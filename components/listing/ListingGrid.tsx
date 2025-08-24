@@ -1,4 +1,3 @@
-"use client";
 import Link from "next/link";
 import React from "react";
 
@@ -19,15 +18,19 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { formatCurrency } from "@/utils/format";
-import { CheckCircle, Clock, House, HousePlus } from "lucide-react";
+import {
+  CheckCircle,
+  Clock,
+  Heart,
+  House,
+  HousePlus,
+  MapPin,
+} from "lucide-react";
 import { Badge } from "../ui/badge";
+import FavoriteToggleButton from "./FavaretToggel";
+import Imaglisting from "./Imaglisting";
 
 function ListingGrid({ listing }: { listing: Listing[] }) {
-  const handelonerror = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    e.currentTarget.onerror = null;
-    e.currentTarget.src = "/imges/notfoundimg.jpg";
-    e.currentTarget.removeAttribute("srcset");
-  };
   const getStatusConfig = (statusName: string) => {
     return statuse.find((s) => s.states === statusName) || statuse[3];
   };
@@ -73,12 +76,13 @@ function ListingGrid({ listing }: { listing: Listing[] }) {
     >
       <CarouselContent>
         {listing.map((listing) => {
-          const { price, photos, location, listing_status } = listing;
+          const { price, photos, is_rental, location, listing_status } =
+            listing;
           const statusConfig = getStatusConfig(listing_status);
           const StatusIcon = statusConfig.icon;
-          const productId = listing.id;
+          const listingId = listing.id;
           return (
-            <CarouselItem key={productId} className="md:basis-1/2 lg:basis-1/3">
+            <CarouselItem key={listingId} className="md:basis-1/2 lg:basis-1/3">
               <article className="group relative ">
                 <Card className=" overflow-hidden pt-0">
                   <Carousel className="w-full">
@@ -91,16 +95,8 @@ function ListingGrid({ listing }: { listing: Listing[] }) {
                           {photos.length == 1 ? null : (
                             <CarouselPrevious className="left-8" />
                           )}
-                          <Link href={`/listing/${productId}`}>
-                            <Image
-                              src={src}
-                              alt={`${src} image ${i + 1}`}
-                              fill
-                              className="object-cover z-40"
-                              sizes="(max-width:768px) 100vw, 600px"
-                              onError={handelonerror}
-                              priority={i === 0}
-                            />
+                          <Link href={`/listing/${listingId}`}>
+                            <Imaglisting src={src} alt={src} />
                           </Link>
                           {photos.length == 1 ? null : (
                             <CarouselNext className="right-4" />
@@ -113,12 +109,16 @@ function ListingGrid({ listing }: { listing: Listing[] }) {
                     <CardTitle className="text-xl">
                       {formatCurrency(price)}
                     </CardTitle>
-                    <CardDescription>{location?.county}</CardDescription>
+                    <CardDescription></CardDescription>
+                    <CardDescription>
+                      {is_rental ? "Rent" : "Sale"}
+                    </CardDescription>
                   </CardHeader>
                   <CardContent className="flex items-center justify-between">
-                    <CardDescription>
-                      {location?.city}
-                      {location?.street_address}
+                    <CardDescription className=" flex justify-center items-center">
+                      <MapPin className="h-3 w-3 mr-2" />
+                      {location?.county} , {location?.city}
+                      {/* {location?.street_address} */}
                     </CardDescription>
                     {price ? (
                       <Badge
@@ -131,8 +131,8 @@ function ListingGrid({ listing }: { listing: Listing[] }) {
                     ) : null}
                   </CardContent>
                 </Card>
-                <div className="absolute top-13 right-7 z-5">
-                  {/* <FavoriteToggleButton productId={productId} /> */}
+                <div className="absolute top-8 right-12 z-5">
+                  <FavoriteToggleButton listingId={listingId} />
                 </div>
               </article>
             </CarouselItem>

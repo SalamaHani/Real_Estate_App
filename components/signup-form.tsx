@@ -20,6 +20,7 @@ import { useState } from "react";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { createAuthClient } from "better-auth/client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 export function SignUp({ className, ...props }: React.ComponentProps<"form">) {
   const [isLoding, setisLoding] = useState(false);
   const form = useForm<z.infer<typeof SignupFormSchema>>({
@@ -37,6 +38,7 @@ export function SignUp({ className, ...props }: React.ComponentProps<"form">) {
       callbackURL: "/",
     });
   };
+  const router = useRouter();
   async function onSubmit(values: z.infer<typeof SignupFormSchema>) {
     setisLoding(true);
     const { success, message } = await signUp(
@@ -46,8 +48,8 @@ export function SignUp({ className, ...props }: React.ComponentProps<"form">) {
     );
     if (success) {
       toast.success(message as string);
-    }
-    toast.error(message as string);
+      router.push("/");
+    } else toast.error(message as string);
     setisLoding(false);
   }
 

@@ -2,7 +2,7 @@
 
 import { useActionState, useEffect } from "react";
 import { toast } from "sonner";
-import { actionFunction } from "@/utils/Type";
+import { actionFunction } from "@/utils";
 import { cn } from "@/lib/utils";
 
 const initialState = {
@@ -22,8 +22,8 @@ function FormContainer({
   const [state, formAction] = useActionState(action, initialState);
   useEffect(() => {
     if (state.message) {
+      console.log(state.message);
       toast.success(`Successfully ${state.message}`, {
-        description: "Astorefonte Shop online",
         action: {
           label: "Undo",
           onClick: () => console.log("Undo"),

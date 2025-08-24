@@ -94,7 +94,11 @@ export const CardSubmitButton = ({ isFavorite }: { isFavorite: boolean }) => {
       type="submit"
       size="icon"
       variant="outline"
-      className="p-2 cursor-pointer dark:bg-black"
+      // className="p-2 cursor-pointer dark:bg-black"
+      className={cn(
+        "absolute dark:bg-black  z-50 size-8 rounded-full",
+        "top-0 left-0 -translate-y-1/2"
+      )}
     >
       {pending ? (
         <ReloadIcon className="animate-spin" />
