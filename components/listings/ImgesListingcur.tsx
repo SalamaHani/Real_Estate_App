@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -7,8 +7,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import Imaglisting from "../listing/Imaglisting";
 import Image from "next/image";
+import { DialogDemo } from "./Dilogimg";
 function ImgesListingcur({ photos }: { photos: string[] | undefined }) {
   function chunkArray(arr: string[] | undefined, size: number) {
     const result = [];
@@ -19,6 +19,10 @@ function ImgesListingcur({ photos }: { photos: string[] | undefined }) {
     return result;
   }
   const groupedPhotos = chunkArray(photos, 6);
+  const [isopen, setisopen] = useState(false);
+  const handeldilog = () => {
+    setisopen(!isopen);
+  };
   return (
     <Carousel className="w-full h-auto">
       <CarouselContent>
@@ -36,8 +40,14 @@ function ImgesListingcur({ photos }: { photos: string[] | undefined }) {
                       src={item}
                       width={250} // set width
                       height={250}
+                      onClick={handeldilog}
                       alt={`photo-${index}-${i}`}
                     />
+                    {/* <DialogDemo
+                      isopen={isopen}
+                      handeldilog={handeldilog}
+                      photo={item}
+                    /> */}
                   </div>
                 ))}
               </div>
