@@ -5,28 +5,6 @@ import Logo from "./Logo";
 import DarkMode from "./DarkMode";
 import LinksDropdown from "./LinksDropdown";
 import { Session } from "@/lib/auth";
-
-// interface NavbarProps {
-//   session: {
-//     id: string;
-//     userId: string;
-//     expiresAt: Date;
-//     createdAt: Date;
-//     updatedAt: Date;
-//     token: string;
-//     ipAddress?: string | null;
-//     userAgent?: string | null;
-//   } | null;
-//   user?: {
-//     id: string;
-//     email: string;
-//     emailVerified: boolean;
-//     name: string;
-//     createdAt: Date;
-//     updatedAt: Date;
-//     image?: string | null;
-//   };
-// }
 function Navbar({ session }: { session: Session | null }) {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {

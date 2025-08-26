@@ -2,19 +2,19 @@
 import React from "react";
 import Link from "next/link";
 import { MotionDiv, Motionh1, MotionP } from "../motindev";
-import { useTheme } from "next-themes";
+// import { useTheme } from "next-themes";
 
 export default function HeroSection() {
-  const { theme } = useTheme();
-  const urel =
-    theme === "dark"
-      ? "imges/daniel-barnes-RKdLlTyjm5g-unsplash.jpg"
-      : "imges/salman-saqib-mN6l37Didcc-unsplash.jpg";
+  // const { theme } = useTheme();
+  // const urel =
+  //   theme === "dark"
+  //     ? "https://images.unsplash.com/photo-1519501025264-65ba15a82390?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  //     : "imges/https-saqib-mN6l37Didcc-unsplash.jpg";
   return (
     <section
       className="relative h-screen w-full bg-cover bg-center flex items-center justify-center object-cover "
       style={{
-        backgroundImage: ` url(${urel})`,
+        backgroundImage: `url(https://images.unsplash.com/photo-1519501025264-65ba15a82390?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3)`,
       }}
     >
       <div className="absolute inset-0 bg-black/40" />

@@ -5,7 +5,6 @@ import ListingGrid from "../listing/ListingGrid";
 
 async function Featured() {
   const Featurdlisting = await Feauterdlistings();
-  console.log(Featurdlisting);
   return (
     <section className="mt-23">
       <TitelSection text={"Featured Listings Homes"} />

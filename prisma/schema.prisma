@@ -206,3 +206,17 @@ model Favorite {
   updatedAt DateTime? 
   @@map("favorite")
 }
+
+model Areacuntry {
+  id                   String      @id @default(auto()) @map("_id") @db.ObjectId
+  name                 String
+  description          String
+  living_area          Int?
+  location             Location?
+  photos               String[]
+  property_type        String
+  areaKm2              Float?    
+  population           Int?    
+  hospitalsCount       Int?    
+  schoolsCount         Int? 
+}

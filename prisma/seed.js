@@ -1,9 +1,9 @@
 const { PrismaClient } = require("@prisma/client");
-const listings = require("./listings.json");
+const counties = require("./counties.json");
 const prisma = new PrismaClient();
 async function main() {
-  for (const listing of listings) {
-    await prisma.listing.create({
+  for (const listing of counties) {
+    await prisma.areaCuntry.create({
       data: listing,
     });
   }

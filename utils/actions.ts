@@ -13,6 +13,14 @@ export const Feauterdlistings = async () => {
   });
   return faverd;
 };
+export const fetchlistingById = async ({ id }: { id: string }) => {
+  const listing = await db.listing.findUnique({
+    where: {
+      id: id,
+    },
+  });
+  return listing;
+};
 export const users = async () => {
   return await db.listing.count();
 };
@@ -64,4 +72,18 @@ export const fetchFavoriteId = async ({ listingId }: { listingId: string }) => {
     },
   });
   return favoreit?.id || null;
+};
+export const fetshAraeacuntry = async () => {
+  const cuntry = await db.areaCuntry.findMany({
+    take: 6,
+  });
+  return cuntry;
+};
+export const fetshAgenys = async () => {
+  const Agents = await db.listing.findMany({
+    select: {
+      agents: true,
+    },
+  });
+  return Agents;
 };

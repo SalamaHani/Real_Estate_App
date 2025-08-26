@@ -2,7 +2,6 @@ import Link from "next/link";
 import React from "react";
 
 import { Listing } from "@prisma/client";
-import Image from "next/image";
 import {
   Card,
   CardContent,
@@ -18,14 +17,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { formatCurrency } from "@/utils/format";
-import {
-  CheckCircle,
-  Clock,
-  Heart,
-  House,
-  HousePlus,
-  MapPin,
-} from "lucide-react";
+import { CheckCircle, Clock, House, HousePlus, MapPin } from "lucide-react";
 import { Badge } from "../ui/badge";
 import FavoriteToggleButton from "./FavaretToggel";
 import Imaglisting from "./Imaglisting";
@@ -76,8 +68,15 @@ function ListingGrid({ listing }: { listing: Listing[] }) {
     >
       <CarouselContent>
         {listing.map((listing) => {
-          const { price, photos, is_rental, location, listing_status } =
-            listing;
+          const {
+            price,
+            photos,
+            location,
+            bathrooms,
+            bedrooms,
+            living_area,
+            listing_status,
+          } = listing;
           const statusConfig = getStatusConfig(listing_status);
           const StatusIcon = statusConfig.icon;
           const listingId = listing.id;
@@ -109,17 +108,42 @@ function ListingGrid({ listing }: { listing: Listing[] }) {
                     <CardTitle className="text-xl">
                       {formatCurrency(price)}
                     </CardTitle>
-                    <CardDescription></CardDescription>
-                    <CardDescription>
-                      {is_rental ? "Rent" : "Sale"}
+                    <CardDescription className="flex ">
+                      <MapPin className="h-3 w-3 mt-1" />
+                      {location?.county} , {location?.city}
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="flex items-center justify-between">
-                    <CardDescription className=" flex justify-center items-center">
-                      <MapPin className="h-3 w-3 mr-2" />
-                      {location?.county} , {location?.city}
-                      {/* {location?.street_address} */}
-                    </CardDescription>
+                    <div className=" flex flex-col justify-between">
+                      <CardDescription>
+                        <ul className="flex gap-4 mb-0">
+                          <li className="text-center">
+                            <span className="block font-bold text-lg">
+                              {living_area}m
+                            </span>
+                            <span className="block text-sm text-gray-600">
+                              Sq Ft
+                            </span>
+                          </li>
+                          <li className="text-center">
+                            <span className="block font-bold text-lg">
+                              {bedrooms}
+                            </span>
+                            <span className="block text-sm text-gray-600">
+                              Beds
+                            </span>
+                          </li>
+                          <li className="text-center">
+                            <span className="block font-bold text-lg">
+                              {bathrooms}
+                            </span>
+                            <span className="block text-sm text-gray-600">
+                              Baths
+                            </span>
+                          </li>
+                        </ul>
+                      </CardDescription>
+                    </div>
                     {price ? (
                       <Badge
                         className={`${statusConfig.color} flex items-center gap-1 w-fit`}

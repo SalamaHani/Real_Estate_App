@@ -16,6 +16,22 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "content.mediastg.net",
       },
+      {
+        protocol: "http",
+        hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "http",
+        hostname: "barringtonteam.virtualresults.com",
+      },
+      {
+        protocol: "https",
+        hostname: "barringtonteam.virtualresults.com",
+      },
     ],
   },
 };
