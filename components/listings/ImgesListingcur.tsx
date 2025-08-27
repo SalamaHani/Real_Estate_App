@@ -23,6 +23,25 @@ function ImgesListingcur({ photos }: { photos: string[] | undefined }) {
   const handeldilog = () => {
     setisopen(!isopen);
   };
+  if (photos?.length == 1) {
+    return (
+      <div className="mt-12 mx-auto">
+        {photos.map((item, index) => {
+          return (
+            <Image
+              className="w-full size-100 object-cover bg-gray-100 rounded-md dark:bg-neutral-800"
+              src={item}
+              key={index}
+              width={250} // set width
+              height={250}
+              alt={`photo-${index}`}
+            />
+          );
+        })}
+      </div>
+    );
+  }
+
   return (
     <Carousel className="w-full h-auto">
       <CarouselContent>
@@ -36,18 +55,18 @@ function ImgesListingcur({ photos }: { photos: string[] | undefined }) {
                     className="group block relative overflow-hidden rounded-md"
                   >
                     <Image
-                      className="w-full size-40 object-cover bg-gray-100 rounded-md dark:bg-neutral-800"
+                      className="w-full  size-50 object-cover bg-gray-100 rounded-md dark:bg-neutral-800"
                       src={item}
                       width={250} // set width
                       height={250}
                       onClick={handeldilog}
                       alt={`photo-${index}-${i}`}
                     />
-                    {/* <DialogDemo
+                    <DialogDemo
                       isopen={isopen}
                       handeldilog={handeldilog}
                       photo={item}
-                    /> */}
+                    />
                   </div>
                 ))}
               </div>

@@ -13,18 +13,16 @@ export function DialogDemo({
 }) {
   return (
     <Dialog open={isopen} onOpenChange={handeldilog}>
-      <form>
-        <DialogTrigger asChild></DialogTrigger>
-        <DialogContent className="w-[825px]">
-          <Image
-            // className="w-full size-40 object-cover"
-            src={photo}
-            width={725} // set width
-            height={820}
-            alt={`photo-${photo}`}
-          />
-        </DialogContent>
-      </form>
+      <DialogTrigger asChild></DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <Image
+          // className="w-full size-40 object-cover"
+          src={photo}
+          width={425} // set width
+          height={420}
+          alt={`photo-${photo}`}
+        />
+      </DialogContent>
     </Dialog>
   );
 }

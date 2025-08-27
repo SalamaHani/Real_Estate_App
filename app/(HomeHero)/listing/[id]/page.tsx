@@ -5,6 +5,7 @@ import ImgesListingcur from "@/components/listings/ImgesListingcur";
 import MapListing from "@/components/listings/MapListing";
 import ShareButton from "@/components/listings/ShareButton";
 import TitelListingt from "@/components/listings/TitelListingt";
+import { Button } from "@/components/ui/button";
 import { fetchlistingById } from "@/utils/actions";
 import React from "react";
 type ProductEditPageProps = {
@@ -18,8 +19,8 @@ async function page({ params }: ProductEditPageProps) {
   const listung = await fetchlistingById({ id });
 
   const locationmap = {
-    lag: Number(listung?.location?.lng) || 38.9072,
     lat: Number(listung?.location?.lat) || -77.0369,
+    lng: Number(listung?.location?.lng) || 38.9072,
   };
   return (
     <section className="mt-12">
@@ -38,7 +39,20 @@ async function page({ params }: ProductEditPageProps) {
           </div>
         </div>
         <DatielsListing listungs={listung} />
-        <MapListing location={locationmap} />
+        <div className=" flex flex-wrap justify-between items-center gap-10 mb-20">
+          <MapListing location={locationmap} />
+          <div className="w-[100%] sm:w-[40%] h-[40vh] mt-30 flex flex-col justify-between ">
+            <h1 className="text-3xl font-sans">{listung?.location?.county}</h1>
+            <p className="text-md">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Voluptatibus nesciunt iusto excepturi reprehenderit molestiae
+              error distinctio minima architecto quasi aperiam ipsa expedita
+              consequatur ducimus soluta omnis voluptatum incidunt, aliquam
+              debitis.
+            </p>
+            <Button>{listung?.location?.street_address}</Button>
+          </div>
+        </div>
       </Continer>
     </section>
   );
