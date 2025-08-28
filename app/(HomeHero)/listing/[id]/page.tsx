@@ -38,7 +38,10 @@ async function page({ params }: ProductEditPageProps) {
                 <FavoriteToggleButton classname={true} listingId={id} />
               </div>
               <ShareButton name={listung?.mls_name ?? ""} listingId={id} />
-              <ContactAgentForm Agent={listung?.agents[0] ?? null} />
+              <ContactAgentForm
+                listingId={listung?.id ?? ""}
+                Agent={listung?.agents[0] ?? null}
+              />
             </div>
           </div>
         </div>

@@ -23,9 +23,7 @@ function FavoriteToggleForm({
   });
   return (
     <FormContainer
-      className={cn(
-        `${classname ? `relative` : `bg-amber-300`}`,
-      )}
+      className={cn(`${classname ? `relative` : ``}`)}
       action={toggleAction}
     >
       <CardSubmitButton

@@ -71,22 +71,6 @@ export const IconButton = ({ actionType }: { actionType: actionType }) => {
   );
 };
 
-// export const CardSignInButton = () => {
-//   return (
-//     <SignInButton mode="modal">
-//       <Button
-//         type="button"
-//         size="icon"
-//         variant="outline"
-//         className="p-2 cursor-pointer"
-//         asChild
-//       >
-//         <FaRegHeart />
-//       </Button>
-//     </SignInButton>
-//   );
-// };
-
 export const CardSubmitButton = ({
   isFavorite,
   classname,
@@ -102,7 +86,7 @@ export const CardSubmitButton = ({
       variant="outline"
       // className="p-2 cursor-pointer dark:bg-black"
       className={cn(
-        `${classname ? `  bg-red-300 z-50 size-8 rounded-full` : `rounded-full absolute dark:bg-black  top-0 left-0 -translate-y-1/2 z-50 size-8`}`
+        `${classname ? `   z-50 size-8 rounded-full` : `rounded-full absolute dark:bg-black  top-0 left-0 -translate-y-1/2 z-50 size-8`}`
       )}
     >
       {pending ? (

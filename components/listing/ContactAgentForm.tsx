@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useActionState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -11,20 +12,38 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Agent } from "@prisma/client";
-import FormContainer from "../form/FormContener";
-
 import TextAreaInput from "../form/TextAreaInput";
 import { SubmitButton } from "../form/Buttons";
-
 import { UserRound } from "lucide-react";
 import AgentInfo from "./AgentInfo";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Separator } from "../ui/separator";
-function ContactAgentForm({ Agent }: { Agent: Agent | null }) {
+import { ActionAgent } from "@/utils/Tayp";
+import { SendAgentListing } from "@/utils/actions";
+import { toast } from "sonner";
+const initialState: ActionAgent = {
+  success: false,
+  message: "",
+};
+function ContactAgentForm({
+  Agent,
+  listingId,
+}: {
+  Agent: Agent | null;
+  listingId: string | undefined;
+}) {
+  const [open, setOpen] = React.useState(false);
+  const [state, action] = useActionState(SendAgentListing, initialState);
+  React.useEffect(() => {
+    if (state?.success) {
+      setOpen(false);
+      toast.success(state.message);
+    }
+  }, [state?.success, state?.message]);
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button
           variant="outline"
@@ -51,7 +70,7 @@ function ContactAgentForm({ Agent }: { Agent: Agent | null }) {
         <div className="overflow-y-auto pr-5  max-h-[60vh] w-full">
           <p className="text-md">Got a question about this property?</p>
           <Separator />
-          <FormContainer className="" action={""}>
+          <form className="" action={action}>
             <div className="h-full mt-10">
               <div className="space-y-4">
                 <div className="flex gap-4">
@@ -59,13 +78,39 @@ function ContactAgentForm({ Agent }: { Agent: Agent | null }) {
                     <Label className="mb-2" htmlFor="FirstName">
                       First Name<span className="text-red-500">*</span>
                     </Label>
-                    <Input name="FirstName" id="FirstName" type="text" />
+                    <Input
+                      name="FirstName"
+                      id="FirstName"
+                      type="text"
+                      defaultValue={state.Data?.FirstName}
+                      className={
+                        state?.errors?.FirstName ? "border-red-500" : ""
+                      }
+                    />
+                    {state.errors?.FirstName && (
+                      <p className="text-red-500 text-xs">
+                        {state.errors.FirstName}
+                      </p>
+                    )}
                   </div>
                   <div className="w-[50%]">
                     <Label className="mb-2" htmlFor="FirstName">
                       Last Name <span className="text-red-500">*</span>
                     </Label>
-                    <Input name="LastName" id="LastName" type="text" />
+                    <Input
+                      name="LastName"
+                      id="LastName"
+                      type="text"
+                      defaultValue={state.Data?.LastName}
+                      className={
+                        state?.errors?.LastName ? "border-red-500" : ""
+                      }
+                    />
+                    {state.errors?.LastName && (
+                      <p className="text-red-500 text-xs">
+                        {state.errors.LastName}
+                      </p>
+                    )}
                   </div>
                 </div>
                 <div className="flex gap-4">
@@ -73,19 +118,52 @@ function ContactAgentForm({ Agent }: { Agent: Agent | null }) {
                     <Label className="mb-2" htmlFor="email">
                       Email <span className="text-red-500">*</span>
                     </Label>
-                    <Input name="email" id="email" type="email" />
+                    <Input
+                      name="email"
+                      id="email"
+                      type="email"
+                      defaultValue={state.Data?.email}
+                      className={state?.errors?.email ? "border-red-500" : ""}
+                    />
+                    {state.errors?.email && (
+                      <p className="text-red-500 text-xs">
+                        {state.errors.email}
+                      </p>
+                    )}
                   </div>
                   <div className="w-[50%]">
                     <Label className="mb-2" htmlFor="Phone">
                       Phone <span className="text-red-500">*</span>
                     </Label>
-                    <Input name="Phone" type="number" />
+                    <Input
+                      name="Phone"
+                      type="number"
+                      defaultValue={state.Data?.Phone}
+                      className={state?.errors?.Phone ? "border-red-500" : ""}
+                    />
+                    {state.errors?.Phone && (
+                      <p className="text-red-500 text-xs">
+                        {state.errors.Phone}
+                      </p>
+                    )}
                   </div>
                 </div>
                 <TextAreaInput
-                  name="OrderNotes"
+                  name="Listing Notes"
                   labelText="Order Notes"
                   defaultValue="Add any additional instructions or comments here..."
+                />
+                <input
+                  type="hidden"
+                  name="agentemail"
+                  value={Agent?.email}
+                  readOnly
+                />
+                <input
+                  type="hidden"
+                  name="listingId"
+                  value={listingId}
+                  readOnly
                 />
               </div>
             </div>
@@ -97,7 +175,7 @@ function ContactAgentForm({ Agent }: { Agent: Agent | null }) {
               </DialogClose>
               <SubmitButton text="Contact Agent" />
             </DialogFooter>
-          </FormContainer>
+          </form>
         </div>
       </DialogContent>
     </Dialog>

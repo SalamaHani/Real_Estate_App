@@ -8,6 +8,7 @@
     "population": 305000,
     "hospitalsCount": 12,
     "schoolsCount": 45,
+    "Maps": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d78182.20630772215!2d-0.7979974657048893!3d52.23986078682802!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487704236e4aa273%3A0xcdf495d0d9e86209!2z2YbZiNix2KvZh9in2YXYqNiq2YjZhtiMINmG2YjYsdirINmH2KfZhdio2KrZiNmG2Iwg2KfZhNmF2YXZhNmD2Kkg2KfZhNmF2KrYrdiv2Kk!5e0!3m2!1sar!2s!4v1756389985316!5m2!1sar!2s",
     "photos": [
       "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=1244&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "https://images.unsplash.com/photo-1570129477492-45c003edd2be"
@@ -22,6 +23,7 @@
     "population": 620000,
     "hospitalsCount": 15,
     "schoolsCount": 60,
+    "Maps": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24847758.17819165!2d-75.4035089991047!3d40.51565371979575!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c3cf078e32ecb3%3A0x24e4402cc03423a7!2z2YXZgtin2LfYudipINmF2YjZhtmF2YjYq9iMINmG2YrZiCDYrNmK2LHYs9mK2Iwg2KfZhNmI2YTYp9mK2KfYqiDYp9mE2YXYqtit2K_YqQ!5e0!3m2!1sar!2s!4v1756390258322!5m2!1sar!2s",
     "photos": [
       "https://images.unsplash.com/photo-1519501025264-65ba15a82390?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "https://images.unsplash.com/photo-1525253086316-d0c936c814f8"
@@ -36,6 +38,7 @@
     "population": 830000,
     "hospitalsCount": 18,
     "schoolsCount": 75,
+    "Maps": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d48488.33634168238!2d-74.4202182062163!3d40.57425345883282!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c3b8cca13e8307%3A0xd9ebb9b5c074ea61!2zTWlkZGxlc2V4LCDZhtmK2Ygg2KzZitix2LPZiiAwODg0NtiMINin2YTZiNmE2KfZitin2Kog2KfZhNmF2KrYrdiv2Kk!5e0!3m2!1sar!2s!4v1756390229678!5m2!1sar!2s",
     "photos": [
       "https://images.unsplash.com/photo-1514565131-fce0801e5785?q=80&w=1256&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "https://images.unsplash.com/photo-1486308510493-aa648336c899"
@@ -50,6 +53,7 @@
     "population": 330000,
     "hospitalsCount": 10,
     "schoolsCount": 40,
+    "Maps": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387961.17687618296!2d-73.97592505961977!3d40.564854393561916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c3bfb2a50c4e49%3A0xbaab05032912ccb1!2z2YXZgtin2LfYudipINiz2YjZhdix2LPYqtiMINmG2YrZiCDYrNmK2LHYs9mK2Iwg2KfZhNmI2YTYp9mK2KfYqiDYp9mE2YXYqtit2K_YqQ!5e0!3m2!1sar!2s!4v1756390194120!5m2!1sar!2s",
     "photos": [
       "https://images.unsplash.com/photo-1504556106489-6d450910aeb3?q=80&w=1190&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "https://images.unsplash.com/photo-1470770841072-f978cf4d019e"
@@ -64,6 +68,7 @@
     "population": 125000,
     "hospitalsCount": 8,
     "schoolsCount": 30,
+    "Maps": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387968.2666970092!2d-74.61944685633458!3d40.563631240278745!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c3933eca6d9927%3A0xa2e171dcd9ab152!2z2YXZgtin2LfYudipINmH2YjZhtiq2LHYr9mI2YbYjCDZhtmK2Ygg2KzZitix2LPZitiMINin2YTZiNmE2KfZitin2Kog2KfZhNmF2KrYrdiv2Kk!5e0!3m2!1sar!2s!4v1756390145311!5m2!1sar!2s",
     "photos": [
       "https://images.unsplash.com/photo-1465447142348-e9952c393450?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "https://images.unsplash.com/photo-1519125323398-675f0ddb6308"
@@ -78,6 +83,7 @@
     "population": 125000,
     "hospitalsCount": 10,
     "schoolsCount": 40,
+    "Maps": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5868.993862070325!2d12.95653074371332!3d42.6508237879658!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132e5b0cd1b478e9%3A0x14bf334522c8bcee!2zMDYwNDUg2YXZiNmG2KrZitmE2YrZiNmG2Yog2K_ZiiDYs9io2YjZhNmK2KrZiNiMINio2YrYsdmI2KzZitin2Iwg2KXZiti32KfZhNmK2Kc!5e0!3m2!1sar!2s!4v1756390094283!5m2!1sar!2s",
     "photos": [
       "https://images.unsplash.com/photo-1427694012323-fb5e8b0c165b?q=80&w=1189&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "https://images.unsplash.com/photo-1519125323398-675f0ddb6308"

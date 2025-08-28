@@ -3,6 +3,8 @@ import db from "./db";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { getSession } from "./users";
+import { ActionAgent, UserFormData } from "./Tayp";
+import { AgentcontactSchema } from "./schema";
 // const session = await auth.api.getSession({
 //   headers: await headers(),
 // });
@@ -74,10 +76,18 @@ export const fetchFavoriteId = async ({ listingId }: { listingId: string }) => {
   return favoreit?.id || null;
 };
 export const fetshAraeacuntry = async () => {
-  const cuntry = await db.areaCuntry.findMany({
+  const cuntry = await db.areacuntry.findMany({
     take: 6,
   });
   return cuntry;
+};
+export const fetsharyacuntryname = async ({ name }: { name: string }) => {
+  const areacuntry = await db.areacuntry.findFirst({
+    where: {
+      name: name,
+    },
+  });
+  return areacuntry;
 };
 export const fetshAgenys = async () => {
   const Agents = await db.listing.findMany({
@@ -86,4 +96,89 @@ export const fetshAgenys = async () => {
     },
   });
   return Agents;
+};
+//action contact Agent Listiing
+export const SendAgentListing = async (
+  prevState: ActionAgent | null,
+  formData: FormData
+): Promise<ActionAgent> => {
+  const session = await getSession();
+  const user = session?.user;
+  const userId = user?.id;
+
+  const UserData: UserFormData = {
+    FirstName: formData.get("FirstName") as string,
+    LastName: formData.get("LastName") as string,
+    email: formData.get("email") as string,
+    userId: userId as string,
+    agentEmail: formData.get("agentemail") as string,
+    listingId: formData.get("listingId") as string,
+    Phone: Number(formData.get("Phone")),
+  };
+
+  // Validate the form data
+  const validatedData = AgentcontactSchema.safeParse(UserData);
+  if (!validatedData.success) {
+    return {
+      success: false,
+      Data: {
+        FirstName: UserData.FirstName,
+        LastName: UserData.LastName,
+        email: UserData.email,
+        Phone: UserData.Phone,
+      },
+      message: "Please fix the errors in the form",
+      errors: validatedData.error.flatten().fieldErrors,
+    };
+  }
+
+  try {
+    await db.interest.create({
+      data: {
+        name: UserData.FirstName + " " + UserData.LastName,
+        email: UserData.email,
+        userId: UserData.userId,
+        agentemail: UserData.agentEmail ?? "",
+        listingId: UserData.listingId,
+      },
+    });
+
+    return {
+      success: true,
+      message: "Successfully Contact Agent!",
+    };
+  } catch (error) {
+    console.error("Error creating Interest:", error);
+
+    return {
+      success: false,
+      message: "Something went wrong while contacting the agent.",
+    };
+  }
+};
+///text form react ui
+export const SendAgentListinge = async (
+  FirstName: string,
+  LastName: string,
+  phone: number,
+  email: string
+) => {
+  const UserData: UserFormData = {
+    FirstName: FirstName as string,
+    LastName: LastName as string,
+    email: email as string,
+    Phone: Number(phone),
+  };
+  // Validate the form data
+  const validatedData = AgentcontactSchema.safeParse(UserData);
+  if (!validatedData.success) {
+    return {
+      success: false,
+      message: "Please fix the errors in the form",
+    };
+  }
+  return {
+    success: true,
+    message: "Successfully Contact Agent !",
+  };
 };

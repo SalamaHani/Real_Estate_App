@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { MapPin } from "lucide-react";
-import { AreaCuntry } from "@prisma/client";
+import { Areacuntry } from "@prisma/client";
 import Imaglisting from "../listing/Imaglisting";
 import {
   Carousel,
@@ -10,8 +10,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-function ContenerListing({ cuntryar }: { cuntryar: AreaCuntry }) {
-  const { id, name, photos } = cuntryar;
+function ContenerListing({ cuntryar }: { cuntryar: Areacuntry }) {
+  const { name, photos } = cuntryar;
   return (
     <>
       <div className="group relative block rounded-sm overflow-hidden focus:outline-hidden">
@@ -23,7 +23,7 @@ function ContenerListing({ cuntryar }: { cuntryar: AreaCuntry }) {
                   {photos.length == 1 ? null : (
                     <CarouselPrevious className="left-8" />
                   )}
-                  <Link href={`/communities/${id}`}>
+                  <Link href={`/communities/${name}`}>
                     <Imaglisting src={src} alt={src} />
                   </Link>
                   {photos.length == 1 ? null : (

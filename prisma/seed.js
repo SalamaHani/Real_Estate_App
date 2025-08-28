@@ -3,7 +3,7 @@ const counties = require("./counties.json");
 const prisma = new PrismaClient();
 async function main() {
   for (const listing of counties) {
-    await prisma.areaCuntry.create({
+    await prisma.areacuntry.create({
       data: listing,
     });
   }

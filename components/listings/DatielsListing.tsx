@@ -88,8 +88,7 @@ function DatielsListing({ listungs }: { listungs: Listing | null }) {
               className={`${statusConfig.color} flex items-center gap-1 w-fit`}
             >
               <StatusIcon className="h-3 w-3" />
-              {listungs?.listing_status?.charAt(0).toUpperCase() ??
-                "" + listungs?.listing_status?.slice(1)}
+              {listungs?.listing_status}
             </Badge>
           </div>
         </div>

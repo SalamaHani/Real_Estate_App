@@ -10,18 +10,12 @@ export default function Home() {
   return (
     <div className="h-[200vh]">
       <HeroSection />
-      <Suspense>
-        <Continer>
+      <Continer>
+        <Suspense>
           <Featured />
-        </Continer>
-      </Suspense>
-      <Continer>
-        <Communities />
-      </Continer>
-      <Continer>
-        <Agents />
-      </Continer>
-      <Continer>
+          <Communities />
+          <Agents />
+        </Suspense>
         <Footer />
       </Continer>
     </div>

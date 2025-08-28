@@ -27,3 +27,9 @@ export const SignupFormSchema = z.object({
     })
     .trim(),
 });
+export const AgentcontactSchema = z.object({
+  FirstName: z.string().min(1, { message: "First Name is required" }),
+  LastName: z.string().min(1, { message: "Last Name is required" }),
+  email: z.string().email({ message: "Invalid email address" }),
+  Phone: z.number().min(7, { message: "Phone number is required" }),
+});

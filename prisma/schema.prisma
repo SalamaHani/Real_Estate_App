@@ -10,44 +10,7 @@ generator client {
 }
 
 
-// model Listing {
-//   id                      String   @id @map("_id") 
-//   agents                  String []
-//   always_email_agents     String?
-//   bathroathrooms          Int?
-//   half_boms               Int?
-//   bedrooms                Int?
-//   coordinates             String []
-//   description             String?
-//   full_bathrooms          Int?
-//   is_rental               Boolean?
-//   listing_email           String?
-//   listing_status          String?
-//   living_area             Float?
-//   location                Json?
-//   lot_size                Int?
-//   make_ame                String?
-//   offinotified           Boolean?
-//   mls_nce_ids              Json?
-//   offices                 String []
-//   photos                  String []
-//   price                   Float?
-//   property_type           String
-//   schools_district        String?
-//   single_property_website String?
-//   url                     String?
-//   virtual_tour_url        String?
-//   year_built              Int?
-//   listing_source          String
-//   caravan_end_time        String?
-//   caravan_food_offered    String?
-//   caravan_notes           String?
-//   caravan_start_date      String?
-//   caravan_start_time      String?
-//   is_caravan              Boolean?
-//   favorites Favorite[]
-//   @@map("listing")
-// }
+
 model Listing {
   id                   String      @id @default(auto()) @map("_id") @db.ObjectId
   agents               Agent[]
@@ -84,6 +47,7 @@ model Listing {
   caravan_start_time   String?
   is_caravan           Boolean?
   favorites            Favorite[]
+  interest      Interest[]
   @@map("listing")
 }
 
@@ -151,6 +115,7 @@ model User {
   updatedAt     DateTime
   sessions      Session[]
   accounts      Account[]
+  interest      Interest[]
   @@unique([email])
   @@map("user")
 }
@@ -219,4 +184,17 @@ model Areacuntry {
   population           Int?    
   hospitalsCount       Int?    
   schoolsCount         Int? 
+  Maps                 String?
+}
+model Interest {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  email     String
+  user      User?   @relation(fields: [userId], references: [id])
+  userId    String  
+  agentemail String?
+  listing   Listing? @relation(fields: [listingId], references: [id])
+  listingId String  @db.ObjectId
+  createdAt DateTime? @default(now())
+   @@map("interest")
 }
