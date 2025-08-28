@@ -87,7 +87,13 @@ export const IconButton = ({ actionType }: { actionType: actionType }) => {
 //   );
 // };
 
-export const CardSubmitButton = ({ isFavorite }: { isFavorite: boolean }) => {
+export const CardSubmitButton = ({
+  isFavorite,
+  classname,
+}: {
+  isFavorite: boolean;
+  classname?: boolean;
+}) => {
   const { pending } = useFormStatus();
   return (
     <Button
@@ -96,8 +102,7 @@ export const CardSubmitButton = ({ isFavorite }: { isFavorite: boolean }) => {
       variant="outline"
       // className="p-2 cursor-pointer dark:bg-black"
       className={cn(
-        "absolute dark:bg-black  z-50 size-8 rounded-full",
-        "top-0 left-0 -translate-y-1/2"
+        `${classname ? `  bg-red-300 z-50 size-8 rounded-full` : `rounded-full absolute dark:bg-black  top-0 left-0 -translate-y-1/2 z-50 size-8`}`
       )}
     >
       {pending ? (

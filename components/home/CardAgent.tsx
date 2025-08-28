@@ -10,7 +10,7 @@ function CardAgent({ Agent }: { Agent: Agent }) {
     <div className="flex flex-col rounded-xl p-4 md:p-6 bg-white border border-gray-200 dark:bg-neutral-900 dark:border-neutral-700">
       <div className="flex items-center gap-x-4">
         <Avatar className="w-17 h-17">
-          <AvatarImage src={Agent?.photo ?? ""} />
+          <AvatarImage className=" object-cover" src={Agent?.photo ?? ""} />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
         <div className="grow">

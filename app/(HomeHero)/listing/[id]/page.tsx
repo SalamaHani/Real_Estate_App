@@ -1,4 +1,5 @@
 import Continer from "@/components/global/Continer";
+import ContactAgentForm from "@/components/listing/ContactAgentForm";
 import FavoriteToggleButton from "@/components/listing/FavaretToggel";
 import DatielsListing from "@/components/listings/DatielsListing";
 import ImgesListingcur from "@/components/listings/ImgesListingcur";
@@ -28,19 +29,25 @@ async function page({ params }: ProductEditPageProps) {
         <TitelListingt name={listung?.mls_name ?? ""} />
         <ImgesListingcur photos={listung?.photos ?? undefined} />
         <div>
-          <div className="flex justify-between mt-20 gap-x-8 items-center">
+          <div className="flex mt-20 gap-x-8 items-center justify-between">
             <h1 className="capitalize text-2xl font-bold">
               Agent:{listung?.agents[0].full_name ?? ""}
             </h1>
-            <div className="flex w-30 justify-around items-center gap-x-2">
-              <FavoriteToggleButton listingId={id} />
+            <div className="flex items-center gap-x-2">
+              <div>
+                <FavoriteToggleButton classname={true} listingId={id} />
+              </div>
               <ShareButton name={listung?.mls_name ?? ""} listingId={id} />
+              <ContactAgentForm Agent={listung?.agents[0] ?? null} />
             </div>
           </div>
         </div>
         <DatielsListing listungs={listung} />
         <div className=" flex flex-wrap justify-between items-center gap-10 mb-20">
-          <MapListing location={locationmap} />
+          <MapListing
+            city={listung?.location?.city ?? ""}
+            location={locationmap}
+          />
           <div className="w-[100%] sm:w-[40%] h-[40vh] mt-30 flex flex-col justify-between ">
             <h1 className="text-3xl font-sans">{listung?.location?.county}</h1>
             <p className="text-md">

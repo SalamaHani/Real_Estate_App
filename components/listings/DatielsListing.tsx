@@ -1,9 +1,9 @@
 import { formatCurrency } from "@/utils/format";
 import { Listing } from "@prisma/client";
 import React from "react";
-import { CheckCircle, Clock, House, HousePlus, MapPin } from "lucide-react";
+import { CheckCircle, Clock, House, HousePlus } from "lucide-react";
 import { Badge } from "../ui/badge";
-function DatielsListing({ listungs }: { listungs: Listing }) {
+function DatielsListing({ listungs }: { listungs: Listing | null }) {
   const getStatusConfig = (statusName: string) => {
     return statuse.find((s) => s.states === statusName) || statuse[3];
   };
@@ -39,7 +39,7 @@ function DatielsListing({ listungs }: { listungs: Listing }) {
       description: "Order awaiting confirmation",
     },
   ];
-  const statusConfig = getStatusConfig(listungs.listing_status);
+  const statusConfig = getStatusConfig(listungs?.listing_status ?? "");
   const StatusIcon = statusConfig.icon;
   return (
     <div className="w-full mt-12 mx-auto  ">
@@ -47,26 +47,26 @@ function DatielsListing({ listungs }: { listungs: Listing }) {
       <div className="flex justify-between items-start">
         <div>
           <h2 className="text-2xl font-semibold">
-            {listungs.location?.street_address}
+            {listungs?.location?.street_address}
           </h2>
-          <p className="text-gray-600">{listungs.location?.city}</p>
+          <p className="text-gray-600">{listungs?.location?.city}</p>
 
           <ul className="flex gap-4 mt-5 mb-0">
             <li className="text-center">
               <span className="block font-bold text-xl">
-                {listungs.living_area}m
+                {listungs?.living_area}m
               </span>
               <span className="block text-lg text-gray-600">Sq Ft</span>
             </li>
             <li className="text-center">
               <span className="block font-bold text-xl">
-                {listungs.bedrooms}
+                {listungs?.bedrooms}
               </span>
               <span className="block text-lg text-gray-600">Beds</span>
             </li>
             <li className="text-center">
               <span className="block font-bold text-xl">
-                {listungs.bathrooms}
+                {listungs?.bathrooms}
               </span>
               <span className="block text-lg text-gray-600">Baths</span>
             </li>
@@ -75,12 +75,12 @@ function DatielsListing({ listungs }: { listungs: Listing }) {
 
         <div className="text-right">
           <p className="text-2xl font-bold">
-            ${formatCurrency(listungs.price)}
+            ${formatCurrency(listungs?.price ?? 6559)}
           </p>
           <p className="text-sm text-gray-500 mt-2">
             Est. Offices <br />
             <span className="font-semibold">
-              ${listungs.offices[0].office_name}
+              ${listungs?.offices[0].office_name}
             </span>
           </p>
           <div className="mt-4 flex  justify-end">
@@ -88,15 +88,15 @@ function DatielsListing({ listungs }: { listungs: Listing }) {
               className={`${statusConfig.color} flex items-center gap-1 w-fit`}
             >
               <StatusIcon className="h-3 w-3" />
-              {listungs.listing_status.charAt(0).toUpperCase() +
-                listungs.listing_status.slice(1)}
+              {listungs?.listing_status?.charAt(0).toUpperCase() ??
+                "" + listungs?.listing_status?.slice(1)}
             </Badge>
           </div>
         </div>
       </div>
 
       <div className="mt-6  text-lg leading-relaxed">
-        {listungs.description}
+        {listungs?.description}
       </div>
     </div>
   );

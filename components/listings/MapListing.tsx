@@ -13,12 +13,17 @@ interface locar {
   lng: number;
 }
 import React from "react";
-function MapListing({ location }: { location: locar }) {
+function MapListing({ location, city }: { location: locar; city: string }) {
   const [open, setOpen] = useState(false);
   return (
     <APIProvider apiKey={process.env.NEXT_GOOGLE_API_KEY_MAP!}>
       <div className="mt-32 w-[100%] sm:w-[50%]" style={{ height: "50vh" }}>
-        <Map center={location} zoom={14} mapId={process.env.NEXT_PUBLIC_MAP_ID}>
+        <Map
+          scrollwheel={true}
+          defaultZoom={12}
+          center={location}
+          mapId={process.env.NEXT_PUBLIC_MAP_ID}
+        >
           <AdvancedMarker position={location} onClick={() => setOpen(true)}>
             <Pin
               background={"red"}
@@ -29,7 +34,7 @@ function MapListing({ location }: { location: locar }) {
 
           {open && (
             <InfoWindow position={location} onCloseClick={() => setOpen(false)}>
-              <p>Im in Hamburg</p>
+              <p>Im in {city}</p>
             </InfoWindow>
           )}
         </Map>
