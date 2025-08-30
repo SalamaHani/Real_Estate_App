@@ -185,7 +185,17 @@ model Areacuntry {
   hospitalsCount       Int?    
   schoolsCount         Int? 
   Maps                 String?
+  Catholic           Int?      
+  Mosques            Int?     
+  AboutAllCountry    Int?     
+  AvgWorkCommute     Int?      
+  MedianAge          Int?      
+  MedianAreaIncome   Int?     
+  MedianSalePrice    Int?     
+  Stores             Int? 
+  Universities       Int?
 }
+
 model Interest {
   id        String  @id @default(auto()) @map("_id") @db.ObjectId
   name      String

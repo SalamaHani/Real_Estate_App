@@ -8,8 +8,11 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Image from "next/image";
-// import { DialogDemo } from "./Dilogimg";
+import Link from "next/link";
+import useFancybox from "@/app/hooks/useFancybox";
+
 function ImgesListingcur({ photos }: { photos: string[] | undefined }) {
+  const [fancyboxRef] = useFancybox();
   function chunkArray(arr: string[] | undefined, size: number) {
     const result = [];
     if (!arr || size <= 0) return [];
@@ -19,10 +22,7 @@ function ImgesListingcur({ photos }: { photos: string[] | undefined }) {
     return result;
   }
   const groupedPhotos = chunkArray(photos, 6);
-  // const [isopen, setisopen] = useState(false);
-  // const handeldilog = () => {
-  //   setisopen(!isopen);
-  // };
+
   if (photos?.length == 1) {
     return (
       <div className="mt-12 mx-auto">
@@ -41,32 +41,30 @@ function ImgesListingcur({ photos }: { photos: string[] | undefined }) {
       </div>
     );
   }
-
   return (
     <Carousel className="w-full h-auto">
       <CarouselContent>
         {groupedPhotos.map((group, index) => (
           <CarouselItem key={index}>
             <div className="mt-12 mx-auto">
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              <div
+                className="grid grid-cols-2 sm:grid-cols-3 gap-2"
+                ref={fancyboxRef}
+              >
                 {group.map((item, i) => (
                   <div
                     key={item + i}
                     className="group block relative overflow-hidden rounded-md"
                   >
-                    <Image
-                      className="w-full  size-50 object-cover bg-gray-100 rounded-md dark:bg-neutral-800"
-                      src={item}
-                      width={250} // set width
-                      height={250}
-                      // onClick={handeldilog}
-                      alt={`photo-${index}-${i}`}
-                    />
-                    {/* <DialogDemo
-                      isopen={isopen}
-                      handeldilog={handeldilog}
-                      photo={item}
-                    /> */}
+                    <Link data-fancybox="gallery" href={item}>
+                      <Image
+                        className="w-full  size-50 object-cover bg-gray-100 rounded-md dark:bg-neutral-800"
+                        src={item}
+                        width={250} // set width
+                        height={250}
+                        alt={`photo-${index}-${i}`}
+                      />
+                    </Link>
                   </div>
                 ))}
               </div>

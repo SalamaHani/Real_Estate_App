@@ -6,6 +6,11 @@ const nextConfig: NextConfig = {
       bodySizeLimit: "10mb", // or '10mb' if needed
     },
   },
+  domains: [
+    "images.unsplash.com",
+    "content.mediastg.net",
+    "barringtonteam.virtualresults.com",
+  ],
   images: {
     remotePatterns: [
       {
