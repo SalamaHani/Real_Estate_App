@@ -8,3 +8,6 @@ export const formatCurrency = (amount: number | null) => {
     currency: "USD",
   }).format(value);
 };
+export function isRealString(value: string) {
+  return typeof value === "string" && !/^\d+$/.test(value);
+}

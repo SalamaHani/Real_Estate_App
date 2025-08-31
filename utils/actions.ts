@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { getSession } from "./users";
 import { ActionAgent, UserFormData } from "./Tayp";
 import { AgentcontactSchema } from "./schema";
+import prisma from "./db";
 // const session = await auth.api.getSession({
 //   headers: await headers(),
 // });
@@ -181,4 +182,44 @@ export const SendAgentListinge = async (
     success: true,
     message: "Successfully Contact Agent !",
   };
+};
+///sersh query
+export const SershQuerlisting = async (value: string) => {
+  type RawCursorResult = {
+    cursor: {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      firstBatch: any[];
+    };
+  };
+  const liset = (await prisma.$runCommandRaw({
+    find: "listing",
+    filter: {
+      $or: [
+        { "location.street_address": { $regex: value, $options: "i" } },
+        { "location.county": { $regex: value, $options: "i" } },
+      ],
+    },
+    limit: 5,
+  })) as RawCursorResult;
+  const listings = liset.cursor.firstBatch;
+  return listings;
+};
+export const SershQuerCatylistirng = async (value: string) => {
+  type RawCursorResult = {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    [x: string]: any;
+    cursor: {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      firstBatch: any[];
+    };
+  };
+  const city = (await prisma.$runCommandRaw({
+    distinct: "listing",
+    key: "location.city",
+    query: {
+      $or: [{ "location.city": { $regex: value, $options: "i" } }],
+    },
+  })) as RawCursorResult;
+  const citys = city.values;
+  return citys;
 };

@@ -25,7 +25,7 @@ model Listing {
   listing_email        String?
   listing_status       String
   living_area          Int?
-  location             Location?
+  location             Location
   lot_size             Float?
   make_notified        Boolean?
   mls_name             String?
@@ -86,7 +86,7 @@ type Location {
   city           String?
   state          String?
   display_address Boolean?
-  zip_code       String?
+  zip_code       String
   lng             Float?
   lat             Float?
   neighborhood   String?

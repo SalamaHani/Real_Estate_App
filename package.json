@@ -26,6 +26,7 @@
     "better-auth": "^1.3.7",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "debounce": "^2.2.0",
     "embla-carousel-react": "^8.6.0",
     "lucide-react": "^0.539.0",
     "motion": "^12.23.12",
@@ -39,6 +40,7 @@
     "sonner": "^2.0.7",
     "swiper": "^11.2.10",
     "tailwind-merge": "^3.3.1",
+    "use-debounce": "^10.0.5",
     "zod": "^4.0.17"
   },
   "devDependencies": {

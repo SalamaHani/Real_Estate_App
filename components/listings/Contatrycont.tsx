@@ -15,11 +15,11 @@ import { Areacuntry } from "@prisma/client";
 import TitelSection from "../global/TitelSection";
 function Contatrycont({ cuntryprparty }: { cuntryprparty: Areacuntry | null }) {
   return (
-    <div className="pb-10">
+    <div className="pb-10 pt-10">
       <TitelSection text={`${cuntryprparty?.name} Schools & Education`} />
       <div className="max-w-[85rem] px-4  sm:px-6 lg:px-8 lg:py-14 mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          <Card className="h-36 sm:h-56 flex flex-col justify-center border  rounded-xl text-center p-4 md:p-5 hover:shadow-lg transition-all  hover:scale-105 animate-in fade-in duration-500 group ">
+          <Card className="h-46  sm:h-56 flex flex-col justify-center border   rounded-xl text-center p-4 md:p-5 hover:shadow-lg transition-all  hover:scale-105 animate-in fade-in duration-500 group ">
             <div className="p-2 flex justify-center items-center size-12 mx-auto bg-gradient-to-r from-blue-50 to-purple-50 dark:from-white rounded-lg group-hover:scale-110 transition-transform duration-300">
               <LandPlot className=" text-black dark:text-black" />
             </div>
@@ -31,7 +31,7 @@ function Contatrycont({ cuntryprparty }: { cuntryprparty: Areacuntry | null }) {
               Km
             </div>
           </Card>
-          <Card className="h-36 sm:h-56 flex flex-col justify-center border  rounded-xl text-center p-4 md:p-5 hover:shadow-lg transition-all  hover:scale-105 animate-in fade-in duration-500 group ">
+          <Card className="h-46 sm:h-56 flex flex-col justify-center border  rounded-xl text-center p-4 md:p-5 hover:shadow-lg transition-all  hover:scale-105 animate-in fade-in duration-500 group ">
             <div className="p-2 flex justify-center items-center size-12 mx-auto bg-gradient-to-r from-blue-50 to-purple-50 dark:from-white rounded-lg group-hover:scale-110 transition-transform duration-300">
               <Users className=" text-black dark:text-black" />
             </div>
@@ -42,7 +42,7 @@ function Contatrycont({ cuntryprparty }: { cuntryprparty: Areacuntry | null }) {
               <HTMLContent Cont={cuntryprparty?.population ?? 0} />
             </div>
           </Card>
-          <Card className="h-36 sm:h-56 flex flex-col justify-center border  rounded-xl text-center p-4 md:p-5 hover:shadow-lg transition-all  hover:scale-105 animate-in fade-in duration-500 group ">
+          <Card className="h-46 sm:h-56 flex flex-col justify-center border  rounded-xl text-center p-4 md:p-5 hover:shadow-lg transition-all  hover:scale-105 animate-in fade-in duration-500 group ">
             <div className="p-2 flex justify-center items-center size-12 mx-auto bg-gradient-to-r from-blue-50 to-purple-50 dark:from-white rounded-lg group-hover:scale-110 transition-transform duration-300">
               <Hospital className=" text-black dark:text-black" />
             </div>
@@ -53,7 +53,7 @@ function Contatrycont({ cuntryprparty }: { cuntryprparty: Areacuntry | null }) {
               <HTMLContent Cont={cuntryprparty?.hospitalsCount ?? 0} />
             </div>
           </Card>
-          <Card className="h-36 sm:h-56 flex flex-col justify-center border  rounded-xl text-center p-4 md:p-5 hover:shadow-lg transition-all  hover:scale-105 animate-in fade-in duration-500 group ">
+          <Card className="h-46 sm:h-56 flex flex-col justify-center border  rounded-xl text-center p-4 md:p-5 hover:shadow-lg transition-all  hover:scale-105 animate-in fade-in duration-500 group ">
             <div className="p-2 flex justify-center items-center size-12 mx-auto bg-gradient-to-r from-blue-50 to-purple-50 dark:from-white rounded-lg group-hover:scale-110 transition-transform duration-300">
               <School className=" text-black dark:text-black" />
             </div>
@@ -64,7 +64,7 @@ function Contatrycont({ cuntryprparty }: { cuntryprparty: Areacuntry | null }) {
               <HTMLContent Cont={cuntryprparty?.schoolsCount ?? 0} />
             </div>
           </Card>
-          <Card className="h-36 sm:h-56 flex flex-col justify-center border  rounded-xl text-center p-4 md:p-5 hover:shadow-lg transition-all  hover:scale-105 animate-in fade-in duration-500 group ">
+          <Card className="h-46 sm:h-56 flex flex-col justify-center border  rounded-xl text-center p-4 md:p-5 hover:shadow-lg transition-all  hover:scale-105 animate-in fade-in duration-500 group ">
             <div className="p-2 flex justify-center items-center size-12 mx-auto bg-gradient-to-r from-blue-50 to-purple-50 dark:from-white rounded-lg group-hover:scale-110 transition-transform duration-300">
               <University className=" text-black dark:text-black" />
             </div>
@@ -75,7 +75,7 @@ function Contatrycont({ cuntryprparty }: { cuntryprparty: Areacuntry | null }) {
               <HTMLContent Cont={cuntryprparty?.Universities ?? 0} />
             </div>
           </Card>
-          <Card className="h-36 sm:h-56 flex flex-col justify-center border  rounded-xl text-center p-4 md:p-5 hover:shadow-lg transition-all  hover:scale-105 animate-in fade-in duration-500 group ">
+          <Card className="h-46 sm:h-56 flex flex-col justify-center border  rounded-xl text-center p-4 md:p-5 hover:shadow-lg transition-all  hover:scale-105 animate-in fade-in duration-500 group ">
             <div className="p-2 flex justify-center items-center size-12 mx-auto bg-gradient-to-r from-blue-50 to-purple-50 dark:from-white rounded-lg group-hover:scale-110 transition-transform duration-300">
               <Landmark className=" text-black dark:text-black" />
             </div>
@@ -86,7 +86,7 @@ function Contatrycont({ cuntryprparty }: { cuntryprparty: Areacuntry | null }) {
               <HTMLContent Cont={cuntryprparty?.Mosques ?? 0} />
             </div>
           </Card>
-          <Card className="h-36 sm:h-56 flex flex-col justify-center border  rounded-xl text-center p-4 md:p-5 hover:shadow-lg transition-all  hover:scale-105 animate-in fade-in duration-500 group ">
+          <Card className="h-46 sm:h-56 flex flex-col justify-center border  rounded-xl text-center p-4 md:p-5 hover:shadow-lg transition-all  hover:scale-105 animate-in fade-in duration-500 group ">
             <div className="p-2 flex justify-center items-center size-12 mx-auto bg-gradient-to-r from-blue-50 to-purple-50 dark:from-white rounded-lg group-hover:scale-110 transition-transform duration-300">
               <Castle className=" text-black dark:text-black" />
             </div>
@@ -97,7 +97,7 @@ function Contatrycont({ cuntryprparty }: { cuntryprparty: Areacuntry | null }) {
               <HTMLContent Cont={cuntryprparty?.Catholic ?? 0} />
             </div>
           </Card>
-          <Card className="h-36 sm:h-56 flex flex-col justify-center border  rounded-xl text-center p-4 md:p-5 hover:shadow-lg transition-all  hover:scale-105 animate-in fade-in duration-500 group ">
+          <Card className="h-46 sm:h-56 flex flex-col justify-center border  rounded-xl text-center p-4 md:p-5 hover:shadow-lg transition-all  hover:scale-105 animate-in fade-in duration-500 group ">
             <div className="p-2 flex justify-center items-center size-12 mx-auto bg-gradient-to-r from-blue-50 to-purple-50 dark:from-white rounded-lg group-hover:scale-110 transition-transform duration-300">
               <Store className=" text-black dark:text-black" />
             </div>
