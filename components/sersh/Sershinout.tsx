@@ -1,94 +1,157 @@
 "use client";
-import { SershQuerCatylistirng, SershQuerlisting } from "@/utils/actions";
-import { Input } from "../ui/input";
-// import { useSearchParams, useRouter } from "next/navigation";
+import { SershQuerlisting } from "@/utils/actions";
+
+import { useSearchParams, useRouter } from "next/navigation";
 
 // import { useState, useEffect } from "react";
-import { MapPinCheckInside, Search } from "lucide-react";
-// import { isRealString } from "@/utils/format";
+import { Search, X } from "lucide-react";
 
 import { useDebouncedCallback } from "use-debounce";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Listing } from "@prisma/client";
+import { Badge } from "../ui/badge";
+
 type QueryResult = {
   listing: Listing[];
   citys: string[];
 };
 function Sershinout() {
-  //   const searchParams = useSearchParams();
-  //   const { replace } = useRouter();
+  const searchParams = useSearchParams();
+  const { replace } = useRouter();
+  const [isOpen, setIsopen] = useState(false);
   const [Parmes, setParmes] = useState("");
+  const [ParmesAll, setPramsAll] = useState(
+    Object.fromEntries(searchParams.entries())
+  );
   const [query, setQuery] = useState<QueryResult>({ listing: [], citys: [] });
+  ///handelfetsh Query Servar Action
   const retunequer = async (val: string) => {
     const liset = await SershQuerlisting(val);
-    const cites = await SershQuerCatylistirng(val);
-    console.log(cites);
-    return {
-      listing: liset,
-      citys: cites,
-    };
+    return liset;
   };
+  //handel filtring
+  const handleSuggestedSearch = (value: string, typeParmes: string) => {
+    const params = new URLSearchParams(searchParams);
+    if (value) {
+      params.set(typeParmes, value);
+    } else {
+      params.delete(typeParmes);
+    }
+    setIsopen(false);
+    setParmes("");
+    replace(`/listing?${params.toString()}`);
+  };
+  const handleSuggestedRemovSearch = (typeParmes: string) => {
+    const params = new URLSearchParams(searchParams);
+    if (typeParmes) {
+      params.delete(typeParmes);
+    }
+    setParmes("");
+    replace(`/listing?${params.toString()}`);
+  };
+  ///fetshQuery
   const handleSearch = useDebouncedCallback(async (value: string) => {
     const querey = await retunequer(value);
     setQuery(querey);
-    // const params = new URLSearchParams(searchParams);
-    // if (value && isRealString(value)) {
-    //   params.set("Parmes", value);
-    // } else {
-    //   params.delete("Parmes");
-    // }
-    // replace(`/products?${params.toString()}`);
+    console.log(query);
   }, 500);
 
-  //   useEffect(() => {
-  //     if (!searchParams.get("Parmes")) {
-  //       setParmes("");
-  //     }
-  //     // eslint-disable-next-line react-hooks/exhaustive-deps
-  //   }, [searchParams.get("Parmes")]);
-  console.log(query);
+  useEffect(() => {
+    if (!searchParams.get("Parmes")) {
+      setParmes("");
+    }
+    setPramsAll(Object.fromEntries(searchParams.entries()));
+  }, [searchParams]);
   return (
-    <div className="relative md:block hidden">
-      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400 dark:text-white" />
-      <Input
-        type="search"
-        placeholder="Search Product..."
-        onChange={(e) => {
-          setParmes(e.target.value);
-          handleSearch(e.target.value);
-        }}
-        value={Parmes}
-        className="pl-10 py-3 bg-gray-50 w-sm text-base dark:placeholder:text-white placeholder:text-gray-500"
-      />
-      {query.listing.length != 0 && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-gray-800 rounded-2xl shadow-xl z-50 overflow-hidden border border-gray-100 dark:border-gray-700 animate-in slide-in-from-top-2 duration-300">
-          <div className="p-4">
-            <div className="mb-3 flex items-center gap-2">
-              <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-              <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                City
-              </span>
-            </div>
-            <div className="space-y-1">
-              {query.citys.map((city, index) => (
-                <button
-                  key={index}
-                  //   onClick={() => handleSuggestedSearch(search)}
-                  className="focus:bg-accent focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-gray-300 w-full data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
-                  style={{
-                    animationDelay: `${index * 50}ms`,
-                  }}
-                >
-                  <span className="font-bold text-gray-500">{city}</span>
-                  <div className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                    <div className="w-5 h-5 bg-black rounded-full flex items-center justify-center">
-                      <Search className="h-2 w-2 text-white" />
-                    </div>
-                  </div>
-                </button>
-              ))}
-            </div>
-            <div className="mb-3 flex items-center gap-2">
+    <div className=" relative md:block hidden">
+      <div
+        className={`  flex flex-wrap dark:bg-black  items-center w-full min-w-lg max-w-xl border  border-gray-300 rounded-xl  ${isOpen ? "rounded-b-none" : ""}  bg-white shadow-sm overflow-hidden`}
+      >
+        {/* Filter Pills */}
+        <div className="flex  items-center space-x-2 py-3 px-2">
+          {Object.entries(ParmesAll).map(([key, value]) => (
+            <Badge
+              key={key}
+              className="dark:bg-neutral-700 bg-neutral-200 flex justify-between items-center"
+              variant="outline"
+            >
+              {value}
+              <button
+                onClick={() => handleSuggestedRemovSearch(key)}
+                className=" flex  justify-center items-center cursor-pointer w-3 h-3"
+              >
+                <X />
+              </button>
+            </Badge>
+          ))}
+        </div>
+        <div className=" flex flex-1 w-full ">
+          <input
+            type="text"
+            placeholder="Enter address,city, zip, neighborhood, building..."
+            onChange={(e) => {
+              setParmes(e.target.value);
+              handleSearch(e.target.value);
+            }}
+            onFocus={() => {
+              setIsopen(true);
+            }}
+            onBlur={() => {
+              setIsopen(false);
+            }}
+            value={Parmes}
+            className={`pl-3 py-3 bg-gray-50 dark:bg-black  flex-1 px-3  border-none  outline-none transition-all duration-300  focus:border-none  rounded-xl ${isOpen ? "rounded-b-none" : ""}  text-base dark:placeholder:text-white placeholder:text-gray-500 `}
+          />
+          <button className="px-4  text-gray-500 hover:text-gray-700">
+            <Search />
+          </button>
+        </div>
+      </div>
+      {query.listing.length != 0 && isOpen && (
+        <div className="absolute top-full left-0 right-0 mt-0 bg-white dark:bg-black rounded-b-xl shadow-xl z-50 overflow-hidden border border-gray-100 dark:border-gray-700 animate-in slide-in-from-top-2 duration-300">
+          <div
+            className=" max-h-100 overflow-y-auto pb-1
+                [&::-webkit-scrollbar]:w-2
+                [&::-webkit-scrollbar]:h-5
+                [&::-webkit-scrollbar-track]:rounded-full
+              [&::-webkit-scrollbar-track]:bg-gray-100
+                 [&::-webkit-scrollbar-thumb]:rounded-full
+               [&::-webkit-scrollbar-thumb]:bg-gray-400
+                 dark:[&::-webkit-scrollbar-track]:bg-neutral-400
+                dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
+          >
+            {query.citys.length != 0 && (
+              <div>
+                <div className="mb-1 bg-gray-100 dark:bg-neutral-800 p-2 flex items-center gap-2">
+                  <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+                  <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                    City
+                  </span>
+                </div>
+                <div className="space-y-1">
+                  {query.citys.map((city, index) => (
+                    <button
+                      key={index}
+                      onMouseDown={() =>
+                        handleSuggestedSearch(city ?? "", "city")
+                      }
+                      className="focus:bg-accent focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-gray-200 hover:border-l-1 dark:hover:bg-neutral-700 border-gray-500 w-full data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
+                      style={{
+                        animationDelay: `${index * 50}ms`,
+                      }}
+                    >
+                      <span>{city}</span>
+                      <div className="ml-auto opacity-10 group-hover:opacity-100 transition-opacity duration-200">
+                        <div className="w-5 h-5  rounded-full flex items-center justify-center">
+                          <Search className="h-2 w-2 text-black " />
+                        </div>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+            <div className="mb-1 mt-1 bg-gray-100 dark:bg-neutral-800 p-2 flex items-center gap-2">
               <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
               <span className="text-sm  font-medium text-gray-500 dark:text-gray-400">
                 Address
@@ -98,41 +161,25 @@ function Sershinout() {
               {query.listing.map((search, index) => (
                 <button
                   key={index}
-                  //   onClick={() => handleSuggestedSearch(search)}
-                  className="focus:bg-accent focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-gray-300 w-full data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
+                  onMouseDown={() =>
+                    handleSuggestedSearch(
+                      search?.location?.street_address ?? "",
+                      "address"
+                    )
+                  }
+                  className="focus:bg-accent focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-gray-200 hover:border-l-1 dark:hover:bg-neutral-700 border-gray-500 w-full data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
                   style={{
                     animationDelay: `${index * 50}ms`,
                   }}
                 >
-                  {search.location.zip_code}:
-                  <span className="font-bold text-gray-500">
-                    {search.location.county}
-                  </span>
-                  <div className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                    <div className="w-5 h-5 bg-black rounded-full flex items-center justify-center">
-                      <Search className="h-2 w-2 text-white" />
+                  {search.location.street_address}
+                  <div className="ml-auto opacity-10 group-hover:opacity-100 transition-opacity duration-200">
+                    <div className="w-5 h-5 z-99  rounded-full flex items-center justify-center">
+                      <Search className="h-2 w-2 text-black" />
                     </div>
                   </div>
                 </button>
               ))}
-            </div>
-            <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700">
-              <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
-                <div className="flex items-center gap-1">
-                  <kbd className="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-xs font-mono">
-                    Ctrl
-                  </kbd>
-                  <span>+</span>
-                  <kbd className="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-xs font-mono">
-                    /
-                  </kbd>
-                </div>
-                <span>to focus search</span>
-                <div className="ml-auto flex items-center gap-1">
-                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                  <span>Live search</span>
-                </div>
-              </div>
             </div>
           </div>
         </div>

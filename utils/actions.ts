@@ -191,6 +191,14 @@ export const SershQuerlisting = async (value: string) => {
       firstBatch: any[];
     };
   };
+  if (value == "") return { listing: [], citys: [] };
+  const city = (await prisma.$runCommandRaw({
+    distinct: "listing",
+    key: "location.city",
+    query: {
+      $or: [{ "location.city": { $regex: value, $options: "i" } }],
+    },
+  })) as RawCursorResult;
   const liset = (await prisma.$runCommandRaw({
     find: "listing",
     filter: {
@@ -199,10 +207,12 @@ export const SershQuerlisting = async (value: string) => {
         { "location.county": { $regex: value, $options: "i" } },
       ],
     },
+
     limit: 5,
   })) as RawCursorResult;
-  const listings = liset.cursor.firstBatch;
-  return listings;
+  const citys = city.values;
+  const listing = liset.cursor.firstBatch;
+  return { listing, citys };
 };
 export const SershQuerCatylistirng = async (value: string) => {
   type RawCursorResult = {

@@ -3,7 +3,8 @@ import React from "react";
 type ProductsPageProps = {
   searchParams: Promise<{
     layout?: string;
-    Parmes?: string;
+    address?: string;
+    city?: string;
     Page?: string;
   }>;
 };

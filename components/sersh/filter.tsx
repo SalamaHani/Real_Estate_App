@@ -1,14 +1,18 @@
 import React from "react";
 import Continer from "../global/Continer";
 import Sershinout from "./Sershinout";
+import SallandRell from "./SallandRell";
+import Pricefilter from "./Pricefilter";
 
 function Filter() {
   return (
     <nav
-      className={`top-30 left-0 w-full z-50 transition-all duration-500 bg-white dark:bg-black shadow-md fixed`}
+      className={`top-25 left-0 w-full z-50 transition-all duration-500 bg-red-200 shadow-md fixed`}
     >
-      <Continer className="flex justify-between md:flex-row md:justify-between md:items-center flex-wrap py-5 gap-4">
+      <Continer className="flex  md:flex-row  md:items-center flex-wrap py-5 gap-3">
+        <SallandRell />
         <Sershinout />
+        <Pricefilter />
         <div className=" flex gap-4 items-center  ">
           {/* <CartButton /> */}
           {/* <DarkMode />
