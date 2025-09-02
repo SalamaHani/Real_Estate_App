@@ -3,21 +3,21 @@ import React from "react";
 import { Button } from "../ui/button";
 import { useRouter, useSearchParams } from "next/navigation";
 
-function SallandRell() {
+function Activfilter() {
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const params = new URLSearchParams(searchParams);
-  const isactiv = params.get("listing_type");
+  const isactiv = params.get("status");
   const filterOptionsTyep = [
     {
-      id: "Sales",
-      label: "listing_type",
-      value: "Sales",
+      id: "Activ",
+      label: "status",
+      value: "Activ",
     },
     {
-      id: "Rentals",
-      label: "listing_type",
-      value: "Rentals",
+      id: "Sold",
+      label: "status",
+      value: "Sold",
     },
   ];
   const handleSuggestedSearch = (value: string, typeParmes: string) => {
@@ -30,7 +30,7 @@ function SallandRell() {
     replace(`/listing?${params.toString()}`);
   };
   return (
-    <div className="flex dark:bg-black items-center p-1 border rounded-xl  bg-white shadow-sm overflow-hidden">
+    <div className="flex  dark:bg-black items-center p-1 border rounded-xl  bg-white shadow-sm overflow-hidden">
       {filterOptionsTyep.map((item) => {
         const isSelected = item.value == isactiv;
         return (
@@ -43,7 +43,7 @@ function SallandRell() {
                 ? "bg-black dark:bg-white dark:text-black text-white shadow-sm   border border-gray-200 dark:border-gray-700"
                 : "hover:bg-gray-200 g-card text-card-foreground  dark:text-gray-400"
             }`}
-            onClick={() => handleSuggestedSearch(item.value, item.label)}
+            onClick={() => handleSuggestedSearch(item.id, item.label)}
           >
             {item.id}
           </Button>
@@ -53,4 +53,4 @@ function SallandRell() {
   );
 }
 
-export default SallandRell;
+export default Activfilter;

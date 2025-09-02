@@ -10,6 +10,7 @@ import { useDebouncedCallback } from "use-debounce";
 import { useEffect, useState } from "react";
 import { Listing } from "@prisma/client";
 import { Badge } from "../ui/badge";
+import { formatPrice } from "@/utils/format";
 
 type QueryResult = {
   listing: Listing[];
@@ -41,6 +42,7 @@ function Sershinout() {
     setParmes("");
     replace(`/listing?${params.toString()}`);
   };
+
   const handleSuggestedRemovSearch = (typeParmes: string) => {
     const params = new URLSearchParams(searchParams);
     if (typeParmes) {
@@ -53,7 +55,6 @@ function Sershinout() {
   const handleSearch = useDebouncedCallback(async (value: string) => {
     const querey = await retunequer(value);
     setQuery(querey);
-    console.log(query);
   }, 500);
 
   useEffect(() => {
@@ -62,49 +63,157 @@ function Sershinout() {
     }
     setPramsAll(Object.fromEntries(searchParams.entries()));
   }, [searchParams]);
-  return (
-    <div className=" relative md:block hidden">
-      <div
-        className={`  flex flex-wrap dark:bg-black  items-center w-full min-w-lg max-w-xl border  border-gray-300 rounded-xl  ${isOpen ? "rounded-b-none" : ""}  bg-white shadow-sm overflow-hidden`}
-      >
-        {/* Filter Pills */}
-        <div className="flex  items-center space-x-2 py-3 px-2">
-          {Object.entries(ParmesAll).map(([key, value]) => (
+
+  const prices = Object.entries(ParmesAll)
+    .filter(([key]) => key === "Maximam" || key === "Minimam")
+    .map(([key, value]) => ({ key, value }));
+
+  const filtringgionrpeice = Object.fromEntries(
+    Object.entries(ParmesAll).filter(
+      ([key]) => key !== "Maximam" && key !== "Minimam"
+    )
+  );
+
+  type KeyValue = {
+    key: string;
+    value: string; // or number, depending on your data
+  };
+
+  const handelprice = (arr: KeyValue[]) => {
+    if (arr.length == 2) {
+      return (
+        <Badge
+          className="dark:bg-neutral-700 bg-neutral-200 flex justify-between items-center"
+          variant="outline"
+        >
+          Price:{" "}
+          {formatPrice(arr.find((p) => p.key === "Minimam")?.value ?? "")} to{" "}
+          {formatPrice(arr.find((p) => p.key === "Maximam")?.value ?? "")}
+          <button
+            onClick={() => handleSuggestedRemovSearch("Maximam")}
+            className=" flex justify-center items-center cursor-pointer w-3 h-3"
+          >
+            <X />
+          </button>
+        </Badge>
+      );
+    } else if (arr.length == 1) {
+      return (
+        <>
+          {arr.find((p) => p.key === "Minimam")?.key == "Minimam" ? (
             <Badge
-              key={key}
               className="dark:bg-neutral-700 bg-neutral-200 flex justify-between items-center"
               variant="outline"
             >
-              {value}
+              Price: ovar{" "}
+              {formatPrice(arr.find((p) => p.key === "Minimam")?.value ?? "")}
               <button
-                onClick={() => handleSuggestedRemovSearch(key)}
-                className=" flex  justify-center items-center cursor-pointer w-3 h-3"
+                onClick={() => handleSuggestedRemovSearch("Minimam")}
+                className=" flex justify-center items-center cursor-pointer w-3 h-3"
               >
                 <X />
               </button>
             </Badge>
-          ))}
-        </div>
-        <div className=" flex flex-1 w-full ">
-          <input
-            type="text"
-            placeholder="Enter address,city, zip, neighborhood, building..."
-            onChange={(e) => {
-              setParmes(e.target.value);
-              handleSearch(e.target.value);
-            }}
-            onFocus={() => {
-              setIsopen(true);
-            }}
-            onBlur={() => {
-              setIsopen(false);
-            }}
-            value={Parmes}
-            className={`pl-3 py-3 bg-gray-50 dark:bg-black  flex-1 px-3  border-none  outline-none transition-all duration-300  focus:border-none  rounded-xl ${isOpen ? "rounded-b-none" : ""}  text-base dark:placeholder:text-white placeholder:text-gray-500 `}
-          />
-          <button className="px-4  text-gray-500 hover:text-gray-700">
-            <Search />
-          </button>
+          ) : (
+            <Badge
+              className="dark:bg-neutral-700 bg-neutral-200 flex justify-between items-center"
+              variant="outline"
+            >
+              Price: under{" "}
+              {formatPrice(arr.find((p) => p.key === "Maximam")?.value ?? "")}
+              <button
+                onClick={() => handleSuggestedRemovSearch("Maximam")}
+                className=" flex justify-center items-center cursor-pointer w-3 h-3"
+              >
+                <X />
+              </button>
+            </Badge>
+          )}
+        </>
+      );
+    } else if (arr.length == 0) {
+      return null;
+    }
+  };
+  return (
+    <div className=" relative min-w-[40%] ">
+      <div className="w-full">
+        <div className={` relative`}>
+          {/* Filter Pills */}
+          <div
+            className={`  flex flex-row dark:bg-black  items-center w-full  max-w-lg border  border-gray-300 rounded-xl  ${isOpen ? "rounded-b-none" : ""}  bg-white shadow-sm overflow-hidden`}
+          >
+            <div className="flex  items-center space-x-2 py-3 px-2">
+              {Object.entries(filtringgionrpeice).map(([key, value]) => (
+                <div key={key}>
+                  {key == "Bads" || key == "Baths" ? (
+                    value == "Studio" ? (
+                      <Badge
+                        className="dark:bg-neutral-700 bg-neutral-200 flex justify-between items-center"
+                        variant="outline"
+                      >
+                        {value}
+                        <button
+                          onClick={() => handleSuggestedRemovSearch(key)}
+                          className=" flex justify-center items-center cursor-pointer w-3 h-3"
+                        >
+                          <X />
+                        </button>
+                      </Badge>
+                    ) : (
+                      <Badge
+                        className="dark:bg-neutral-700 bg-neutral-200 flex justify-between items-center"
+                        variant="outline"
+                      >
+                        {key}:{value}
+                        <button
+                          onClick={() => handleSuggestedRemovSearch(key)}
+                          className=" flex justify-center items-center cursor-pointer w-3 h-3"
+                        >
+                          <X />
+                        </button>
+                      </Badge>
+                    )
+                  ) : (
+                    <Badge
+                      className="dark:bg-neutral-700 bg-neutral-200 flex justify-between items-center"
+                      variant="outline"
+                    >
+                      {value}
+                      <button
+                        onClick={() => handleSuggestedRemovSearch(key)}
+                        className=" flex justify-center items-center cursor-pointer w-3 h-3"
+                      >
+                        <X />
+                      </button>
+                    </Badge>
+                  )}
+                </div>
+              ))}
+              {handelprice(prices)}
+            </div>
+            <div className=" flex flex-1 w-full ">
+              <input
+                type="text"
+                placeholder="Enter address,city, zip, neighborhood, building..."
+                onChange={(e) => {
+                  setParmes(e.target.value);
+                  handleSearch(e.target.value);
+                }}
+                onFocus={() => {
+                  setIsopen(true);
+                }}
+                onBlur={() => {
+                  setIsopen(false);
+                }}
+                value={Parmes}
+                className={`pl-3 py-3 bg-gray-50 dark:bg-black  flex-1 px-3  border-none  outline-none transition-all duration-300  focus:border-none  rounded-xl ${isOpen ? "rounded-b-none" : ""}  text-base dark:placeholder:text-white placeholder:text-gray-500 `}
+              />
+              <button className="px-4  text-gray-500 hover:text-gray-700">
+                <Search />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
       {query.listing.length != 0 && isOpen && (

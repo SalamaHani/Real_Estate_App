@@ -3,6 +3,9 @@ import Continer from "../global/Continer";
 import Sershinout from "./Sershinout";
 import SallandRell from "./SallandRell";
 import Pricefilter from "./Pricefilter";
+import Bedasfilter from "./Bedasfilter";
+import Bathsfilter from "./Badthfilter";
+import Activfilter from "./ActivFilter";
 
 function Filter() {
   return (
@@ -13,6 +16,9 @@ function Filter() {
         <SallandRell />
         <Sershinout />
         <Pricefilter />
+        <Bedasfilter />
+        <Bathsfilter />
+        <Activfilter />
         <div className=" flex gap-4 items-center  ">
           {/* <CartButton /> */}
           {/* <DarkMode />

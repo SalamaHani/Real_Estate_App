@@ -3,31 +3,21 @@ import React from "react";
 import {
   Menubar,
   MenubarContent,
-  MenubarItem,
   MenubarMenu,
-  MenubarRadioGroup,
-  MenubarRadioItem,
-  MenubarSeparator,
   MenubarTrigger,
 } from "@/components/ui/menubar";
+import { ComboboxPrice } from "./PriceStauts";
 function Pricefilter() {
   return (
     <div>
-      <Menubar>
-        <MenubarMenu  >
-          <MenubarTrigger className="px-6 py-3 text-lg h-12">
-            Profiles
+      <Menubar className="py-3 rounded-xl h-12">
+        <MenubarMenu>
+          <MenubarTrigger className="px-6 py-3 rounded-xl  h-12">
+            Price
           </MenubarTrigger>
-          <MenubarContent>
-            <MenubarRadioGroup value="benoit">
-              <MenubarRadioItem value="andy">Andy</MenubarRadioItem>
-              <MenubarRadioItem value="benoit">Benoit</MenubarRadioItem>
-              <MenubarRadioItem value="Luis">Luis</MenubarRadioItem>
-            </MenubarRadioGroup>
-            <MenubarSeparator />
-            <MenubarItem inset>Edit...</MenubarItem>
-            <MenubarSeparator />
-            <MenubarItem inset>Add Profile...</MenubarItem>
+          <MenubarContent className=" flex items-center w-full gap-1 pr-2 justify-between">
+            <ComboboxPrice type={"Minimam"} />
+            <ComboboxPrice type={"Maximam"} />
           </MenubarContent>
         </MenubarMenu>
       </Menubar>
