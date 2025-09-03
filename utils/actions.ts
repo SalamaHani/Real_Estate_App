@@ -233,4 +233,66 @@ export const SershQuerCatylistirng = async (value: string) => {
   const citys = city.values;
   return citys;
 };
-///
+///Fetsh Query filtring LIsting
+
+export const FetshSershListoning = async ({
+  Page = 1,
+  Minimam,
+  Maximam,
+  Bads,
+  Baths,
+  status,
+  listing_type,
+  city,
+  address,
+  limit = 6,
+}: {
+  Page?: number;
+  Minimam?: number;
+  Maximam?: number;
+  Bads?: string;
+  Baths?: string;
+  status?: string;
+  listing_type?: string;
+  city?: string;
+  address?: string;
+  limit?: number;
+}) => {
+  const skip = (Page - 1) * limit;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const filter: any = {};
+
+  if (Minimam !== undefined || Maximam !== undefined) {
+    filter.price = {};
+    if (Minimam !== undefined) filter.price.$gte = Number(Minimam);
+    if (Maximam !== undefined) filter.price.$lte = Number(Maximam);
+  }
+  if (Bads) filter.bedrooms = { $gte: Number(Bads.replace("+", "")) };
+  if (Baths) filter.bathrooms = { $gte: Number(Baths.replace("+", "")) };
+  if (status) filter.listing_status = status;
+  if (listing_type !== undefined) {
+    filter.is_rental = listing_type ? "Rental" : "Sales";
+  }
+  if (city) filter["location.set.city"] = { $regex: city, $options: "i" };
+  if (address)
+    filter["location.set.street_address"] = { $regex: address, $options: "i" };
+
+  // count total documents
+  // const total = await db.$runCommandRaw({
+  //   count: "listing",
+  //   query: filter,
+  // });
+  const total = await db.listing.count();
+  // query listings
+  const listing = await db.$runCommandRaw({
+    find: "listing",
+    filter,
+    skip,
+    limit,
+    sort: { createdAt: -1 }, // latest first
+  });
+  return {
+    listings: listing?.cursor?.firstBatch,
+    metadata: { total: total, totalPage: Math.ceil(total / limit), Page: Page },
+  };
+};
