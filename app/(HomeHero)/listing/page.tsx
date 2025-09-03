@@ -12,7 +12,6 @@ function page({ searchParams }: ProductsPageProps) {
   return (
     <div>
       <Filter />
-      <h1>listing</h1>
     </div>
   );
 }

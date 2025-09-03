@@ -1,21 +1,21 @@
 "use client";
 import { SershQuerlisting } from "@/utils/actions";
-
 import { useSearchParams, useRouter } from "next/navigation";
-
-// import { useState, useEffect } from "react";
 import { Search, X } from "lucide-react";
-
 import { useDebouncedCallback } from "use-debounce";
 import { useEffect, useState } from "react";
 import { Listing } from "@prisma/client";
 import { Badge } from "../ui/badge";
 import { formatPrice } from "@/utils/format";
-
 type QueryResult = {
   listing: Listing[];
   citys: string[];
 };
+type KeyValue = {
+  key: string;
+  value: string; // or number, depending on your data
+};
+
 function Sershinout() {
   const searchParams = useSearchParams();
   const { replace } = useRouter();
@@ -24,6 +24,7 @@ function Sershinout() {
   const [ParmesAll, setPramsAll] = useState(
     Object.fromEntries(searchParams.entries())
   );
+
   const [query, setQuery] = useState<QueryResult>({ listing: [], citys: [] });
   ///handelfetsh Query Servar Action
   const retunequer = async (val: string) => {
@@ -68,47 +69,119 @@ function Sershinout() {
     .filter(([key]) => key === "Maximam" || key === "Minimam")
     .map(([key, value]) => ({ key, value }));
 
-  const filtringgionrpeice = Object.fromEntries(
-    Object.entries(ParmesAll).filter(
-      ([key]) => key !== "Maximam" && key !== "Minimam"
-    )
-  );
+  // const filtringgionrpeice = Object.fromEntries(
+  //   Object.entries(ParmesAll).filter(
+  //     ([key]) => key !== "Maximam" && key !== "Minimam"
+  //   )
+  // );
+  const Morefilter = Object.entries(ParmesAll).slice(0, 2);
+  const lenesthmotre = Object.entries(ParmesAll).length - Morefilter.length;
+  Morefilter.push(["more", `${lenesthmotre}`]);
 
-  type KeyValue = {
-    key: string;
-    value: string; // or number, depending on your data
-  };
-
-  const handelprice = (arr: KeyValue[]) => {
-    if (arr.length == 2) {
+  let handelorice = false;
+  const formatBedge = (key: string, value: string) => {
+    if ((key == "Maximam" || key == "Minimam") && !handelorice) {
+      handelorice = true;
+      return handelprice(prices);
+    }
+    if ((key == "Maximam" || key == "Minimam") && handelorice) {
+      return null;
+    }
+    if (key == "Bads" || key == "Baths") {
+      if (value == "Studio") {
+        return (
+          <Badge
+            className="dark:bg-neutral-700 my-3 bg-neutral-200 flex justify-between items-center"
+            variant="outline"
+          >
+            {value}
+            <button
+              onMouseDown={() => handleSuggestedRemovSearch(key)}
+              className=" flex justify-center items-center cursor-pointer w-3 h-3"
+            >
+              <X />
+            </button>
+          </Badge>
+        );
+      } else {
+        return (
+          <Badge
+            className="dark:bg-neutral-700 my-3 bg-neutral-200 flex justify-between items-center"
+            variant="outline"
+          >
+            {key}:{value}
+            <button
+              onMouseDown={() => handleSuggestedRemovSearch(key)}
+              className=" flex justify-center items-center cursor-pointer w-3 h-3"
+            >
+              <X />
+            </button>
+          </Badge>
+        );
+      }
+    }
+    if (key == "more") {
       return (
         <Badge
-          className="dark:bg-neutral-700 bg-neutral-200 flex justify-between items-center"
+          className="dark:bg-neutral-700 my-3 bg-neutral-200 flex justify-between items-center"
           variant="outline"
         >
-          Price:{" "}
-          {formatPrice(arr.find((p) => p.key === "Minimam")?.value ?? "")} to{" "}
-          {formatPrice(arr.find((p) => p.key === "Maximam")?.value ?? "")}
+          {key}:({value})
           <button
-            onClick={() => handleSuggestedRemovSearch("Maximam")}
+            onMouseDown={() => handleSuggestedRemovSearch(key)}
             className=" flex justify-center items-center cursor-pointer w-3 h-3"
           >
             <X />
           </button>
         </Badge>
       );
-    } else if (arr.length == 1) {
+    }
+    return (
+      <Badge
+        className="dark:bg-neutral-700 my-3 bg-neutral-200 flex justify-between items-center"
+        variant="outline"
+      >
+        {value}
+        <button
+          onMouseDown={() => handleSuggestedRemovSearch(key)}
+          className=" flex justify-center items-center cursor-pointer w-3 h-3"
+        >
+          <X />
+        </button>
+      </Badge>
+    );
+  };
+  const handelprice = (arr: KeyValue[]) => {
+    if (arr.length == 2) {
+      return (
+        <Badge
+          className="dark:bg-neutral-700 my-3 bg-neutral-200 flex justify-between items-center"
+          variant="outline"
+        >
+          Price:{" "}
+          {formatPrice(arr.find((p) => p.key === "Minimam")?.value ?? "")} to{" "}
+          {formatPrice(arr.find((p) => p.key === "Maximam")?.value ?? "")}
+          <button
+            onMouseDown={() => handleSuggestedRemovSearch("Maximam")}
+            className=" flex justify-center items-center cursor-pointer w-3 h-3"
+          >
+            <X />
+          </button>
+        </Badge>
+      );
+    }
+    if (arr.length == 1) {
       return (
         <>
           {arr.find((p) => p.key === "Minimam")?.key == "Minimam" ? (
             <Badge
-              className="dark:bg-neutral-700 bg-neutral-200 flex justify-between items-center"
+              className="dark:bg-neutral-700 my-3 bg-neutral-200 flex justify-between items-center"
               variant="outline"
             >
               Price: ovar{" "}
               {formatPrice(arr.find((p) => p.key === "Minimam")?.value ?? "")}
               <button
-                onClick={() => handleSuggestedRemovSearch("Minimam")}
+                onMouseDown={() => handleSuggestedRemovSearch("Minimam")}
                 className=" flex justify-center items-center cursor-pointer w-3 h-3"
               >
                 <X />
@@ -116,13 +189,13 @@ function Sershinout() {
             </Badge>
           ) : (
             <Badge
-              className="dark:bg-neutral-700 bg-neutral-200 flex justify-between items-center"
+              className="dark:bg-neutral-700 my-3 bg-neutral-200 flex justify-between items-center"
               variant="outline"
             >
               Price: under{" "}
               {formatPrice(arr.find((p) => p.key === "Maximam")?.value ?? "")}
               <button
-                onClick={() => handleSuggestedRemovSearch("Maximam")}
+                onMouseDown={() => handleSuggestedRemovSearch("Maximam")}
                 className=" flex justify-center items-center cursor-pointer w-3 h-3"
               >
                 <X />
@@ -131,66 +204,39 @@ function Sershinout() {
           )}
         </>
       );
-    } else if (arr.length == 0) {
+    }
+    if (arr.length == 0) {
       return null;
     }
   };
+
+  ///return filter input sersh query
   return (
-    <div className=" relative min-w-[40%] ">
-      <div className="w-full">
+    <div className=" relative min-w-[40%] max-w-[30%]: ">
+      <div
+        className={`w-full  ${Object.entries(ParmesAll).length > 3 && isOpen ? `h-[50px] ` : ``}`}
+      >
         <div className={` relative`}>
           {/* Filter Pills */}
           <div
-            className={`  flex flex-row dark:bg-black  items-center w-full  max-w-lg border  border-gray-300 rounded-xl  ${isOpen ? "rounded-b-none" : ""}  bg-white shadow-sm overflow-hidden`}
+            className={`flex dark:bg-black ${Object.entries(ParmesAll).length > 3 && isOpen ? `flex-col absolute left-0 top-0` : `flex-row block`} items-center w-full  max-w-lg border  border-gray-300 rounded-xl  ${isOpen ? "rounded-b-none" : ""}  bg-white shadow-sm overflow-hidden`}
           >
-            <div className="flex  items-center space-x-2 py-3 px-2">
-              {Object.entries(filtringgionrpeice).map(([key, value]) => (
-                <div key={key}>
-                  {key == "Bads" || key == "Baths" ? (
-                    value == "Studio" ? (
-                      <Badge
-                        className="dark:bg-neutral-700 bg-neutral-200 flex justify-between items-center"
-                        variant="outline"
-                      >
-                        {value}
-                        <button
-                          onClick={() => handleSuggestedRemovSearch(key)}
-                          className=" flex justify-center items-center cursor-pointer w-3 h-3"
-                        >
-                          <X />
-                        </button>
-                      </Badge>
-                    ) : (
-                      <Badge
-                        className="dark:bg-neutral-700 bg-neutral-200 flex justify-between items-center"
-                        variant="outline"
-                      >
-                        {key}:{value}
-                        <button
-                          onClick={() => handleSuggestedRemovSearch(key)}
-                          className=" flex justify-center items-center cursor-pointer w-3 h-3"
-                        >
-                          <X />
-                        </button>
-                      </Badge>
-                    )
-                  ) : (
-                    <Badge
-                      className="dark:bg-neutral-700 bg-neutral-200 flex justify-between items-center"
-                      variant="outline"
-                    >
-                      {value}
-                      <button
-                        onClick={() => handleSuggestedRemovSearch(key)}
-                        className=" flex justify-center items-center cursor-pointer w-3 h-3"
-                      >
-                        <X />
-                      </button>
-                    </Badge>
-                  )}
-                </div>
-              ))}
-              {handelprice(prices)}
+            <div
+              className={`flex ${Object.entries(ParmesAll).length > 3 && isOpen ? `flex-wrap w-full  justify-start ` : `flex-nowrap`}     space-x-2  px-2 `}
+            >
+              {Object.entries(ParmesAll).length > 3 && !isOpen ? (
+                <>
+                  {Morefilter.map(([key, value], index) => (
+                    <div key={index}>{formatBedge(key, value)}</div>
+                  ))}
+                </>
+              ) : (
+                <>
+                  {Object.entries(ParmesAll).map(([key, value]) => (
+                    <div key={key}>{formatBedge(key, value)}</div>
+                  ))}
+                </>
+              )}
             </div>
             <div className=" flex flex-1 w-full ">
               <input
@@ -217,16 +263,18 @@ function Sershinout() {
         </div>
       </div>
       {query.listing.length != 0 && isOpen && (
-        <div className="absolute top-full left-0 right-0 mt-0 bg-white dark:bg-black rounded-b-xl shadow-xl z-50 overflow-hidden border border-gray-100 dark:border-gray-700 animate-in slide-in-from-top-2 duration-300">
+        <div
+          className={`absolute  left-0 right-0 mt-0 ${Object.entries(ParmesAll).length > 3 && isOpen ? (Object.entries(ParmesAll).length > 5 && isOpen ? `top-34` : `top-24`) : `top-full`} bg-white dark:bg-black rounded-b-xl shadow-xl z-50 overflow-hidden border border-gray-100 dark:border-gray-700 animate-in slide-in-from-top-2 duration-300`}
+        >
           <div
             className=" max-h-100 overflow-y-auto pb-1
                 [&::-webkit-scrollbar]:w-2
                 [&::-webkit-scrollbar]:h-5
                 [&::-webkit-scrollbar-track]:rounded-full
               [&::-webkit-scrollbar-track]:bg-gray-100
-                 [&::-webkit-scrollbar-thumb]:rounded-full
-               [&::-webkit-scrollbar-thumb]:bg-gray-400
-                 dark:[&::-webkit-scrollbar-track]:bg-neutral-400
+                  [&::-webkit-scrollbar-thumb]:rounded-full
+                [&::-webkit-scrollbar-thumb]:bg-gray-400
+                  dark:[&::-webkit-scrollbar-track]:bg-neutral-400
                 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
           >
             {query.citys.length != 0 && (
@@ -241,6 +289,7 @@ function Sershinout() {
                   {query.citys.map((city, index) => (
                     <button
                       key={index}
+                      tabIndex={index}
                       onMouseDown={() =>
                         handleSuggestedSearch(city ?? "", "city")
                       }
@@ -269,6 +318,7 @@ function Sershinout() {
             <div className="space-y-1">
               {query.listing.map((search, index) => (
                 <button
+                  tabIndex={index}
                   key={index}
                   onMouseDown={() =>
                     handleSuggestedSearch(
