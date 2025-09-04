@@ -1,20 +1,15 @@
 "use client";
 import React from "react";
 import { Button } from "../ui/button";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { RotateCcw } from "lucide-react";
 
 function ButtonReset() {
-  const searchParams = useSearchParams();
   const { replace } = useRouter();
   const [isrest, setreset] = React.useState(false);
   const resetParmes = () => {
-    const params = new URLSearchParams(searchParams);
-    params.forEach((_, key) => {
-      params.delete(key);
-    });
     setreset(true);
-    replace(`/listing?${params.toString()}`);
+    replace(`/listing`);
   };
   return (
     <div className="flex dark:bg-black items-center p-1 border rounded-xl  bg-white shadow-sm overflow-hidden">

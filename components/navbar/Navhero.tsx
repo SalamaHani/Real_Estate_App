@@ -7,10 +7,16 @@ import LinksDropdown from "./LinksDropdown";
 import { Session } from "@/lib/auth";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 function Navhero({ session }: { session: Session | null }) {
+  const pathname = usePathname();
+  const isSearchPage = pathname.replace(/\/$/, "") === "/listing";
+
   return (
     <>
-      <nav className="border-b ">
+      <nav
+        className={` ${isSearchPage ? `top-0  left-0 w-full z-50 bg-white dark:bg-black  transition-all duration-500  shadow-md fixed` : ` border-b`}`}
+      >
         <Continer className="flex justify-between md:flex-row md:justify-between md:items-center flex-wrap py-5 gap-4">
           <div>
             <Link href="/">

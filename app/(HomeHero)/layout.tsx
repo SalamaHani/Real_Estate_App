@@ -34,7 +34,6 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         <Providers>
           <Navhero session={session} />
           {children}
-          <Footer />
         </Providers>
       </body>
     </html>

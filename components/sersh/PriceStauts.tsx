@@ -83,7 +83,7 @@ export function ComboboxPrice({ type }: { type: string }) {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[50%] justify-between"
+          className="w-[50%]  justify-between"
         >
           {value
             ? pricse.find((price: PriceOption) => price.value === value)?.label

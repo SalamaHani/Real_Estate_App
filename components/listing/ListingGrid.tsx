@@ -67,7 +67,7 @@ function ListingGrid({ listing }: { listing: Listing[] }) {
       className="w-full mt-10"
     >
       <CarouselContent>
-        {listing.map((listing) => {
+        {listing.map((listing, index) => {
           const {
             price,
             photos,
@@ -81,7 +81,7 @@ function ListingGrid({ listing }: { listing: Listing[] }) {
           const StatusIcon = statusConfig.icon;
           const listingId = listing.id;
           return (
-            <CarouselItem key={listingId} className="md:basis-1/2 lg:basis-1/3">
+            <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
               <article className="group relative ">
                 <Card className=" overflow-hidden pt-0">
                   <Carousel className="w-full">

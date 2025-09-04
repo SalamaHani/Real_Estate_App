@@ -10,9 +10,9 @@ function Activfilter() {
   const isactiv = params.get("status");
   const filterOptionsTyep = [
     {
-      id: "Activ",
+      id: "Active",
       label: "status",
-      value: "Activ",
+      value: "Active",
     },
     {
       id: "Sold",

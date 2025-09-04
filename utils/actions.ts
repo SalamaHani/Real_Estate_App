@@ -269,19 +269,17 @@ export const FetshSershListoning = async ({
   }
   if (Bads) filter.bedrooms = { $gte: Number(Bads.replace("+", "")) };
   if (Baths) filter.bathrooms = { $gte: Number(Baths.replace("+", "")) };
-  if (status) filter.listing_status = status;
+  if (status) filter.listing_status = { $regex: status, $options: "i" };
   if (listing_type !== undefined) {
-    filter.is_rental = listing_type ? "Rental" : "Sales";
+    if (listing_type === "Rentals") {
+      filter.is_rental = true;
+    } else {
+      filter.is_rental = false;
+    }
   }
-  if (city) filter["location.set.city"] = { $regex: city, $options: "i" };
+  if (city) filter["location.city"] = { $regex: city, $options: "i" };
   if (address)
-    filter["location.set.street_address"] = { $regex: address, $options: "i" };
-
-  // count total documents
-  // const total = await db.$runCommandRaw({
-  //   count: "listing",
-  //   query: filter,
-  // });
+    filter["location.street_address"] = { $regex: address, $options: "i" };
   const total = await db.listing.count();
   // query listings
   const listing = await db.$runCommandRaw({
@@ -291,8 +289,13 @@ export const FetshSershListoning = async ({
     limit,
     sort: { createdAt: -1 }, // latest first
   });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const listings = listing?.cursor?.firstBatch.map((doc: any) => ({
+    ...doc,
+    id: doc._id.$oid,
+  }));
   return {
-    listings: listing?.cursor?.firstBatch,
+    listings: listings,
     metadata: { total: total, totalPage: Math.ceil(total / limit), Page: Page },
   };
 };

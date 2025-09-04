@@ -11,7 +11,7 @@ import ButtonReset from "./ButtonReset";
 function Filter() {
   return (
     <nav
-      className={`top-23 left-0 w-full z-50 bg-gray-100 transition-all duration-500  shadow-md fixed`}
+      className={`top-23  left-0 w-full z-50 bg-gray-100 dark:bg-neutral-900 transition-all duration-500  shadow-md fixed`}
     >
       <Continer className="flex  md:flex-row  md:items-center  py-3 gap-2">
         <SallandRell />
