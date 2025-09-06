@@ -1,7 +1,9 @@
 import Continer from "@/components/global/Continer";
-import { PaginationListing } from "@/components/global/Pgenation";
+import PaginationListing from "@/components/global/Pgenation";
 import GridListingS from "@/components/listing/GridListingS";
+import MapFiltring from "@/components/listing/MapFiltring";
 import Filter from "@/components/sersh/filter";
+import { Button } from "@/components/ui/button";
 import { FetshSershListoning } from "@/utils/actions";
 import React from "react";
 type ListingsPageProps = {
@@ -38,20 +40,30 @@ async function page({ searchParams }: ListingsPageProps) {
     city: searchParams.city,
     address: searchParams.address,
   });
-  console.log(data.listings);
-
+  const locationmap = {
+    lat: -75.397666,
+    lng: 40.654583,
+  };
   return (
-    <div>
+    <div className="h-[100vh] overflow-y-hidden">
       <Filter />
-      <div className="mt-60 mb-20">
-        <Continer>
+
+      <div className=" mt-50 grid grid-cols-1 sm:grid-cols-1 gap-2">
+        <div>
           <GridListingS listing={data.listings} />
-        </Continer>
-        {/* <PaginationListing
-          Page={Page}
-          pathe="listings"
-          metadata={data.metadata}
-        /> */}
+          <div>
+            {data.listings.length == 0 ? null : (
+              <PaginationListing
+                Page={Page}
+                pathe="listing"
+                metadata={data.metadata}
+              />
+            )}
+          </div>
+        </div>
+        {/* <div className="w-full h-190 p-5 rounded-md border">
+            <MapFiltring location={locationmap} city="los Anglo" />
+          </div> */}
       </div>
     </div>
   );

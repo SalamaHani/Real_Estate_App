@@ -15,7 +15,7 @@ function Navhero({ session }: { session: Session | null }) {
   return (
     <>
       <nav
-        className={` ${isSearchPage ? `top-0  left-0 w-full z-50 bg-white dark:bg-black  transition-all duration-500  shadow-md fixed` : ` border-b`}`}
+        className={` ${isSearchPage ? `top-0  left-0 w-full z-50 bg-white  overflow-y-hidden dark:bg-black  transition-all duration-500  shadow-md fixed` : ` border-b`}`}
       >
         <Continer className="flex justify-between md:flex-row md:justify-between md:items-center flex-wrap py-5 gap-4">
           <div>

@@ -1,35 +1,23 @@
 "use client";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
-import { Button } from "../ui/button";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
-export type Metadata = {
-  total: number;
-  totalPage: number;
-  Page: number;
-};
-export function PaginationListing({
+import { metaData } from "@/utils/Tayp";
+
+export default function PaginationListing({
   pathe,
   Page,
   metadata,
 }: {
   pathe: string;
   Page: number;
-  metadata: Metadata;
+  metadata: metaData;
 }) {
   const searchParams = useSearchParams();
   const { replace } = useRouter();
-  const { totalPage } = metadata;
-  const [Pagee, setPage] = useState(searchParams.get("Page")?.toString() || "");
+  const { total, totalPage } = metadata;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [page, setPage] = useState(searchParams.get("Page")?.toString() || "");
   const handleSearch = useDebouncedCallback((value: string) => {
     const params = new URLSearchParams(searchParams);
     if (value) {
@@ -75,15 +63,12 @@ export function PaginationListing({
     // dots
     if (Page > 2) {
       pageButtons.push(
-        <PaginationItem>
-          <PaginationLink
-            onClick={() => {
-              handleSearch(Page.toString());
-            }}
-          >
-            1
-          </PaginationLink>
-        </PaginationItem>
+        <button
+          className="flex items-center justify-center px-4 h-10 leading-tight pointer-coarse text-gray-500  border border-gray-300 hover:bg-gray-100 dark:bg-neutral-900  dark:text-gray-100 dark:border-neutral-800 dark:hover:bg-neutral-800 dark:hover:text-white"
+          key="dots-1"
+        >
+          ...
+        </button>
       );
     }
 
@@ -94,17 +79,12 @@ export function PaginationListing({
     // dots
     if (Page < totalPage - 1) {
       pageButtons.push(
-        <PaginationItem>
-          <button
-            type="submit"
-            name="Page"
-            value={String(Page - 1)}
-            onClick={() => handleSearch(Page.toString())}
-            className="px-3 py-2 rounded-md border"
-          >
-            {Page - 1}
-          </button>
-        </PaginationItem>
+        <button
+          className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 pointer-coarse  border border-gray-300 hover:bg-gray-100 hover:text-gray-700  dark:text-gray-100 dark:border-neutral-800 dark:hover:bg-neutral-800 dark:hover:text-white"
+          key="dots-2"
+        >
+          ...
+        </button>
       );
     }
 
@@ -117,61 +97,39 @@ export function PaginationListing({
     );
     return pageButtons;
   };
-  if (totalPage < 3) {
+  if (totalPage < 2) return null;
+  if (total < 3) {
     return null;
   }
 
   return (
-    <Pagination>
-      <PaginationContent className="flex flex-wrap gap-1">
-        {/* Prev */}
-        <PaginationItem>
-          <Button
+    <div className="container mt-2  flex  justify-center pb-15">
+      <nav aria-label="Page flex flex-row-reverse  mt-5  navigation example dark:bg-[#252525]">
+        <div className="inline-flex mt-16 -space-x-px text-base h-10">
+          <button
             onClick={() => {
-              let prevPage = Page + 1;
-              if (prevPage < 1) prevPage = totalPage;
-              handleSearch(prevPage.toString());
+              let prevpage = Page - 1;
+              if (prevpage < 1) prevpage = totalPage;
+              handleSearch(prevpage.toString());
             }}
-            type="submit"
-            variant="ghost"
-            disabled={Page <= 1}
+            className="flex items-center justify-center px-4 h-10 ms-0 pointer-coarse leading-tight text-gray-500  border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700   dark:text-gray-100 dark:border-neutral-800 dark:hover:bg-neutral-800 dark:hover:text-white"
           >
-            <PaginationPrevious />
-          </Button>
-        </PaginationItem>
+            Prev
+          </button>
+          {renderPageButtons()}
+          <button
+            onClick={() => {
+              let nextpage = Page + 1;
+              if (nextpage > totalPage) nextpage = 1;
 
-        {Page > 3 && (
-          <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem>
-        )}
-        {renderPageButtons()}
-        {Page + 2 < totalPage && (
-          <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem>
-        )}
-        {Page + 1 < totalPage && (
-          <PaginationItem>
-            <PaginationLink href={`/listings?`}>{totalPage}</PaginationLink>
-          </PaginationItem>
-        )}
-        {/* Next */}
-        <PaginationItem>
-          <Button
-            onClick={() => {
-              let prevPage = Page - 1;
-              if (prevPage < 1) prevPage = totalPage;
-              handleSearch(prevPage.toString());
+              handleSearch(nextpage.toString());
             }}
-            type="submit"
-            variant="ghost"
-            disabled={Page >= totalPage}
+            className="flex items-center justify-center px-4 h-10 pointer-coarse leading-tight text-gray-500  border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700   dark:text-gray-100 dark:border-neutral-800 dark:hover:bg-neutral-800 dark:hover:text-white"
           >
-            <PaginationNext />
-          </Button>
-        </PaginationItem>
-      </PaginationContent>
-    </Pagination>
+            Next
+          </button>
+        </div>
+      </nav>
+    </div>
   );
 }

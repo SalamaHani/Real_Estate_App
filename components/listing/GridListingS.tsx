@@ -21,6 +21,8 @@ import {
 import Link from "next/link";
 import { formatCurrency } from "@/utils/format";
 import NoreseltListing from "./NoreseltListing";
+import { ScrollArea } from "../ui/scroll-area";
+import Continer from "../global/Continer";
 function GridListingS({ listing }: { listing: Listing[] }) {
   const getStatusConfig = (statusName: string) => {
     return statuse.find((s) => s.states === statusName) || statuse[3];
@@ -65,100 +67,107 @@ function GridListingS({ listing }: { listing: Listing[] }) {
     );
   }
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-      {listing.map((listing) => {
-        const {
-          price,
-          photos,
-          location,
-          bathrooms,
-          bedrooms,
-          living_area,
-          listing_status,
-        } = listing;
-        const statusConfig = getStatusConfig(listing_status);
-        const StatusIcon = statusConfig.icon;
-        const listingId = listing.id;
-        return (
-          <div key={listingId}>
-            <article className="group relative ">
-              <Card className=" overflow-hidden pt-0">
-                <Carousel className="w-full">
-                  <CarouselContent>
-                    {photos.map((src, i) => (
-                      <CarouselItem key={i} className="relative aspect-[16/10]">
-                        {photos.length == 1 ? null : (
-                          <CarouselPrevious className="left-8" />
-                        )}
-                        <Link href={`/listing/${listingId}`}>
-                          <Imaglisting src={src} alt={src} />
-                        </Link>
-                        {photos.length == 1 ? null : (
-                          <CarouselNext className="right-4" />
-                        )}
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                </Carousel>
-                <CardHeader className="space-y-2">
-                  <CardTitle className="text-xl">
-                    {formatCurrency(price)}
-                  </CardTitle>
-                  <CardDescription className="flex ">
-                    <MapPin className="h-3 w-3 mt-1" />
-                    {location?.county} , {location?.city}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="flex items-center justify-between">
-                  <div className=" flex flex-col justify-between">
-                    <CardDescription>
-                      <ul className="flex gap-4 mb-0">
-                        <li className="text-center">
-                          <span className="block font-bold text-lg">
-                            {living_area}m
-                          </span>
-                          <span className="block text-sm text-gray-600">
-                            Sq Ft
-                          </span>
-                        </li>
-                        <li className="text-center">
-                          <span className="block font-bold text-lg">
-                            {bedrooms}
-                          </span>
-                          <span className="block text-sm text-gray-600">
-                            Beds
-                          </span>
-                        </li>
-                        <li className="text-center">
-                          <span className="block font-bold text-lg">
-                            {bathrooms}
-                          </span>
-                          <span className="block text-sm text-gray-600">
-                            Baths
-                          </span>
-                        </li>
-                      </ul>
-                    </CardDescription>
+    <ScrollArea className="h-120 w-full p-5 ">
+      <Continer>
+        <div className="grid  grid-cols-2 sm:grid-cols-4 gap-2">
+          {listing.map((listing) => {
+            const {
+              price,
+              photos,
+              location,
+              bathrooms,
+              bedrooms,
+              living_area,
+              listing_status,
+            } = listing;
+            const statusConfig = getStatusConfig(listing_status);
+            const StatusIcon = statusConfig.icon;
+            const listingId = listing.id;
+            return (
+              <div key={listingId}>
+                <article className="group relative ">
+                  <Card className=" overflow-hidden pt-0">
+                    <Carousel className="w-full">
+                      <CarouselContent>
+                        {photos.map((src, i) => (
+                          <CarouselItem
+                            key={i}
+                            className="relative aspect-[16/10]"
+                          >
+                            {photos.length == 1 ? null : (
+                              <CarouselPrevious className="left-8" />
+                            )}
+                            <Link href={`/listing/${listingId}`}>
+                              <Imaglisting src={src} alt={src} />
+                            </Link>
+                            {photos.length == 1 ? null : (
+                              <CarouselNext className="right-4" />
+                            )}
+                          </CarouselItem>
+                        ))}
+                      </CarouselContent>
+                    </Carousel>
+                    <CardHeader className="space-y-2">
+                      <CardTitle className="text-xl">
+                        {formatCurrency(price)}
+                      </CardTitle>
+                      <CardDescription className="flex ">
+                        <MapPin className="h-3 w-3 mt-1" />
+                        {location?.county} , {location?.city}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="flex items-center justify-between">
+                      <div className=" flex flex-col justify-between">
+                        <CardDescription>
+                          <ul className="flex gap-4 mb-0">
+                            <li className="text-center">
+                              <span className="block font-bold text-lg">
+                                {living_area}m
+                              </span>
+                              <span className="block text-sm text-gray-600">
+                                Sq Ft
+                              </span>
+                            </li>
+                            <li className="text-center">
+                              <span className="block font-bold text-lg">
+                                {bedrooms}
+                              </span>
+                              <span className="block text-sm text-gray-600">
+                                Beds
+                              </span>
+                            </li>
+                            <li className="text-center">
+                              <span className="block font-bold text-lg">
+                                {bathrooms}
+                              </span>
+                              <span className="block text-sm text-gray-600">
+                                Baths
+                              </span>
+                            </li>
+                          </ul>
+                        </CardDescription>
+                      </div>
+                      {price ? (
+                        <Badge
+                          className={`${statusConfig.color} flex items-center gap-1 w-fit`}
+                        >
+                          <StatusIcon className="h-3 w-3" />
+                          {listing_status.charAt(0).toUpperCase() +
+                            listing_status.slice(1)}
+                        </Badge>
+                      ) : null}
+                    </CardContent>
+                  </Card>
+                  <div className="absolute top-8 right-12 z-5">
+                    <FavoriteToggleButton listingId={listingId} />
                   </div>
-                  {price ? (
-                    <Badge
-                      className={`${statusConfig.color} flex items-center gap-1 w-fit`}
-                    >
-                      <StatusIcon className="h-3 w-3" />
-                      {listing_status.charAt(0).toUpperCase() +
-                        listing_status.slice(1)}
-                    </Badge>
-                  ) : null}
-                </CardContent>
-              </Card>
-              <div className="absolute top-8 right-12 z-5">
-                <FavoriteToggleButton listingId={listingId} />
+                </article>
               </div>
-            </article>
-          </div>
-        );
-      })}
-    </div>
+            );
+          })}
+        </div>
+      </Continer>
+    </ScrollArea>
   );
 }
 

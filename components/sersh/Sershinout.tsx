@@ -136,6 +136,9 @@ function Sershinout() {
         </Badge>
       );
     }
+    if (key == "Page") {
+      return null;
+    }
     return (
       <Badge
         className="dark:bg-neutral-700 my-3 bg-neutral-200 flex justify-between items-center"

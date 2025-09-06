@@ -23,3 +23,7 @@ export interface ActionAgent {
     [K in keyof UserFormData]?: string[];
   };
 }
+export interface metaData {
+  total: number;
+  totalPage: number;
+}
