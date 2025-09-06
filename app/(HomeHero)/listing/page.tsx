@@ -1,9 +1,5 @@
-import Continer from "@/components/global/Continer";
-import PaginationListing from "@/components/global/Pgenation";
-import GridListingS from "@/components/listing/GridListingS";
-import MapFiltring from "@/components/listing/MapFiltring";
+import ContenerLsting from "@/components/listing/ContenerLsting";
 import Filter from "@/components/sersh/filter";
-import { Button } from "@/components/ui/button";
 import { FetshSershListoning } from "@/utils/actions";
 import React from "react";
 type ListingsPageProps = {
@@ -18,10 +14,12 @@ type ListingsPageProps = {
     city?: string;
     address?: string;
     limit?: string;
+    Map?: string;
   };
 };
 async function page({ searchParams }: ListingsPageProps) {
   const Page = parseInt(searchParams.Page ?? "1");
+  const Map = searchParams?.Map;
   const Minimam = searchParams?.Minimam
     ? Number(searchParams.Minimam)
     : undefined;
@@ -40,31 +38,10 @@ async function page({ searchParams }: ListingsPageProps) {
     city: searchParams.city,
     address: searchParams.address,
   });
-  const locationmap = {
-    lat: -75.397666,
-    lng: 40.654583,
-  };
   return (
     <div className="h-[100vh] overflow-y-hidden">
       <Filter />
-
-      <div className=" mt-50 grid grid-cols-1 sm:grid-cols-1 gap-2">
-        <div>
-          <GridListingS listing={data.listings} />
-          <div>
-            {data.listings.length == 0 ? null : (
-              <PaginationListing
-                Page={Page}
-                pathe="listing"
-                metadata={data.metadata}
-              />
-            )}
-          </div>
-        </div>
-        {/* <div className="w-full h-190 p-5 rounded-md border">
-            <MapFiltring location={locationmap} city="los Anglo" />
-          </div> */}
-      </div>
+      <ContenerLsting hidenmap={Map} data={data} Page={Page} />
     </div>
   );
 }

@@ -103,9 +103,9 @@ export default function PaginationListing({
   }
 
   return (
-    <div className="container mt-2  flex  justify-center pb-15">
-      <nav aria-label="Page flex flex-row-reverse  mt-5  navigation example dark:bg-[#252525]">
-        <div className="inline-flex mt-16 -space-x-px text-base h-10">
+    <div className=" mt-2  flex  justify-center pb-15">
+      <nav aria-label="Page flex flex-row-reverse   navigation example dark:bg-[#252525]">
+        <div className="inline-flex  -space-x-px text-base h-10">
           <button
             onClick={() => {
               let prevpage = Page - 1;

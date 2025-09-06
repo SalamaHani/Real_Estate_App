@@ -69,11 +69,6 @@ function Sershinout() {
     .filter(([key]) => key === "Maximam" || key === "Minimam")
     .map(([key, value]) => ({ key, value }));
 
-  // const filtringgionrpeice = Object.fromEntries(
-  //   Object.entries(ParmesAll).filter(
-  //     ([key]) => key !== "Maximam" && key !== "Minimam"
-  //   )
-  // );
   const Morefilter = Object.entries(ParmesAll).slice(0, 2);
   const lenesthmotre = Object.entries(ParmesAll).length - Morefilter.length;
   Morefilter.push(["more", `${lenesthmotre}`]);
@@ -127,16 +122,10 @@ function Sershinout() {
           variant="outline"
         >
           {key}:({value})
-          <button
-            onMouseDown={() => handleSuggestedRemovSearch(key)}
-            className=" flex justify-center items-center cursor-pointer w-3 h-3"
-          >
-            <X />
-          </button>
         </Badge>
       );
     }
-    if (key == "Page") {
+    if (key == "Page" || key == "Map") {
       return null;
     }
     return (
@@ -222,7 +211,7 @@ function Sershinout() {
         <div className={` relative`}>
           {/* Filter Pills */}
           <div
-            className={`flex dark:bg-black ${Object.entries(ParmesAll).length > 3 && isOpen ? `flex-col absolute left-0 top-0` : `flex-row block`} items-center w-full  max-w-lg border  border-gray-300 rounded-xl  ${isOpen ? "rounded-b-none" : ""}  bg-white shadow-sm overflow-hidden`}
+            className={`flex dark:bg-black ${Object.entries(ParmesAll).length > 3 && isOpen ? `flex-col absolute left-0 top-0` : `flex-row block`} items-center w-full  max-w-lg border  border-gray-300 dark:border-none rounded-xl  ${isOpen ? "rounded-b-none" : ""}  bg-white shadow-sm overflow-hidden`}
           >
             <div
               className={`flex ${Object.entries(ParmesAll).length > 3 && isOpen ? `flex-wrap w-full  justify-start ` : `flex-nowrap`}     space-x-2  px-2 `}
@@ -283,7 +272,7 @@ function Sershinout() {
             {query.citys.length != 0 && (
               <div>
                 <div className="mb-1 bg-gray-100 dark:bg-neutral-800 p-2 flex items-center gap-2">
-                  <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+                  <div className="w-2 h-2  rounded-full animate-pulse"></div>
                   <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
                     City
                   </span>
@@ -296,7 +285,7 @@ function Sershinout() {
                       onMouseDown={() =>
                         handleSuggestedSearch(city ?? "", "city")
                       }
-                      className="focus:bg-accent focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-gray-200 hover:border-l-1 dark:hover:bg-neutral-700 border-gray-500 w-full data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
+                      className="focus:bg-accent focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-gray-200 hover:border-l-2 dark:hover:bg-neutral-700 border-gray-500 w-full data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
                       style={{
                         animationDelay: `${index * 50}ms`,
                       }}
@@ -329,7 +318,7 @@ function Sershinout() {
                       "address"
                     )
                   }
-                  className="focus:bg-accent focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-gray-200 hover:border-l-1 dark:hover:bg-neutral-700 border-gray-500 w-full data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
+                  className="focus:bg-accent focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-gray-200 hover:border-l-2 dark:hover:bg-neutral-700 border-gray-500 w-full data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
                   style={{
                     animationDelay: `${index * 50}ms`,
                   }}

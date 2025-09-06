@@ -23,7 +23,13 @@ import { formatCurrency } from "@/utils/format";
 import NoreseltListing from "./NoreseltListing";
 import { ScrollArea } from "../ui/scroll-area";
 import Continer from "../global/Continer";
-function GridListingS({ listing }: { listing: Listing[] }) {
+function GridListingS({
+  listing,
+  hiden_map,
+}: {
+  listing: Listing[];
+  hiden_map: string;
+}) {
   const getStatusConfig = (statusName: string) => {
     return statuse.find((s) => s.states === statusName) || statuse[3];
   };
@@ -67,9 +73,14 @@ function GridListingS({ listing }: { listing: Listing[] }) {
     );
   }
   return (
-    <ScrollArea className="h-120 w-full p-5 ">
+    <ScrollArea
+      className={`${hiden_map == "true" ? "h-107" : "h-102"} w-full p-5  max-h-110 overflow-y-auto pb-1
+                `}
+    >
       <Continer>
-        <div className="grid  grid-cols-2 sm:grid-cols-4 gap-2">
+        <div
+          className={`grid ${hiden_map == "true" ? "sm:grid-cols-2" : "sm:grid-cols-4"} grid-cols-2 sm:grid-cols-2  gap-2 `}
+        >
           {listing.map((listing) => {
             const {
               price,

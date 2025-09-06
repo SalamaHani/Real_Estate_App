@@ -245,7 +245,7 @@ export const FetshSershListoning = async ({
   listing_type,
   city,
   address,
-  limit = 6,
+  limit = 8,
 }: {
   Page?: number;
   Minimam?: number;

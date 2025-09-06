@@ -19,7 +19,7 @@ function ButtonReset() {
         className={`flex items-center gap-1 cursor-pointer  transition-all duration-300  font-medium ${
           isrest
             ? "bg-black dark:bg-white dark:text-black text-white shadow-sm   border border-gray-200 dark:border-gray-700"
-            : "hover:bg-gray-200 g-card text-card-foreground  dark:text-gray-400"
+            : "hover:bg-gray-200 g-card text-card-foreground  dark:text-white"
         }`}
         onClick={() => resetParmes()}
       >
