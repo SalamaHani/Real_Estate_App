@@ -36,7 +36,7 @@ function Bedasfilter() {
     <div>
       <Menubar className="py-3 rounded-xl h-12">
         <MenubarMenu>
-          <MenubarTrigger className="px-6 py-3 cursor-pointer rounded-xl  h-12">
+          <MenubarTrigger className="px-6  cursor-pointer ">
             Bads
           </MenubarTrigger>
           <MenubarContent className=" flex items-center w-full gap-1 pr-2 justify-between">
@@ -51,7 +51,7 @@ function Bedasfilter() {
                   className={`flex items-center gap-1 cursor-pointer  transition-all duration-300  font-medium ${
                     isSelected
                       ? "bg-black dark:bg-white dark:text-black text-white shadow-sm   border border-gray-200 dark:border-gray-700"
-                      : "hover:bg-gray-200 g-card text-card-foreground  dark:text-gray-400"
+                      : "hover:bg-gray-200 g-card text-card-foreground  dark:text-white"
                   }`}
                 >
                   {item.Label}

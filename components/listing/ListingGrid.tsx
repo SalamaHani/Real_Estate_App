@@ -21,6 +21,7 @@ import { CheckCircle, Clock, House, HousePlus, MapPin } from "lucide-react";
 import { Badge } from "../ui/badge";
 import FavoriteToggleButton from "./FavaretToggel";
 import Imaglisting from "./Imaglisting";
+import Cardprice from "./Cardprice";
 
 function ListingGrid({ listing }: { listing: Listing[] }) {
   const getStatusConfig = (statusName: string) => {
@@ -105,9 +106,7 @@ function ListingGrid({ listing }: { listing: Listing[] }) {
                     </CarouselContent>
                   </Carousel>
                   <CardHeader className="space-y-2">
-                    <CardTitle className="text-xl">
-                      {formatCurrency(price)}
-                    </CardTitle>
+                    <Cardprice price={price ?? 0} />
                     <CardDescription className="flex ">
                       <MapPin className="h-3 w-3 mt-1" />
                       {location?.county} , {location?.city}

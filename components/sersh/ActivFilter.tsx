@@ -7,17 +7,17 @@ function Activfilter() {
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const params = new URLSearchParams(searchParams);
-  const isactiv = params.get("status");
+  const isactiv = params.get("Status");
   const filterOptionsTyep = [
     {
       id: "Active",
-      label: "status",
+      label: "Status",
       value: "Active",
     },
     {
       id: "Sold",
-      label: "status",
-      value: "Sold",
+      label: "Status",
+      value: "Contingent",
     },
   ];
   const handleSuggestedSearch = (value: string, typeParmes: string) => {
@@ -43,7 +43,7 @@ function Activfilter() {
                 ? "bg-black dark:bg-white dark:text-black text-white shadow-sm   border border-gray-200 dark:border-gray-700"
                 : "hover:bg-gray-200 g-card text-card-foreground  dark:text-white"
             }`}
-            onClick={() => handleSuggestedSearch(item.id, item.label)}
+            onClick={() => handleSuggestedSearch(item.value, item.label)}
           >
             {item.id}
           </Button>

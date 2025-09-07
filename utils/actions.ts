@@ -6,9 +6,18 @@ import { getSession } from "./users";
 import { ActionAgent, UserFormData } from "./Tayp";
 import { AgentcontactSchema } from "./schema";
 import prisma from "./db";
+import { cookies } from "next/headers";
 // const session = await auth.api.getSession({
 //   headers: await headers(),
 // });
+///convartpriceAction 
+export async function setCurrency(currency: string) {
+  (await cookies()).set("currency", currency, {
+    path: "/",
+    httpOnly: false, // client can read
+    maxAge: 60 * 60 * 24 * 30, // 30 days
+  });
+}
 
 export const Feauterdlistings = async () => {
   const faverd = await db.listing.findMany({
@@ -241,7 +250,7 @@ export const FetshSershListoning = async ({
   Maximam,
   Bads,
   Baths,
-  status,
+  Status,
   listing_type,
   city,
   address,
@@ -252,7 +261,7 @@ export const FetshSershListoning = async ({
   Maximam?: number;
   Bads?: string;
   Baths?: string;
-  status?: string;
+  Status?: string;
   listing_type?: string;
   city?: string;
   address?: string;
@@ -269,7 +278,7 @@ export const FetshSershListoning = async ({
   }
   if (Bads) filter.bedrooms = { $gte: Number(Bads.replace("+", "")) };
   if (Baths) filter.bathrooms = { $gte: Number(Baths.replace("+", "")) };
-  if (status) filter.listing_status = { $regex: status, $options: "i" };
+  if (Status) filter.listing_status = { $regex: Status, $options: "i" };
   if (listing_type !== undefined) {
     if (listing_type === "Rentals") {
       filter.is_rental = true;

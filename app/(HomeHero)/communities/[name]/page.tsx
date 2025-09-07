@@ -1,4 +1,5 @@
 import Continer from "@/components/global/Continer";
+import Footer from "@/components/home/Footer";
 import Contatrycont from "@/components/listings/Contatrycont";
 import FramMapscuntry from "@/components/listings/FramMapscuntry";
 import Stepcontry from "@/components/listings/Stepcontry";
@@ -15,8 +16,6 @@ async function page({ params }: ProductEditPageProps) {
   const resolvedParams = await params;
   const { name } = resolvedParams;
   const aereacuntry = await fetsharyacuntryname({ name });
-  console.log(name);
-  console.log(aereacuntry);
   const imgese = aereacuntry?.photos[0];
   return (
     <div>
@@ -74,6 +73,7 @@ async function page({ params }: ProductEditPageProps) {
           </div>
         </div>
         <Contatrycont cuntryprparty={aereacuntry} />
+        <Footer />
       </Continer>
     </div>
   );

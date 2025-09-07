@@ -11,6 +11,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
 import { Agent } from "@prisma/client";
 import TextAreaInput from "../form/TextAreaInput";
 import { SubmitButton } from "../form/Buttons";
@@ -45,13 +50,35 @@ function ContactAgentForm({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button
-          variant="outline"
-          size="icon"
-          className="p-2  size-8 rounded-full"
-        >
-          <UserRound />
-        </Button>
+        <HoverCard>
+          <HoverCardTrigger asChild>
+            <Button
+              variant="outline"
+              size="icon"
+              className="p-2 size-8 rounded-full"
+              onClick={() => {
+                setOpen(true);
+              }}
+            >
+              <UserRound />
+            </Button>
+          </HoverCardTrigger>
+          <HoverCardContent align="end" className="w-80 h-30">
+            <div className="flex justify-between gap-4">
+              <Avatar>
+                <AvatarImage src={Agent?.photo ?? ""} />
+                <AvatarFallback>VC</AvatarFallback>
+              </Avatar>
+              <div className="space-y-1">
+                <h4 className="text-sm font-semibold">{Agent?.full_name}</h4>
+                <p className="text-sm">{Agent?.brokerage_name}</p>
+                <div className="text-muted-foreground text-xs">
+                  Joined December 2021
+                </div>
+              </div>
+            </div>
+          </HoverCardContent>
+        </HoverCard>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[725px]">
         <DialogHeader className="flex flex-row  justify-around items-center">

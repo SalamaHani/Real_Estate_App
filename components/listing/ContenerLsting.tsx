@@ -31,13 +31,11 @@ function ContenerLsting({
       <div>
         <GridListingS hiden_map={hidenmap} listing={data.listings} />
         <div>
-          {data.listings.length < 8 ? null : (
-            <PaginationListing
-              Page={Page}
-              pathe="listing"
-              metadata={data.metadata}
-            />
-          )}
+          <PaginationListing
+            Page={Page}
+            pathe="listing"
+            metadata={data.metadata}
+          />
         </div>
       </div>
       <div

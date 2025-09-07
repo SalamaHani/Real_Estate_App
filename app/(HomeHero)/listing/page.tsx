@@ -9,7 +9,7 @@ type ListingsPageProps = {
     Maximam?: number;
     Bads?: string;
     Baths?: string;
-    status?: string;
+    Status?: string;
     listing_type?: string;
     city?: string;
     address?: string;
@@ -33,7 +33,7 @@ async function page({ searchParams }: ListingsPageProps) {
     Maximam,
     Bads: searchParams.Bads,
     Baths: searchParams.Baths,
-    status: searchParams.status,
+    Status: searchParams.Status,
     listing_type: searchParams.listing_type,
     city: searchParams.city,
     address: searchParams.address,

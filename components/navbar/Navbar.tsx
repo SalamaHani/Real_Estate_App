@@ -5,6 +5,7 @@ import Logo from "./Logo";
 import DarkMode from "./DarkMode";
 import LinksDropdown from "./LinksDropdown";
 import { Session } from "@/lib/auth";
+import CurrencySelector from "./Curentreat";
 function Navbar({ session }: { session: Session | null }) {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
@@ -28,7 +29,7 @@ function Navbar({ session }: { session: Session | null }) {
         <Continer className="flex justify-between md:flex-row md:justify-between md:items-center flex-wrap py-5 gap-4">
           <Logo scrolled={scrolled} />
           <div className=" flex gap-4 items-center  ">
-            {/* <CartButton /> */}
+            <CurrencySelector />
             <DarkMode />
             <LinksDropdown session={session} />
           </div>

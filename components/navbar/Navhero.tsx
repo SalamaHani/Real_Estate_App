@@ -8,6 +8,7 @@ import { Session } from "@/lib/auth";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import CurrencySelector from "./Curentreat";
 function Navhero({ session }: { session: Session | null }) {
   const pathname = usePathname();
   const isSearchPage = pathname.replace(/\/$/, "") === "/listing";
@@ -37,7 +38,7 @@ function Navhero({ session }: { session: Session | null }) {
             </Link>
           </div>
           <div className=" flex gap-4 items-center  ">
-            {/* <CartButton /> */}
+            <CurrencySelector />
             <DarkMode />
             <LinksDropdown session={session} />
           </div>

@@ -8,7 +8,6 @@ import {
   Card,
   CardContent,
   CardHeader,
-  CardTitle,
   CardDescription,
 } from "@/components/ui/card";
 import {
@@ -19,10 +18,12 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Link from "next/link";
-import { formatCurrency } from "@/utils/format";
+
 import NoreseltListing from "./NoreseltListing";
 import { ScrollArea } from "../ui/scroll-area";
 import Continer from "../global/Continer";
+import Cardprice from "./Cardprice";
+
 function GridListingS({
   listing,
   hiden_map,
@@ -30,6 +31,8 @@ function GridListingS({
   listing: Listing[];
   hiden_map: string;
 }) {
+  
+  console.log();
   const getStatusConfig = (statusName: string) => {
     return statuse.find((s) => s.states === statusName) || statuse[3];
   };
@@ -72,6 +75,7 @@ function GridListingS({
       </div>
     );
   }
+
   return (
     <ScrollArea
       className={`${hiden_map == "true" ? "h-107" : "h-102"} w-full p-5  max-h-110 overflow-y-auto pb-1
@@ -79,7 +83,7 @@ function GridListingS({
     >
       <Continer>
         <div
-          className={`grid ${hiden_map == "true" ? "sm:grid-cols-2" : "sm:grid-cols-4"} grid-cols-2 sm:grid-cols-2  gap-2 `}
+          className={`grid ${hiden_map == "true" ? "sm:grid-cols-2" : "sm:grid-cols-4"} grid-cols-1 sm:grid-cols-2  gap-2 `}
         >
           {listing.map((listing) => {
             const {
@@ -90,7 +94,7 @@ function GridListingS({
               bedrooms,
               living_area,
               listing_status,
-            } = listing;
+            } = listing
             const statusConfig = getStatusConfig(listing_status);
             const StatusIcon = statusConfig.icon;
             const listingId = listing.id;
@@ -119,9 +123,7 @@ function GridListingS({
                       </CarouselContent>
                     </Carousel>
                     <CardHeader className="space-y-2">
-                      <CardTitle className="text-xl">
-                        {formatCurrency(price)}
-                      </CardTitle>
+                      <Cardprice price={price ?? 0} />
                       <CardDescription className="flex ">
                         <MapPin className="h-3 w-3 mt-1" />
                         {location?.county} , {location?.city}
