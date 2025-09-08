@@ -16,7 +16,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { formatCurrency } from "@/utils/format";
 import { CheckCircle, Clock, House, HousePlus, MapPin } from "lucide-react";
 import { Badge } from "../ui/badge";
 import FavoriteToggleButton from "./FavaretToggel";

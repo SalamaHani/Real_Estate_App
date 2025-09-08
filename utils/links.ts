@@ -3,9 +3,11 @@ type NavLink = {
   label: string;
 };
 export const links: NavLink[] = [
-  { href: "/", label: "home" },
-  { href: "/about", label: "about" },
-  { href: "/buy", label: "buy" },
-  { href: "/sell", label: "sell" },
+  { href: "/", label: "Home" },
+  { href: "/listing", label: "BUY" },
+  { href: "/sell", label: "SELL" },
+  { href: "/communities", label: "Communities" },
+  { href: "/about", label: "About" },
+  { href: "/contactus", label: "Contact US" },
   { href: "/profile", label: "profile" },
 ];

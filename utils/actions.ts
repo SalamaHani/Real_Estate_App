@@ -10,7 +10,7 @@ import { cookies } from "next/headers";
 // const session = await auth.api.getSession({
 //   headers: await headers(),
 // });
-///convartpriceAction 
+///convartpriceAction
 export async function setCurrency(currency: string) {
   (await cookies()).set("currency", currency, {
     path: "/",
@@ -246,6 +246,7 @@ export const SershQuerCatylistirng = async (value: string) => {
 
 export const FetshSershListoning = async ({
   Page = 1,
+
   Minimam,
   Maximam,
   Bads,

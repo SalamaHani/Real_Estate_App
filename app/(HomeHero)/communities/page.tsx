@@ -22,7 +22,7 @@ async function page() {
         </div>
 
         <div className="mt-12 mx-auto">
-          <div className="grid sm:grid-cols-12 gap-4">
+          <div className="grid sm:grid-cols-12 gap-8">
             {cuntty.map((item) => {
               return (
                 <div

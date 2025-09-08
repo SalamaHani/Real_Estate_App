@@ -20,7 +20,7 @@ function ContenerLsting({
 }: {
   data: DataListing;
   Page: number;
-  hidenmap: string;
+  hidenmap: string | undefined;
 }) {
   console.log(hidenmap);
   return (
@@ -29,7 +29,7 @@ function ContenerLsting({
     >
       <ShowMap />
       <div>
-        <GridListingS hiden_map={hidenmap} listing={data.listings} />
+        <GridListingS hiden_map={hidenmap ?? ''} listing={data.listings} />
         <div>
           <PaginationListing
             Page={Page}

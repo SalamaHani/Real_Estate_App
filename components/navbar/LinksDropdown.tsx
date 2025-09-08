@@ -8,12 +8,12 @@ import {
 import { setstring } from "@/utils/format";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import { LuAlignLeft } from "react-icons/lu";
-import Link from "next/link";
 import { Button } from "../ui/button";
 import { links } from "@/utils/links";
 // import UserIcon from "./UserIcon";
 import { Logout } from "../logout";
 import { Session } from "@/lib/auth";
+import Link from "next/link";
 function LinksDropdown({ session }: { session: Session | null }) {
   const username = session?.user.name;
   return (

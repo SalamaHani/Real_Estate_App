@@ -30,7 +30,7 @@ function Activfilter() {
     replace(`/listing?${params.toString()}`);
   };
   return (
-    <div className="flex  dark:bg-black items-center p-1 border rounded-xl  bg-white shadow-sm overflow-hidden">
+    <div className="flex  dark:bg-black items-center p-1 border rounded-xl   bg-white shadow-sm overflow-hidden">
       {filterOptionsTyep.map((item) => {
         const isSelected = item.value == isactiv;
         return (
