@@ -31,7 +31,6 @@ function GridListingS({
   listing: Listing[];
   hiden_map: string;
 }) {
-  
   console.log();
   const getStatusConfig = (statusName: string) => {
     return statuse.find((s) => s.states === statusName) || statuse[3];

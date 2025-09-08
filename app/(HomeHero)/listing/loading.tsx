@@ -23,6 +23,7 @@ function loading() {
             </article>
           </div>
         </div>
+        <PaginationSkeleton />
       </div>
     </div>
   );
@@ -67,5 +68,20 @@ export const FilterNavSkeleton = () => {
         <Skeleton className="h-8 w-15 rounded-md" />
       </Continer>
     </nav>
+  );
+};
+
+// components/PaginationSkeleton.tsx
+
+export const PaginationSkeleton = () => {
+  return (
+    <div className="mt-15 flex justify-center pb-15">
+      <nav aria-label="Pagination loading">
+        <div className="inline-flex -space-x-px text-base h-10">
+          {/* Prev button placeholder */}
+          <Skeleton className="h-6 w-80 rounded-l-lg" />
+        </div>
+      </nav>
+    </div>
   );
 };
