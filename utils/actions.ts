@@ -7,6 +7,8 @@ import { ActionAgent, UserFormData } from "./Tayp";
 import { AgentcontactSchema } from "./schema";
 import prisma from "./db";
 import { cookies } from "next/headers";
+import { Agent } from "@prisma/client";
+import { console } from "inspector";
 // const session = await auth.api.getSession({
 //   headers: await headers(),
 // });
@@ -308,4 +310,120 @@ export const FetshSershListoning = async ({
     listings: listings,
     metadata: { total: total, totalPage: Math.ceil(total / limit), Page: Page },
   };
+};
+
+//page agents querys
+export const FetshAllAgents = async ({
+  Page = 1,
+  limit = 11,
+}: {
+  Page?: number;
+  limit?: number;
+}) => {
+  const skip = (Page - 1) * limit;
+  const Agents = await db.listing.findMany({
+    skip,
+    take: limit,
+    select: {
+      agents: true,
+    },
+  });
+  const agents: Agent[] = [];
+  Agents.map((Agent) => {
+    Agent.agents.map((agent: Agent) => {
+      if (
+        !agents.find((a: Agent) => a.email === agent.email) &&
+        agents.length < limit
+      ) {
+        agents.push(agent);
+      }
+    });
+  });
+  const total = await db.listing.count();
+  return {
+    Agents: agents,
+    metadata: { total: total, totalPage: Math.ceil(total / limit), Page: Page },
+  };
+};
+
+//fetsh agent is name
+export const fetshAgentlisting = async ({ name }: { name: string }) => {
+  const listings = await prisma.listing.findMany({
+    select: { agents: true },
+  });
+  let foundAgent = null;
+  const authername = decodeURIComponent(name);
+  for (const listing of listings) {
+    foundAgent = listing.agents.find((agent) => agent.first_name == authername);
+    if (foundAgent) break;
+  }
+  return foundAgent;
+};
+
+export const SendAgent = async (
+  prevState: ActionAgent | null,
+  formData: FormData
+): Promise<ActionAgent> => {
+  const session = await getSession();
+  const user = session?.user;
+  const userId = user?.id;
+
+  const UserData: UserFormData = {
+    FirstName: formData.get("FirstName") as string,
+    LastName: formData.get("LastName") as string,
+    email: formData.get("email") as string,
+    userId: userId as string,
+    agentEmail: formData.get("agentemail") as string,
+    Phone: Number(formData.get("Phone")),
+  };
+
+  // Validate the form data
+  const validatedData = AgentcontactSchema.safeParse(UserData);
+  if (!validatedData.success) {
+    return {
+      success: false,
+      Data: {
+        FirstName: UserData.FirstName,
+        LastName: UserData.LastName,
+        email: UserData.email,
+        Phone: UserData.Phone,
+      },
+      message: "Please fix the errors in the form",
+      errors: validatedData.error.flatten().fieldErrors,
+    };
+  }
+
+  try {
+    await db.interest.create({
+      data: {
+        name: UserData.FirstName + " " + UserData.LastName,
+        email: UserData.email,
+        userId: UserData.userId,
+        agentemail: UserData.agentEmail ?? "",
+      },
+    });
+
+    return {
+      success: true,
+      message: "Successfully Contact Agent!",
+    };
+  } catch (error) {
+    console.error("Error creating Interest:", error);
+    return {
+      success: false,
+      message: "Something went wrong while contacting the agent.",
+    };
+  }
+};
+export const ListingOfAgents = async ({ email }: { email: string }) => {
+  const listing = await db.listing.findMany({
+    where: {
+      agents: {
+        some: {
+          email: email,
+        },
+      },
+    },
+  });
+  return listing;
 };

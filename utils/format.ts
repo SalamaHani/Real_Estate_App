@@ -1,7 +1,10 @@
 export const setstring = (Username: string) => {
   return Username.toUpperCase().slice(0, 1);
 };
-export const formatCurrency = (amount: number | null, currency: string) => {
+export const formatCurrency = (
+  amount: number | null,
+  currency?: string 
+) => {
   const value = amount || 0;
   return new Intl.NumberFormat("en-US", {
     style: "currency",

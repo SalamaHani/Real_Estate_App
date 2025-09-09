@@ -1,4 +1,5 @@
 import Continer from "@/components/global/Continer";
+import Footer from "@/components/home/Footer";
 import ContactAgentForm from "@/components/listing/ContactAgentForm";
 import FavoriteToggleButton from "@/components/listing/FavaretToggel";
 import DatielsListing from "@/components/listings/DatielsListing";
@@ -63,6 +64,7 @@ async function page({ params }: ProductEditPageProps) {
             <Button>{listung?.location?.street_address}</Button>
           </div>
         </div>
+        <Footer/>
       </Continer>
     </section>
   );

@@ -11,7 +11,7 @@ async function Agents() {
     Agents.agents.map((agent) => {
       if (
         !agents.find((a: Agent) => a.email === agent.email) &&
-        agents.length < 6
+        agents.length < 4
       ) {
         agents.push(agent);
       }

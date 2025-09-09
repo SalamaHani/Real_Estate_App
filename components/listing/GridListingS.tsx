@@ -29,9 +29,9 @@ function GridListingS({
   hiden_map,
 }: {
   listing: Listing[];
-  hiden_map: string;
+  hiden_map?: string;
 }) {
-  console.log();
+
   const getStatusConfig = (statusName: string) => {
     return statuse.find((s) => s.states === statusName) || statuse[3];
   };
@@ -93,7 +93,7 @@ function GridListingS({
               bedrooms,
               living_area,
               listing_status,
-            } = listing
+            } = listing;
             const statusConfig = getStatusConfig(listing_status);
             const StatusIcon = statusConfig.icon;
             const listingId = listing.id;

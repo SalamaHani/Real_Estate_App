@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/menubar";
 import {
   Circle,
-  Currency,
   DollarSign,
   Euro,
   JapaneseYen,
@@ -54,7 +53,7 @@ export default function CurrencySelector() {
   return (
     <Menubar className="border rounded-md shadow-sm h-9">
       <MenubarMenu>
-        <MenubarTrigger className="px-3 py-1 cursor-pointer ">
+        <MenubarTrigger className="px-3 py-1 dark:bg-input/30 cursor-pointer ">
           {currencies.map((item) => {
             const Iconse = item.icon;
             if (item.value == currency) {
@@ -81,7 +80,7 @@ export default function CurrencySelector() {
                 onClick={() => handleSelect(cur.value)}
                 className={
                   cur.value === currency
-                    ? "font-bold bg-neutral-700 text-primary"
+                    ? "font-bold dark:bg-neutral-700 bg-neutral-500 text-primary"
                     : ""
                 }
               >

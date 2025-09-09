@@ -1,8 +1,9 @@
-import { formatCurrency } from "@/utils/format";
+
 import { Listing } from "@prisma/client";
 import React from "react";
 import { CheckCircle, Clock, House, HousePlus } from "lucide-react";
 import { Badge } from "../ui/badge";
+import Cardprice from "../listing/Cardprice";
 function DatielsListing({ listungs }: { listungs: Listing | null }) {
   const getStatusConfig = (statusName: string) => {
     return statuse.find((s) => s.states === statusName) || statuse[3];
@@ -43,14 +44,12 @@ function DatielsListing({ listungs }: { listungs: Listing | null }) {
   const StatusIcon = statusConfig.icon;
   return (
     <div className="w-full mt-12 mx-auto  ">
-      {/* Header */}
       <div className="flex justify-between items-start">
         <div>
           <h2 className="text-2xl font-semibold">
             {listungs?.location?.street_address}
           </h2>
           <p className="text-gray-600">{listungs?.location?.city}</p>
-
           <ul className="flex gap-4 mt-5 mb-0">
             <li className="text-center">
               <span className="block font-bold text-xl">
@@ -75,7 +74,7 @@ function DatielsListing({ listungs }: { listungs: Listing | null }) {
 
         <div className="text-right">
           <p className="text-2xl font-bold">
-            ${formatCurrency(listungs?.price ?? 6559)}
+            <Cardprice price={listungs?.price ?? 0} />
           </p>
           <p className="text-sm text-gray-500 mt-2">
             Est. Offices <br />

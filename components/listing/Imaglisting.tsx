@@ -12,7 +12,7 @@ function Imaglisting({ src, alt }: { src: string; alt: string }) {
       src={src}
       alt={alt}
       fill
-      className="object-cover z-40"
+      className=" z-40 object-cover "
       sizes="(max-width:768px) 100vw, 600px"
       onError={handelonerror}
     />

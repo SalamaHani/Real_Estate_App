@@ -204,7 +204,7 @@ model Interest {
   userId    String  
   agentemail String?
   listing   Listing? @relation(fields: [listingId], references: [id])
-  listingId String  @db.ObjectId
+  listingId String?  @db.ObjectId
   createdAt DateTime? @default(now())
    @@map("interest")
 }
