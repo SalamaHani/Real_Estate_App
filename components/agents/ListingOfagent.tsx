@@ -65,7 +65,7 @@ function ListingOfagent({ listing }: { listing: Listing[] }) {
     );
   }
   return (
-    <div className={`grid sm:grid-cols-4 grid-cols-1  gap-2 mt-10 `}>
+    <div className={`grid sm:grid-cols-4 grid-cols-1  gap-2 mt-10 mb-10 `}>
       {listing.map((listing) => {
         const {
           price,

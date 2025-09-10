@@ -15,6 +15,7 @@ import {
   EmailIcon,
   LinkedinIcon,
 } from "react-share";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
 function ShareButton({ listingId, name }: { listingId: string; name: string }) {
   const url = process.env.NEXT_PUBLIC_WEBSITE_URL;
@@ -23,13 +24,20 @@ function ShareButton({ listingId, name }: { listingId: string; name: string }) {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          size="icon"
-          className="p-2  size-8 rounded-full"
-        >
-          <LuShare2 />
-        </Button>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              variant="outline"
+              size="icon"
+              className="p-2  size-8 rounded-full"
+            >
+              <LuShare2 />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Share to Listing</p>
+          </TooltipContent>
+        </Tooltip>
       </PopoverTrigger>
       <PopoverContent
         side="top"

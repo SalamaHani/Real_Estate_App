@@ -10,7 +10,7 @@ function FramMapscuntry({ Maps }: { Maps: string | null }) {
     <div>
       <Button
         onClick={() => setShowMap(true)}
-        className="px-6 py-3 rounded-lg text-lg font-medium shadow-md"
+        className="px-6 py-3 italic bg-white text-black rounded-md text-lg font-medium shadow-md"
       >
         View Map
       </Button>

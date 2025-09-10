@@ -11,11 +11,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "@/components/ui/hover-card";
 import { Agent } from "@prisma/client";
 import TextAreaInput from "../form/TextAreaInput";
 import { SubmitButton } from "../form/Buttons";
@@ -28,6 +23,7 @@ import { Separator } from "../ui/separator";
 import { ActionAgent } from "@/utils/Tayp";
 import { SendAgentListing } from "@/utils/actions";
 import { toast } from "sonner";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 const initialState: ActionAgent = {
   success: false,
   message: "",
@@ -50,8 +46,8 @@ function ContactAgentForm({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <HoverCard>
-          <HoverCardTrigger asChild>
+        <Tooltip>
+          <TooltipTrigger asChild>
             <Button
               variant="outline"
               size="icon"
@@ -62,23 +58,11 @@ function ContactAgentForm({
             >
               <UserRound />
             </Button>
-          </HoverCardTrigger>
-          <HoverCardContent align="end" className="w-80 h-30">
-            <div className="flex justify-between gap-4">
-              <Avatar>
-                <AvatarImage src={Agent?.photo ?? ""} />
-                <AvatarFallback>VC</AvatarFallback>
-              </Avatar>
-              <div className="space-y-1">
-                <h4 className="text-sm font-semibold">{Agent?.full_name}</h4>
-                <p className="text-sm">{Agent?.brokerage_name}</p>
-                <div className="text-muted-foreground text-xs">
-                  Joined December 2021
-                </div>
-              </div>
-            </div>
-          </HoverCardContent>
-        </HoverCard>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Send Message Agent</p>
+          </TooltipContent>
+        </Tooltip>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[725px]">
         <DialogHeader className="flex flex-row  justify-around items-center">

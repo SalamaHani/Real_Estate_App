@@ -20,7 +20,7 @@ async function page({ params }: ProductEditPageProps) {
   return (
     <div>
       <section
-        className="relative h-screen w-full bg-cover bg-center flex items-center justify-center object-cover "
+        className="relative h-[68vh] w-full bg-cover bg-center flex items-center justify-center object-cover "
         style={{
           backgroundImage: `url(${imgese})`,
         }}
@@ -33,7 +33,7 @@ async function page({ params }: ProductEditPageProps) {
           transition={{ duration: 1 }}
         >
           <Motionh1
-            className="text-5xl md:text-6xl font-bold mb-6"
+            className="text-5xl italic md:text-6xl font-medium mb-6"
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.3, duration: 1 }}
@@ -61,8 +61,8 @@ async function page({ params }: ProductEditPageProps) {
         <div className="">
           <div className=" px-4 xl:px-0 py-10 lg:pt-20 lg:pb-20 mx-auto">
             <div className="max-w-3xl mb-10 lg:mb-14">
-              <h2 className=" font-semibold text-2xl md:text-4xl md:leading-tight">
-                Our Cuntry{" "}
+              <h2 className=" font-semibold italic text-2xl md:text-4xl md:leading-tight">
+                Our Cuntry
                 <span className=" underline">{aereacuntry?.name}</span>
               </h2>
               <p className="mt-1 text-neutral-400">

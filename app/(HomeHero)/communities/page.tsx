@@ -9,11 +9,11 @@ async function page() {
   return (
     <Continer>
       <section className="mt-23 mb-23">
-        <div className=" mb-10 lg:mb-14 flex-col justify-center items-center">
-          <h2 className=" text-center font-semibold text-4xl md:text-4xl ">
+        <div className=" mb-10 lg:mb-14 flex-col  justify-start">
+          <h2 className=" font-semibold italic text-4xl md:text-4xl ">
             Our Communities
           </h2>
-          <p className="mt-1  text-center text-neutral-400">
+          <p className="mt-1 italic   text-neutral-400">
             There is nothing more defining than the place you come from, where
             you lay down your roots and return to nest. Your neighborhood shapes
             who you are and defines your identity in the world. We are here to

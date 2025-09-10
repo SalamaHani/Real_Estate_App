@@ -24,7 +24,7 @@ function Sershinout() {
   const [ParmesAll, setPramsAll] = useState(
     Object.fromEntries(searchParams.entries())
   );
-
+  const [activeIndex, setActiveIndex] = useState<number>(-1);
   const [query, setQuery] = useState<QueryResult>({ listing: [], citys: [] });
   ///handelfetsh Query Servar Action
   const retunequer = async (val: string) => {
@@ -202,9 +202,36 @@ function Sershinout() {
     }
   };
 
+  //handel keypordss
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (query.listing.length && query.citys.length === 0) return;
+    const lethquery = query.listing.length + query.citys.length;
+    if (e.key === "PageDown") {
+      e.preventDefault();
+      setActiveIndex((prev) => (prev + 1) % lethquery);
+    }
+    if (e.key === "PageUp") {
+      e.preventDefault();
+      setActiveIndex((prev) => (prev <= 0 ? lethquery - 1 : prev - 1));
+    }
+    if (e.key === "Enter" && activeIndex >= 0) {
+      alert(`Selected: ${query.citys[activeIndex]}`);
+    }
+  };
+
+  // Sync active state onKeyUp (optional: highlights without moving)
+  const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const lethquery = query.listing.length + query.citys.length;
+    if (e.key === "ArrowDown") {
+      setActiveIndex((prev) => (prev + 1) % lethquery);
+    }
+    if (e.key === "ArrowUp") {
+      setActiveIndex((prev) => (prev <= 0 ? lethquery - 1 : prev - 1));
+    }
+  };
   ///return filter input sersh query
   return (
-    <div className=" relative min-w-[40%] max-w-[30%]: ">
+    <div className=" relative min-w-[40%] max-w-[30%] ">
       <div
         className={`w-full  ${Object.entries(ParmesAll).length > 3 && isOpen ? `h-[50px] ` : ``}`}
       >
@@ -238,6 +265,8 @@ function Sershinout() {
                   setParmes(e.target.value);
                   handleSearch(e.target.value);
                 }}
+                onKeyDown={handleKeyDown}
+                onKeyUp={handleKeyUp}
                 onFocus={() => {
                   setIsopen(true);
                 }}
@@ -278,26 +307,30 @@ function Sershinout() {
                   </span>
                 </div>
                 <div className="space-y-1">
-                  {query.citys.map((city, index) => (
-                    <button
-                      key={index}
-                      tabIndex={index}
-                      onMouseDown={() =>
-                        handleSuggestedSearch(city ?? "", "city")
-                      }
-                      className="focus:bg-accent focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-gray-200 hover:border-l-2 dark:hover:bg-neutral-700 border-gray-500 w-full data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
-                      style={{
-                        animationDelay: `${index * 50}ms`,
-                      }}
-                    >
-                      <span>{city}</span>
-                      <div className="ml-auto opacity-10 group-hover:opacity-100 transition-opacity duration-200">
-                        <div className="w-5 h-5  rounded-full flex items-center justify-center">
-                          <Search className="h-2 w-2 text-black " />
+                  {query.citys.map((city, index) => {
+                    const globalIndex = index;
+                    return (
+                      <button
+                        key={index}
+                        tabIndex={globalIndex}
+                        onMouseDown={() =>
+                          handleSuggestedSearch(city ?? "", "city")
+                        }
+                        onFocus={() => setActiveIndex(globalIndex)}
+                        className={`focus:bg-accent focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-gray-200 hover:border-l-2 dark:hover:bg-neutral-700 border-gray-500 w-full ${activeIndex == globalIndex ? "bg-gray-200 border-l-2 dark:bg-neutral-700 border-gray-500" : ""} data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4`}
+                        style={{
+                          animationDelay: `${index * 50}ms`,
+                        }}
+                      >
+                        <span>{city}</span>
+                        <div className="ml-auto opacity-10 group-hover:opacity-100 transition-opacity duration-200">
+                          <div className="w-5 h-5  rounded-full flex items-center justify-center">
+                            <Search className="h-2 w-2 text-black " />
+                          </div>
                         </div>
-                      </div>
-                    </button>
-                  ))}
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
             )}
@@ -308,29 +341,33 @@ function Sershinout() {
               </span>
             </div>
             <div className="space-y-1">
-              {query.listing.map((search, index) => (
-                <button
-                  tabIndex={index}
-                  key={index}
-                  onMouseDown={() =>
-                    handleSuggestedSearch(
-                      search?.location?.street_address ?? "",
-                      "address"
-                    )
-                  }
-                  className="focus:bg-accent focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-gray-200 hover:border-l-2 dark:hover:bg-neutral-700 border-gray-500 w-full data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
-                  style={{
-                    animationDelay: `${index * 50}ms`,
-                  }}
-                >
-                  {search.location.street_address}
-                  <div className="ml-auto opacity-10 group-hover:opacity-100 transition-opacity duration-200">
-                    <div className="w-5 h-5 z-99  rounded-full flex items-center justify-center">
-                      <Search className="h-2 w-2 text-black" />
+              {query.listing.map((search, index) => {
+                const globalIndex = query.citys.length + index;
+                return (
+                  <button
+                    tabIndex={globalIndex}
+                    key={index}
+                    onMouseDown={() =>
+                      handleSuggestedSearch(
+                        search?.location?.street_address ?? "",
+                        "address"
+                      )
+                    }
+                    onFocus={() => setActiveIndex(globalIndex)}
+                    className={`focus:bg-accent focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-gray-200 hover:border-l-2 dark:hover:bg-neutral-700 border-gray-500 w-full ${activeIndex == globalIndex ? "bg-gray-200 border-l-2 dark:bg-neutral-700 border-gray-500" : ""} data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4`}
+                    style={{
+                      animationDelay: `${index * 50}ms`,
+                    }}
+                  >
+                    {search.location.street_address}
+                    <div className="ml-auto opacity-10 group-hover:opacity-100 transition-opacity duration-200">
+                      <div className="w-5 h-5 z-99  rounded-full flex items-center justify-center">
+                        <Search className="h-2 w-2 text-black" />
+                      </div>
                     </div>
-                  </div>
-                </button>
-              ))}
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>

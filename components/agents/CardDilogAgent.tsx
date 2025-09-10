@@ -23,6 +23,7 @@ import { SendAgent } from "@/utils/actions";
 import { toast } from "sonner";
 import AgentInfo from "../listing/AgentInfo";
 import { Send } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 const initialState: ActionAgent = {
   success: false,
   message: "",
@@ -39,7 +40,10 @@ function CardDilogAgent({ Agent }: { Agent?: Agent | null }) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button
+        
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
           variant="outline"
           className="p-2 rounded-sm"
           onClick={() => {
@@ -49,6 +53,11 @@ function CardDilogAgent({ Agent }: { Agent?: Agent | null }) {
           Send Message
           <Send className="w-4 h-4 ml-1" />
         </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Send Message to Agent</p>
+          </TooltipContent>
+        </Tooltip>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[725px]">
         <DialogHeader className="flex flex-row  justify-around items-center">
@@ -65,7 +74,7 @@ function CardDilogAgent({ Agent }: { Agent?: Agent | null }) {
           </div>
         </DialogHeader>
         <div className="overflow-y-auto pr-5  max-h-[60vh] w-full">
-          <p className="text-md">Got a question about this property?</p>
+          <p className="text-md italic">Got a question about this property?</p>
           <Separator />
           <form className="" action={action}>
             <div className="h-full mt-10">

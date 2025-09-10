@@ -16,7 +16,7 @@ function AgentHero({ Agent }: { Agent?: Agent | null }) {
       <div className="w-full md:w-[60%] p-5 flex flex-col justify-between">
         <div className="flex  items-center justify-between">
           <div>
-            <h1 className="font-medium text-4xl text-gray-800 dark:text-neutral-200">
+            <h1 className="font-medium italic text-4xl text-gray-800 dark:text-neutral-200">
               {Agent?.full_name}
             </h1>
             <p className="text-xl mt-1 text-gray-500 dark:text-neutral-500">
@@ -25,14 +25,10 @@ function AgentHero({ Agent }: { Agent?: Agent | null }) {
           </div>
           <div>
             <CardDilogAgent Agent={Agent} />
-            {/* <ShareButton
-              name={Agent?.office_name ?? ""}
-              listingId={Agent?.full_name ?? ""}
-            /> */}
           </div>
         </div>
         <div>
-          <h4 className="font-medium text-xl">Office Agent:</h4>
+          <h4 className="font-medium italic text-xl">Office Agent:</h4>
           <p className="text-lg mt-1 text-gray-500 dark:text-neutral-500">
             {Agent?.office_name}
           </p>
@@ -46,7 +42,7 @@ function AgentHero({ Agent }: { Agent?: Agent | null }) {
             {Agent?.office_line_number}
           </p>
         </div>
-        <p className="text-lg mt-1 text-gray-500 dark:text-neutral-500">
+        <p className="text-lg mt-1 italic text-gray-500 dark:text-neutral-500">
           Barrys roots in Northern Virginia run deep, influenced by a Top
           Producing real estate agent mother who instilled in him the keys to
           success in the business from an early age. His journey includes
