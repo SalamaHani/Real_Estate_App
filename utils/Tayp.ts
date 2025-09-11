@@ -13,6 +13,12 @@ export interface UserFormData {
   agentEmail?: string;
   listingId?: string;
 }
+export interface UserFormDataSaved {
+  nameSearch: string;
+  userId?: string;
+  email_frequency?: string;
+  url?: string;
+}
 export interface ActionAgent {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   funactuon?: any;
@@ -31,6 +37,16 @@ export interface ActionUserReview {
   message: string;
   errors?: {
     [K in keyof RevierFormData]?: string[];
+  };
+}
+export interface ActionUserSeavd {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  funactuon?: any;
+  Data?: UserFormDataSaved;
+  success: boolean;
+  message: string;
+  errors?: {
+    [K in keyof UserFormDataSaved]?: string[];
   };
 }
 export interface metaData {

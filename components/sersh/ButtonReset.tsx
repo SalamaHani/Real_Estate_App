@@ -12,7 +12,7 @@ function ButtonReset() {
     replace(`/listing`);
   };
   return (
-    <div className="flex dark:bg-black items-center p-1 border rounded-xl  bg-white shadow-sm overflow-hidden">
+    <div className="flex dark:bg-black items-center p-1 border rounded-xl  bg-white shadow-sm ">
       <Button
         variant="ghost"
         size="lg"

@@ -25,9 +25,8 @@ async function ReviewsDiloge({ productId }: { productId: string }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        
         <Button className="text-sm" variant="outline">
-          Read More Reviews
+          Sevad
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[725px] pt-5 pl-5 pr-0 pb-5">

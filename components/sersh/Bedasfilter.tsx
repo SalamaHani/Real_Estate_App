@@ -39,7 +39,7 @@ function Bedasfilter() {
           <MenubarTrigger className="px-6  cursor-pointer ">
             Bads
           </MenubarTrigger>
-          <MenubarContent className=" flex items-center w-full gap-1 pr-2 justify-between">
+          <MenubarContent  className=" flex items-center w-full gap-1 pr-2 justify-between">
             {Bads.map((item) => {
               const isSelected = item.value == isactiv;
               return (

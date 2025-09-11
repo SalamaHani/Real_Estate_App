@@ -27,7 +27,7 @@ function ReviewCard({ reviewInfo, children }: ReviewCardProps) {
           />
           <div className="ml-4">
             <h3 className="text-sm font-bold capitalize mb-1">
-              {reviewInfo.authorName}
+              {reviewInfo?.authorName}
             </h3>
             <Rating rating={reviewInfo.rating} />
             <div className="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">

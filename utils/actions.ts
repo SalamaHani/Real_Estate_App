@@ -6,10 +6,12 @@ import { getSession } from "./users";
 import {
   ActionAgent,
   ActionUserReview,
+  ActionUserSeavd,
   RevierFormData,
   UserFormData,
+  UserFormDataSaved,
 } from "./Tayp";
-import { AgentcontactSchema } from "./schema";
+import { AgentcontactSchema, SavedcontactSchema } from "./schema";
 import prisma from "./db";
 import { cookies } from "next/headers";
 import { Agent } from "@prisma/client";
@@ -91,6 +93,21 @@ export const fetchFavoriteId = async ({ listingId }: { listingId: string }) => {
     },
   });
   return favoreit?.id || null;
+};
+//fetch all fieivaret
+export const faveretlisting = async () => {
+  const session = await getSession();
+  const user = session?.user;
+  const userId = user?.id;
+  const faveretlisting = await db.favorite.findMany({
+    where: {
+      userId: userId,
+    },
+    include: {
+      listing: true,
+    },
+  });
+  return faveretlisting;
 };
 export const fetshAraeacuntry = async () => {
   const cuntry = await db.areacuntry.findMany({
@@ -457,6 +474,98 @@ export const createReviewAction = async (
     return {
       success: true,
       message: "Successfully Reviews Listings!",
+    };
+  } catch (error) {
+    console.error("Error creating Interest:", error);
+    return {
+      success: false,
+      message: "Something went wrong while contacting the agent.",
+    };
+  }
+};
+//fetch  all reviews user
+export const fetchlistingReviewsByUser = async () => {
+  const session = await getSession();
+  const user = session?.user;
+  const userId = user?.id;
+  const reviews = await db.review.findMany({
+    where: {
+      userId: userId,
+    },
+    select: {
+      id: true,
+      rating: true,
+      authorName: true,
+      comment: true,
+      createdAt: true,
+      listing: {
+        select: {
+          price: true,
+        },
+      },
+    },
+  });
+  return reviews;
+};
+//
+export const deleteReview = async (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  prevState: any,
+  formData: FormData
+) => {
+  const reviewId = formData.get("reviewId") as string;
+  const session = await getSession();
+  const user = session?.user;
+  const userId = user?.id;
+  try {
+    await db.review.delete({
+      where: {
+        id: reviewId,
+        userId: userId,
+      },
+    });
+    revalidatePath("/account/reviews");
+    return { message: "review deleted " };
+  } catch (error) {
+    return error;
+  }
+};
+export const SaveSearchUserAction = async (
+  prevState: ActionUserSeavd,
+  formData: FormData
+): Promise<ActionUserSeavd> => {
+  const session = await getSession();
+  const user = session?.user;
+  const userId = user?.id;
+  if (!user) redirect("/login");
+  const UserData: UserFormDataSaved = {
+    nameSearch: formData.get("nameSearch") as string,
+    email_frequency: formData.get("email_frequency") as string,
+    url: formData.get("url") as string,
+  };
+  const validatedData = SavedcontactSchema.safeParse(UserData);
+  if (!validatedData.success) {
+    return {
+      success: false,
+      Data: {
+        nameSearch: UserData.nameSearch,
+        email_frequency: UserData.email_frequency,
+        url: UserData.url,
+      },
+      message: "Please fix the errors in the form",
+      errors: validatedData.error.flatten().fieldErrors,
+    };
+  }
+  try {
+    await db.seavdSearchUser.create({
+      data: {
+        ...validatedData,
+        userId: userId as string,
+      },
+    });
+    return {
+      success: true,
+      message: "Successfully Saved Search!",
     };
   } catch (error) {
     console.error("Error creating Interest:", error);
