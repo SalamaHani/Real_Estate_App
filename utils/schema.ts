@@ -33,3 +33,9 @@ export const AgentcontactSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
   Phone: z.number().min(7, { message: "Phone number is required" }),
 });
+// export const ReiewUsertSchema = z.object({
+//   comment: z.string().min(1, { message: "First Name is required" }),
+//   listingId: z.string().min(1, { message: "Last Name is required" }),
+//   authorName: z.string().min(1, { message: "Invalid email address" }),
+//   rating: z.number().min(7, { message: "Phone number is required" }),
+// });

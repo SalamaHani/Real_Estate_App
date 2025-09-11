@@ -51,7 +51,7 @@ function ContactAgentForm({
             <Button
               variant="outline"
               size="icon"
-              className="p-2 size-8 rounded-full"
+              className="p-2 size-8 cursor-pointer rounded-full"
               onClick={() => {
                 setOpen(true);
               }}

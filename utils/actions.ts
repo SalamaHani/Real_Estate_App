@@ -3,7 +3,12 @@ import db from "./db";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { getSession } from "./users";
-import { ActionAgent, UserFormData } from "./Tayp";
+import {
+  ActionAgent,
+  ActionUserReview,
+  RevierFormData,
+  UserFormData,
+} from "./Tayp";
 import { AgentcontactSchema } from "./schema";
 import prisma from "./db";
 import { cookies } from "next/headers";
@@ -426,4 +431,38 @@ export const ListingOfAgents = async ({ email }: { email: string }) => {
     },
   });
   return listing;
+};
+///revioes
+export const createReviewAction = async (
+  prevState: ActionUserReview,
+  formData: FormData
+): Promise<ActionUserReview> => {
+  const session = await getSession();
+  const user = session?.user;
+  const userId = user?.id;
+  if (!user) redirect("/login");
+  const UserData: RevierFormData = {
+    comment: formData.get("comment") as string,
+    listingId: formData.get("listingId") as string,
+    authorName: user.name as string,
+    rating: Number(formData.get("rating")),
+  };
+  try {
+    await db.review.create({
+      data: {
+        ...UserData,
+        userId: userId as string,
+      },
+    });
+    return {
+      success: true,
+      message: "Successfully Reviews Listings!",
+    };
+  } catch (error) {
+    console.error("Error creating Interest:", error);
+    return {
+      success: false,
+      message: "Something went wrong while contacting the agent.",
+    };
+  }
 };

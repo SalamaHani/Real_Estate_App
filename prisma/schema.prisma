@@ -48,7 +48,8 @@ model Listing {
   is_caravan           Boolean?
   favorites            Favorite[]
   interest      Interest[]
-  @@map("listing")
+  review        Review[]
+   @@map("listing")
 }
 
 type Agent {
@@ -170,6 +171,18 @@ model Favorite {
   createdAt DateTime? 
   updatedAt DateTime? 
   @@map("favorite")
+}
+model Review {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  listingId String   @db.ObjectId
+  userId String?
+  rating Int
+  comment String?
+  authorName String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  listing   Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  @@map("review")
 }
 
 model Areacuntry {

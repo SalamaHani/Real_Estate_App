@@ -7,6 +7,7 @@ import ImgesListingcur from "@/components/listings/ImgesListingcur";
 import MapListing from "@/components/listings/MapListing";
 import ShareButton from "@/components/listings/ShareButton";
 import TitelListingt from "@/components/listings/TitelListingt";
+import { ReviewDiloge } from "@/components/reviews/ReviewDiloge";
 import { Button } from "@/components/ui/button";
 import { fetchlistingById } from "@/utils/actions";
 import React from "react";
@@ -43,6 +44,7 @@ async function page({ params }: ProductEditPageProps) {
                 listingId={listung?.id ?? ""}
                 Agent={listung?.agents[0] ?? null}
               />
+              <ReviewDiloge listingId={listung?.id ?? ""} />
             </div>
           </div>
         </div>
@@ -64,7 +66,7 @@ async function page({ params }: ProductEditPageProps) {
             <Button>{listung?.location?.street_address}</Button>
           </div>
         </div>
-        <Footer/>
+        <Footer />
       </Continer>
     </section>
   );
