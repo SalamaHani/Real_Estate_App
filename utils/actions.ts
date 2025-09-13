@@ -539,10 +539,12 @@ export const SaveSearchUserAction = async (
   const userId = user?.id;
   if (!user) redirect("/login");
   const UserData: UserFormDataSaved = {
+    url: formData.get("url") as string,
     nameSearch: formData.get("nameSearch") as string,
     email_frequency: formData.get("email_frequency") as string,
-    url: formData.get("url") as string,
   };
+  const params = new URLSearchParams(UserData.url);
+  const parmesAll = Object.fromEntries(params.entries());
   const validatedData = SavedcontactSchema.safeParse(UserData);
   if (!validatedData.success) {
     return {
@@ -557,10 +559,13 @@ export const SaveSearchUserAction = async (
     };
   }
   try {
-    await db.seavdSearchUser.create({
+    await db.seavdsearchuser.create({
       data: {
-        ...validatedData,
         userId: userId as string,
+        url: validatedData.data.url as string,
+        qury: parmesAll,
+        nameSearch: validatedData.data.nameSearch as string,
+        email_frequency: validatedData.data.email_frequency as string,
       },
     });
     return {
@@ -573,5 +578,38 @@ export const SaveSearchUserAction = async (
       success: false,
       message: "Something went wrong while contacting the agent.",
     };
+  }
+};
+export const fetshAllSavedSearsh = async () => {
+  const session = await getSession();
+  const user = session?.user;
+  const userId = user?.id;
+  const Savedshershe = await db.seavdsearchuser.findMany({
+    where: {
+      userId: userId,
+    },
+  });
+  return Savedshershe;
+};
+export const deleteSeaved = async (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  prevState: any,
+  formData: FormData
+) => {
+  const reviewId = formData.get("savedId") as string;
+  const session = await getSession();
+  const user = session?.user;
+  const userId = user?.id;
+  try {
+    await db.seavdsearchuser.delete({
+      where: {
+        id: reviewId,
+        userId: userId,
+      },
+    });
+    revalidatePath("/account/s");
+    return { message: "Saved Searsh Deleted !" };
+  } catch (error) {
+    return error;
   }
 };

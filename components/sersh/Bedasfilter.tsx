@@ -36,7 +36,7 @@ function Bedasfilter() {
     <div>
       <Menubar className="py-3 rounded-xl h-12">
         <MenubarMenu>
-          <MenubarTrigger className="px-6  cursor-pointer ">
+          <MenubarTrigger className="px-6   cursor-pointer ">
             Bads
           </MenubarTrigger>
           <MenubarContent  className=" flex items-center w-full gap-1 pr-2 justify-between">

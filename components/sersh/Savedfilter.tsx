@@ -39,13 +39,17 @@ type KeyValue = {
 };
 export function Savedfilter() {
   const searchParams = useSearchParams();
+  console.log(searchParams);
   const [open, setOpen] = React.useState(false);
   const [state, action] = useActionState(SaveSearchUserAction, initialState);
+  const [value, setValue] = React.useState<string>("");
   const [ParmesAll, setPramsAll] = React.useState(
     Object.fromEntries(searchParams.entries())
   );
+  console.log(ParmesAll);
   const params = new URLSearchParams(searchParams);
-  const URL = "listing?" + params;
+  const URL = "" + params;
+  const parmesAllQuery = Object.fromEntries(params.entries());
   console.log(state.Data);
   React.useEffect(() => {
     if (!searchParams.get("Parmes")) {
@@ -58,6 +62,7 @@ export function Savedfilter() {
       toast.success(state.message);
     }
   }, [state?.success, state?.message]);
+  console.log(state?.message);
   const prices = Object.entries(ParmesAll)
     .filter(([key]) => key === "Maximam" || key === "Minimam")
     .map(([key, value]) => ({ key, value }));
@@ -166,7 +171,7 @@ export function Savedfilter() {
               <Button
                 variant="ghost"
                 size="lg"
-                className="bg-black flex items-center gap-1 cursor-pointer  transition-all duration-300  hover:bg-gray-200 g-card text-card-foreground  dark:text-white "
+                className=" flex items-center gap-1 cursor-pointer  transition-all duration-300  hover:bg-gray-100 g-card text-card-foreground  dark:text-white "
                 onClick={() => {
                   setOpen(true);
                 }}
@@ -211,8 +216,9 @@ export function Savedfilter() {
             <Label className="mb-2" htmlFor="email_frequency">
               Email Alerts<span className="text-red-500">*</span>
             </Label>
-            <Select>
-              <SelectTrigger name="email_frequency" className="w-[100%]">
+            <input type="hidden" name="email_frequency" value={value} />
+            <Select value={value} onValueChange={setValue}>
+              <SelectTrigger className="w-[100%]">
                 <SelectValue placeholder="Weekly" />
               </SelectTrigger>
               <SelectContent side="top" align="center">
@@ -229,6 +235,7 @@ export function Savedfilter() {
           <DialogFooter className="w-[100%]">
             <SubmitButton className="w-full" text="Save Search" />
           </DialogFooter>
+
           <input type="text" readOnly hidden name="url" value={URL} />
         </form>
       </DialogContent>

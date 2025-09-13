@@ -2,11 +2,14 @@
 
 import Continer from "@/components/global/Continer";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 
 function loading() {
   return (
-    <Continer>
+    <Continer className="mt-20 mb-10">
+      <Skeleton className="w-60 h-3 mb-20  " />
+      <Separator />
       <section className="grid md:grid-cols-2 gap-8 mt-4">
         <ReviewLoadingCard />
         <ReviewLoadingCard />
@@ -40,6 +43,7 @@ const ReviewLoadingCard = () => {
     </Card>
   );
 };
+
 export function StarSkeleton() {
   return (
     <div className="flex space-x-1">
