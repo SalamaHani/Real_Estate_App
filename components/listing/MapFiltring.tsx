@@ -6,14 +6,9 @@ import {
   AdvancedMarker,
   Pin,
   InfoWindow,
-  useAdvancedMarkerRef,
 } from "@vis.gl/react-google-maps";
 import React, { useState } from "react";
-import Image from "next/image";
-// interface locar {
-//   lat: number;
-//   lng: number;
-// }
+
 
 function MapFiltring({ listing }: { listing: Listing[] }) {
   const location = {

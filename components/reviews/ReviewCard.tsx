@@ -6,13 +6,14 @@ import imgUser from "../../public/imges/user-profile-icon-flat-style-member-avat
 import { Calendar } from "lucide-react";
 type ReviewCardProps = {
   reviewInfo: {
-    comment: string;
+    comment: string | null;
     rating: number;
     createdAt: Date;
-    authorName: string;
-  };
+    authorName: string | null;
+  } | null;
   children?: React.ReactNode;
 };
+
 function ReviewCard({ reviewInfo, children }: ReviewCardProps) {
   return (
     <Card className="relative">
@@ -20,27 +21,27 @@ function ReviewCard({ reviewInfo, children }: ReviewCardProps) {
         <div className="flex items-center">
           <Image
             src={imgUser}
-            alt={reviewInfo.authorName}
+            alt={reviewInfo?.authorName ?? ""}
             width={48}
             height={48}
             className="w-12 h-12 rounded-full object-cover"
           />
           <div className="ml-4">
             <h3 className="text-sm font-bold capitalize mb-1">
-              {reviewInfo?.authorName}
+              {reviewInfo?.authorName ?? ""}
             </h3>
-            <Rating rating={reviewInfo.rating} />
+            <Rating rating={reviewInfo?.rating ?? 7} />
             <div className="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
               <span className=" flex  mt-1 items-center gap-1">
                 <Calendar className="h-3 w-3" />
-                {reviewInfo.createdAt.toISOString()}
+                {reviewInfo?.createdAt?.toISOString()}
               </span>
             </div>
           </div>
         </div>
       </CardHeader>
       <CardContent>
-        <Comment comment={reviewInfo.comment} />
+        <Comment comment={reviewInfo?.comment ?? ""} />
       </CardContent>
       <div className="absolute top-3 right-3">{children}</div>
     </Card>

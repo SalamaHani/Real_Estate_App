@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:socket": "nodemon --watch src --ext ts --exec ts-node src/server.ts",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -46,6 +47,8 @@
     "react-hook-form": "^7.62.0",
     "react-icons": "^5.5.0",
     "react-share": "^5.2.2",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1",
     "sonner": "^2.0.7",
     "swiper": "^11.2.10",
     "tailwind-merge": "^3.3.1",
