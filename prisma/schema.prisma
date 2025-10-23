@@ -1,78 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+}
 
 datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
-
-generator client {
-  provider = "prisma-client-js"
-}
-
-
-
-model Listing {
-  id                   String      @id @default(auto()) @map("_id") @db.ObjectId
-  agents               Agent[]
-  always_email_agents  String?
-  bathrooms            Int?
-  bedrooms             Int?
-  coordinates          Float[]        // [lng, lat]
-  description          String
-  full_bathrooms       Int?
-  half_bathrooms       Int?
-  is_rental            Boolean?
-  listing_email        String?
-  listing_status       String
-  living_area          Int?
-  location             Location
-  lot_size             Float?
-  make_notified        Boolean?
-  mls_name             String?
-  office_ids           String[]
-  offices              Office[]
-  photos               String[]
-  price                Float?
-  property_type        String
-  schools_district     String?
-  single_property_website String?
-  url                  String?
-  virtual_tour_url     String?
-  year_built           Int?
-  listing_source       String?
-  caravan_end_time     String?
-  caravan_food_offered String?
-  caravan_notes        String?
-  caravan_start_date   String?
-  caravan_start_time   String?
-  is_caravan           Boolean?
-  favorites            Favorite[]
-  interest      Interest[]
-  review        Review[]
-   @@map("listing")
-}
-
-type Agent {
-  first_name               String
-  last_name                String
-  full_name                String
-  email                    String
-  photo                    String?
-  office_line_number       String?
-  mobile_phone_line_number String?
+type ListingAgents {
+  broker_email             String
+  broker_phone             String
   brokerage_name           String
-  broker_phone             String?
-  broker_email             String?
-  office_street_address    String?
-  office_city              String?
-  office_state             String?
-  office_zip_code          String?
-  office_name              String?
-  franchise_name           String?
-  social_media             SocialMedia?
+  email                    String
+  first_name               String
+  franchise_name           String
+  full_name                String
+  last_name                String
+  mobile_phone_line_number String
+  office_city              String
+  office_line_number       String
+  office_name              String
+  office_state             String
+  office_street_address    String
+  office_zip_code          String
+  photo                    String
+  social_media             ListingAgentsSocialMedia
 }
 
-type SocialMedia {
+type ListingAgentsSocialMedia {
   facebook  String?
   instagram String?
   linkedin  String?
@@ -81,152 +36,172 @@ type SocialMedia {
   youtube   String?
 }
 
-type Location {
-  street_address String?
-  unit_number    String?
-  city           String?
-  state          String?
+type ListingLocation {
+  city            String
+  county          String
   display_address Boolean?
-  zip_code       String
-  lng             Float?
-  lat             Float?
-  neighborhood   String?
-  county         String?
+  lat             Float
+  lng             Float
+  neighborhood    String
+  state           String
+  street_address  String
+  unit_number     String
+  zip_code        String
 }
 
-type Office {
-  brokerage_name       String
-  broker_phone         String?
-  broker_email         String?
-  office_street_address String?
-  office_city          String?
-  office_state         String?
-  office_zip_code      String?
-  office_name          String?
-  franchise_name       String?
+type ListingOffices {
+  broker_email          String
+  broker_phone          String
+  brokerage_name        String
+  franchise_name        String
+  office_city           String
+  office_name           String
+  office_state          String
+  office_street_address String
+  office_zip_code       String
 }
 
-model User {
-  id            String    @id @map("_id")
-  name          String
-  email         String
-  emailVerified Boolean
-  image         String?
-  createdAt     DateTime
-  updatedAt     DateTime
-  sessions      Session[]
-  accounts      Account[]
-  interest      Interest[]
-  @@unique([email])
-  @@map("user")
+type SeavdsearchuserQury {
+  Bads   String
+  Baths  String
+  Status String
+  city   String
 }
 
-model Session {
-  id        String   @id @map("_id")
-  expiresAt DateTime
-  token     String
-  createdAt DateTime
-  updatedAt DateTime
-  ipAddress String?
-  userAgent String?
-  userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([token])
-  @@map("session")
-}
-
-model Account {
-  id                    String    @id @map("_id")
-  accountId             String
-  providerId            String
-  userId                String
-  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  accessToken           String?
-  refreshToken          String?
-  idToken               String?
-  accessTokenExpiresAt  DateTime?
-  refreshTokenExpiresAt DateTime?
-  scope                 String?
-  password              String?
-  createdAt             DateTime
-  updatedAt             DateTime
-  @@map("account")
-}
-
-model Verification {
-  id         String    @id @map("_id")
-  identifier String
-  value      String
-  expiresAt  DateTime
-  createdAt  DateTime?
-  updatedAt  DateTime?
-  @@map("verification")
-}
-model Favorite {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  listingId String   @db.ObjectId
-  userId    String   
-  listing   Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
-  createdAt DateTime? 
-  updatedAt DateTime? 
-  @@map("favorite")
-}
-model Review {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  listingId String   @db.ObjectId
-  userId String?
-  rating Int
-  comment String?
-  authorName String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  listing   Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
-  @@map("review")
-}
-model Seavdsearchuser {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId    String   
-  qury       Json?
-  url   String
-  nameSearch String
-  email_frequency String
-  createdAt DateTime? @default(now())
-  updatedAt DateTime? @updatedAt
-}
 model Areacuntry {
-  id                   String      @id @default(auto()) @map("_id") @db.ObjectId
-  name                 String
-  description          String
-  living_area          Int?
-  location             Location?
-  photos               String[]
-  property_type        String
-  areaKm2              Float?    
-  population           Int?    
-  hospitalsCount       Int?    
-  schoolsCount         Int? 
-  Maps                 String?
-  Catholic           Int?      
-  Mosques            Int?     
-  AboutAllCountry    Int?     
-  AvgWorkCommute     Int?      
-  MedianAge          Int?      
-  MedianAreaIncome   Int?     
-  MedianSalePrice    Int?     
-  Stores             Int? 
-  Universities       Int?
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  AboutAllCountry  BigInt
+  AvgWorkCommute   BigInt
+  Catholic         BigInt
+  Maps             String
+  MedianAge        BigInt
+  MedianAreaIncome BigInt
+  MedianSalePrice  BigInt
+  Mosques          BigInt
+  Stores           BigInt
+  Universities     BigInt
+  areaKm2          Float
+  description      String
+  hospitalsCount   BigInt
+  living_area      BigInt
+  name             String
+  photos           String[]
+  population       BigInt
+  property_type    String
+  schoolsCount     BigInt
 }
 
-model Interest {
-  id        String  @id @default(auto()) @map("_id") @db.ObjectId
-  name      String
-  email     String
-  user      User?   @relation(fields: [userId], references: [id])
-  userId    String  
-  agentemail String?
-  listing   Listing? @relation(fields: [listingId], references: [id])
-  listingId String?  @db.ObjectId
-  createdAt DateTime? @default(now())
-   @@map("interest")
+model Seavdsearchuser {
+  id              String              @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt       DateTime            @db.Date
+  email_frequency String
+  nameSearch      String
+  qury            SeavdsearchuserQury
+  updatedAt       DateTime            @db.Date
+  url             String
+  userId          String
+}
+
+model account {
+  id                   String    @id @map("_id")
+  accessToken          String?
+  accessTokenExpiresAt DateTime? @db.Date
+  accountId            String
+  createdAt            DateTime  @db.Date
+  idToken              String?
+  password             String?
+  providerId           String
+  scope                String?
+  updatedAt            DateTime  @db.Date
+  userId               String
+}
+
+model favorite {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  listingId String @db.ObjectId
+  userId    String
+   listing   listing  @relation(fields: [listingId], references: [id])
+}
+
+model interest {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  agentemail String
+  createdAt  DateTime @db.Date
+  email      String
+  listingId  String?  @db.ObjectId
+  name       String
+  userId     String
+}
+
+model listing {
+  id                      String           @id @default(auto()) @map("_id") @db.ObjectId
+  agents                  ListingAgents[]
+  always_email_agents     String
+  bathrooms               BigInt
+  bedrooms                BigInt
+  caravan_end_time        String?
+  caravan_food_offered    String?
+  caravan_notes           String?
+  caravan_start_date      String?
+  caravan_start_time      String?
+  coordinates             Float[]
+  description             String
+  full_bathrooms          BigInt
+  half_bathrooms          BigInt
+  is_caravan              Boolean?
+  is_rental               Boolean
+  listing_email           String
+  listing_source          String
+  listing_status          String
+  living_area             BigInt?
+  location                ListingLocation
+  lot_size                Float?
+  make_notified           Boolean
+  mls_name                String
+  office_ids              String[]
+  offices                 ListingOffices[]
+  photos                  String[]
+  price                   Float
+  property_type           String
+  schools_district        String
+  single_property_website String
+  url                     String
+  virtual_tour_url        String
+  year_built              BigInt?
+  Favorite               favorite[]
+}
+
+model review {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  authorName String
+  comment    String
+  createdAt  DateTime @db.Date
+  listingId  String   @db.ObjectId
+  rating     BigInt
+  updatedAt  DateTime @db.Date
+  userId     String
+}
+
+model session {
+  id        String   @id @map("_id")
+  createdAt DateTime @db.Date
+  expiresAt DateTime @db.Date
+  ipAddress String
+  token     String   @unique
+  updatedAt DateTime @db.Date
+  userAgent String
+  userId    String
+}
+
+model user {
+  id            String   @id @map("_id")
+  createdAt     DateTime @db.Date
+  email         String   @unique
+  emailVerified Boolean
+  name          String
+  updatedAt     DateTime @db.Date
+}
+
+model verification {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
 }

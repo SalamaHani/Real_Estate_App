@@ -14,8 +14,9 @@ import {
 import { AgentcontactSchema, SavedcontactSchema } from "./schema";
 import prisma from "./db";
 import { cookies } from "next/headers";
-import { Agent } from "@prisma/client";
+import { ListingAgents } from "@prisma/client";
 import { console } from "inspector";
+
 // const session = await auth.api.getSession({
 //   headers: await headers(),
 // });
@@ -350,11 +351,11 @@ export const FetshAllAgents = async ({
       agents: true,
     },
   });
-  const agents: Agent[] = [];
+  const agents: ListingAgents[] = [];
   Agents.map((Agent) => {
-    Agent.agents.map((agent: Agent) => {
+    Agent.agents.map((agent: ListingAgents) => {
       if (
-        !agents.find((a: Agent) => a.email === agent.email) &&
+        !agents.find((a: ListingAgents) => a.email === agent.email) &&
         agents.length < limit
       ) {
         agents.push(agent);

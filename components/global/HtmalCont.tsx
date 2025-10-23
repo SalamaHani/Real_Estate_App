@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 
 interface HTMLContentProps {
-  Cont?: number;
+  Cont?: number | bigint;
 }
 
 export default function HTMLContent({ Cont = 0 }: HTMLContentProps) {
@@ -20,8 +20,8 @@ export default function HTMLContent({ Cont = 0 }: HTMLContentProps) {
 
   useEffect(() => {
     if (!isMounted) return; // only animate on client
-    const duration = Math.min(Math.max(Cont / 5000, 1), 10); // 1s min, 10s max
-    const controls = animate(count, Cont, { duration });
+    const duration = Math.min(Math.max(Number(Cont) / 5000, 1), 10);
+    const controls = animate(count, Number(Cont), { duration });
     return () => controls.stop();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [Cont, isMounted]);
