@@ -120,7 +120,6 @@ model favorite {
   id        String @id @default(auto()) @map("_id") @db.ObjectId
   listingId String @db.ObjectId
   userId    String
-   listing   listing  @relation(fields: [listingId], references: [id])
 }
 
 model interest {
@@ -168,7 +167,6 @@ model listing {
   url                     String
   virtual_tour_url        String
   year_built              BigInt?
-  Favorite               favorite[]
 }
 
 model review {

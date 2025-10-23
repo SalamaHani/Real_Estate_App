@@ -172,19 +172,18 @@ export const SendAgentListing = async (
       data: {
         name: UserData.FirstName + " " + UserData.LastName,
         email: UserData.email,
-        userId: UserData.userId,
+        userId: UserData.userId!,
         agentemail: UserData.agentEmail ?? "",
         listingId: UserData.listingId,
+        createdAt: new Date(),
       },
     });
-
     return {
       success: true,
       message: "Successfully Contact Agent!",
     };
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
-    console.error("Error creating Interest:", error);
-
     return {
       success: false,
       message: "Something went wrong while contacting the agent.",
@@ -218,21 +217,62 @@ export const SendAgentListinge = async (
   };
 };
 ///sersh query
+// export const SershQuerlisting = async (value: string) => {
+//   type RawCursorResult = {
+//     cursor: {
+//       // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//       firstBatch: any[];
+//     };
+//   };
+
+//   if (value === "") return { listing: [], citys: [] };
+//   const city = (await prisma.$runCommandRaw({
+//     distinct: "listing",
+//     key: "location.city",
+//     query: {
+//       $or: [{ "location.city": { $regex: value, $options: "i" } }],
+//     },
+//   })) as RawCursorResult;
+//   const liset = (await prisma.$runCommandRaw({
+//     find: "listing",
+//     filter: {
+//       $or: [
+//         { "location.street_address": { $regex: value, $options: "i" } },
+//         { "location.county": { $regex: value, $options: "i" } },
+//       ],
+//     },
+
+//     limit: 5,
+//   })) as RawCursorResult;
+//   const citys = city.values ;
+//   const listing = liset.cursor.firstBatch;
+//   return { listing, citys };
+// };
+
 export const SershQuerlisting = async (value: string) => {
-  type RawCursorResult = {
+  type RawFindResult = {
     cursor: {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       firstBatch: any[];
     };
   };
-  if (value == "") return { listing: [], citys: [] };
+
+  type RawDistinctResult = {
+    values: string[];
+    ok: number;
+  };
+  if (value === "") return { listing: [], citys: [] };
+
+  // DISTINCT: find unique cities
   const city = (await prisma.$runCommandRaw({
     distinct: "listing",
     key: "location.city",
     query: {
       $or: [{ "location.city": { $regex: value, $options: "i" } }],
     },
-  })) as RawCursorResult;
+  })) as RawDistinctResult;
+
+  // FIND: get listing results
   const liset = (await prisma.$runCommandRaw({
     find: "listing",
     filter: {
@@ -241,11 +281,12 @@ export const SershQuerlisting = async (value: string) => {
         { "location.county": { $regex: value, $options: "i" } },
       ],
     },
-
     limit: 5,
-  })) as RawCursorResult;
+  })) as RawFindResult;
+
   const citys = city.values;
   const listing = liset.cursor.firstBatch;
+
   return { listing, citys };
 };
 export const SershQuerCatylistirng = async (value: string) => {
@@ -293,6 +334,12 @@ export const FetshSershListoning = async ({
   address?: string;
   limit?: number;
 }) => {
+  type RawFindResult = {
+    cursor: {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      firstBatch: any[];
+    };
+  };
   const skip = (Page - 1) * limit;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const filter: any = {};
@@ -317,13 +364,13 @@ export const FetshSershListoning = async ({
     filter["location.street_address"] = { $regex: address, $options: "i" };
   const total = await db.listing.count();
   // query listings
-  const listing = await db.$runCommandRaw({
+  const listing = (await db.$runCommandRaw({
     find: "listing",
     filter,
     skip,
     limit,
     sort: { createdAt: -1 }, // latest first
-  });
+  })) as RawFindResult;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const listings = listing?.cursor?.firstBatch.map((doc: any) => ({
     ...doc,
@@ -421,8 +468,9 @@ export const SendAgent = async (
       data: {
         name: UserData.FirstName + " " + UserData.LastName,
         email: UserData.email,
-        userId: UserData.userId,
+        userId: UserData.userId!,
         agentemail: UserData.agentEmail ?? "",
+        createdAt: new Date(),
       },
     });
 
@@ -457,7 +505,7 @@ export const createReviewAction = async (
 ): Promise<ActionUserReview> => {
   const session = await getSession();
   const user = session?.user;
-  const userId = user?.id;
+  const userId = user?.id as string;
   if (!user) redirect("/login");
   const UserData: RevierFormData = {
     comment: formData.get("comment") as string,
@@ -465,11 +513,14 @@ export const createReviewAction = async (
     authorName: user.name as string,
     rating: Number(formData.get("rating")),
   };
+
   try {
     await db.review.create({
       data: {
         ...UserData,
-        userId: userId as string,
+        userId: userId!,
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
     });
     return {
