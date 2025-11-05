@@ -117,9 +117,14 @@ model account {
 }
 
 model favorite {
-  id        String @id @default(auto()) @map("_id") @db.ObjectId
-  listingId String @db.ObjectId
-  userId    String
+   id          String @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String     // reference to User model
+  listingId  String     @db.ObjectId
+  listing    listing    @relation(fields: [listingId], references: [id])
+  createdAt  DateTime   @default(now())
+  // id        String @id @default(auto()) @map("_id") @db.ObjectId
+  // listingId String @db.ObjectId
+  // userId    String
 }
 
 model interest {
@@ -134,6 +139,7 @@ model interest {
 
 model listing {
   id                      String           @id @default(auto()) @map("_id") @db.ObjectId
+  favorites  favorite[]  @relation
   agents                  ListingAgents[]
   always_email_agents     String
   bathrooms               BigInt

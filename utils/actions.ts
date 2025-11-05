@@ -101,15 +101,19 @@ export const faveretlisting = async () => {
   const user = session?.user;
   const userId = user?.id;
   const faveretlisting = await db.favorite.findMany({
-    where: {
-      userId: userId,
-    },
-    include: {
-      listing: true,
-    },
+    where: { userId },
+    include: { listing: true },
   });
   return faveretlisting;
 };
+// export const getListingFav = async ({ id }: { id: string }) => {
+//   const listing = await db.listing.findFirst({
+//     where: {
+//       id,
+//     },
+//   });
+//   return listing
+// };
 export const fetshAraeacuntry = async () => {
   const cuntry = await db.areacuntry.findMany({
     take: 6,
@@ -540,9 +544,18 @@ export const fetchlistingReviewsByUser = async () => {
   const session = await getSession();
   const user = session?.user;
   const userId = user?.id;
+  // const reviews = await db.review.findMany({
+  //   where: { userId },
+  //   select: {
+  //     id: true,
+  //     comment: true,
+  //     rating: true,
+  //     createdAt: true,
+  //   },
+  // });
   const reviews = await db.review.findMany({
     where: {
-      userId: userId,
+      userId,
     },
     select: {
       id: true,
@@ -550,11 +563,7 @@ export const fetchlistingReviewsByUser = async () => {
       authorName: true,
       comment: true,
       createdAt: true,
-      listing: {
-        select: {
-          price: true,
-        },
-      },
+      updatedAt: true,
     },
   });
   return reviews;

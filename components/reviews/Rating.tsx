@@ -1,6 +1,6 @@
 import { FaStar, FaRegStar } from "react-icons/fa";
 
-function Rating({ rating }: { rating: number | 0 }) {
+function Rating({ rating }: { rating: bigint | 0 }) {
   // rating = 2
   // 1 <= 2 true
   // 2 <= 2 true

@@ -7,7 +7,11 @@ import React from "react";
 async function page() {
   const fivaretlistinng = await faveretlisting();
   if (fivaretlistinng.length == 0)
-    return <TitelSection text="you have no reviews yet" />;
+    return (
+      <Continer className="mt-20">
+        <TitelSection text="you have no reviews yet" />
+      </Continer>
+    );
   return (
     <Continer className="mt-20">
       <TitelSection text="Your Favorites Listing?" />

@@ -7,7 +7,7 @@ import { Calendar } from "lucide-react";
 type ReviewCardProps = {
   reviewInfo: {
     comment: string | null;
-    rating: number;
+    rating: bigint;
     createdAt: Date;
     authorName: string | null;
   } | null;
