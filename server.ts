@@ -1,6 +1,8 @@
-import { createServer } from "node:http";
+import { createServer } from "http";
+
 import next from "next";
 import { Server } from "socket.io";
+import { methods } from "better-auth/react";
 
 const dev = process.env.DEV !== "production";
 const hostname = process.env.HOSTNAME || "localhost";
@@ -18,3 +20,27 @@ app.prepare().then(() => {
     console.log(`Serever runtig port  on http://${hostname}:${port}`);
   });
 });
+
+
+
+
+
+
+
+
+
+// import { Server } from "socket.io";
+// const servar = createServer();
+// const io = new Server(servar, {
+//   cors: {
+//     origin: "http://localhost:3000",
+//     credentials: true,
+//     methods: ["POST", "GET"],
+//   },
+// });
+// io.on("connection", () => {
+//   console.log(`User Connection `);
+// });
+// servar.listen(3000, () => {
+//   console.log(`Serever runtig port `);
+// });
