@@ -34,7 +34,7 @@ function CardDilogAgent({ Agent }: { Agent?: Agent | null }) {
   React.useEffect(() => {
     if (state?.success) {
       setOpen(false);
-      toast.success(state.message);
+      toast.success(tsate.message);
     }
   }, [state?.success, state?.message]);
   return (

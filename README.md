@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏡 Real Estate App - Barrington Group
 
-## Getting Started
+![Barrington Group Screenshot](./public/imges/لقطة%20شاشة%202025-12-03%20132708.png)
+![React](https://img.shields.io/badge/React-18-blue?logo=react)
+![Next.js](https://img.shields.io/badge/Next.js-15.5.6-black?logo=next.js)
+![Prisma](https://img.shields.io/badge/Prisma-6.19.0-blue)
+![MongoDB](https://img.shields.io/badge/MongoDB-6.0-green?logo=mongodb)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.3.3-blue?logo=tailwind-css)
+![shadcn/ui](https://img.shields.io/badge/shadcn-ui-gray)
+![Google Maps](https://img.shields.io/badge/Google-Maps-red?logo=google)
+![BetterAuth](https://img.shields.io/badge/BetterAuth-Secure-purple)
 
-First, run the development server:
+A **professional, full-stack real estate platform** built with **Next.js, React, Prisma, and MongoDB**, featuring modern UI, authentication, maps integration, and cloud hosting.
+
+---
+
+## 🌟 Features
+
+- **Property Listings:** Add, edit, delete, and browse properties with images and videos.
+- **Google Maps Integration:** Interactive property map, markers, and location-based search.
+- **Authentication:** Secure login/register with **BetterAuth**, role-based access.
+- **Real-time Updates:** Notifications for new property listings or updates.
+- **Professional UI/UX:** Responsive design using **Tailwind CSS** and **shadcn/ui** components.
+- **Cloud Media Hosting:** Cloudinary support for images and videos.
+
+---
+
+## 🏗 Tech Stack
+
+- **Frontend:** React 18, Next.js 15.5.6, Tailwind CSS, shadcn/ui
+- **Backend:** Next.js API routes, Prisma ORM, MongoDB
+- **Authentication:** BetterAuth
+- **Maps:** Google Maps API
+- **Cloud Media:** Cloudinary
+- **Language:** TypeScript
+
+---
+
+## ⚡ Installation
+
+1. **Clone the repository**
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/your-username/real-estate-app.git
+cd real-estate-app
+
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
