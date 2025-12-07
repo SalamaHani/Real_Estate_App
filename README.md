@@ -1,6 +1,8 @@
 # 🏡 Real Estate App - Barrington Group
 
 ![Barrington Group Screenshot](./public/imges/لقطة%20شاشة%202025-12-03%20132708.png)
+![alt text](image.png)
+![Barrington Group Screenshot](./public/imges/لقطة%20شاشة%202025-12-03%20141220.png)
 ![React](https://img.shields.io/badge/React-18-blue?logo=react)
 ![Next.js](https://img.shields.io/badge/Next.js-15.5.6-black?logo=next.js)
 ![Prisma](https://img.shields.io/badge/Prisma-6.19.0-blue)

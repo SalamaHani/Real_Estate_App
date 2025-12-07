@@ -46,18 +46,18 @@ export default function HeroSection() {
           <div className=" flex flex-wrap justify-center  gap-4">
             <Link
               href="/sell"
-              className="px-6 py-3  flex items-center italic bg-white text-black rounded-md shadow-lg text-lg font-semibold 
+              className="px-6 py-3 flex items-center italic bg-primary text-primary-foreground rounded-md shadow-lg text-lg font-semibold 
              transition-all duration-300 ease-in-out 
-               hover:scale-105"
+               hover:scale-105 hover:shadow-xl hover:opacity-90"
             >
               Search Sell Home
               <House className="w-4 h-4 ml-2" />
             </Link>
             <Link
               href="/listing"
-              className="px-6 py-3 bg-black flex items-center text-white italic  rounded-md shadow-lg text-lg font-semibold 
+              className="px-6 py-3 bg-accent flex items-center text-white italic rounded-md shadow-lg text-lg font-semibold 
              transition-all duration-300 ease-in-out 
-             hover:scale-105"
+             hover:scale-105 hover:shadow-xl hover:opacity-90"
             >
               Search Buy Homes
               <House className="w-4 h-4 ml-2" />
