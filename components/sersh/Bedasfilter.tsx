@@ -39,7 +39,7 @@ function Bedasfilter() {
           <MenubarTrigger className="px-6   cursor-pointer ">
             Bads
           </MenubarTrigger>
-          <MenubarContent  className=" flex items-center w-full gap-1 pr-2 justify-between">
+          <MenubarContent className=" flex items-center w-full gap-1 pr-2 justify-between">
             {Bads.map((item) => {
               const isSelected = item.value == isactiv;
               return (
@@ -48,11 +48,10 @@ function Bedasfilter() {
                   variant="ghost"
                   size="sm"
                   onClick={() => handleSuggestedSearch(item.value, "Bads")}
-                  className={`flex items-center gap-1 cursor-pointer  transition-all duration-300  font-medium ${
-                    isSelected
-                      ? "bg-black dark:bg-white dark:text-black text-white shadow-sm   border border-gray-200 dark:border-gray-700"
-                      : "hover:bg-gray-200 g-card text-card-foreground  dark:text-white"
-                  }`}
+                  className={`flex items-center gap-1 cursor-pointer  transition-all duration-300  font-medium ${isSelected
+                    ? "bg-primary text-primary-foreground shadow-md border border-primary/20"
+                    : "hover:bg-gray-200 g-card text-card-foreground  dark:text-white"
+                    }`}
                 >
                   {item.Label}
                 </Button>

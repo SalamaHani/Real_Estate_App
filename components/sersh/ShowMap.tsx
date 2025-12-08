@@ -23,7 +23,7 @@ function ShowMap() {
         {showMap == "false" ? (
           <button
             onClick={() => handleSuggestedSearch("true", "Map")}
-            className="p-5 cursor-pointer flex flex-col items-center justify-center  px-6 py-3 rounded-t-sm  text-white  bg-black"
+            className="p-5 cursor-pointer flex flex-col items-center justify-center  px-6 py-3 rounded-t-sm  text-white  bg-primary"
           >
             <ArrowBigUp />
             Show Map
@@ -31,7 +31,7 @@ function ShowMap() {
         ) : (
           <button
             onClick={() => handleSuggestedSearch("false", "Map")}
-            className="p-5 cursor-pointer flex flex-col items-center justify-center  px-6 py-3 rounded-t-sm  text-white  bg-black"
+            className="p-5 cursor-pointer flex flex-col items-center justify-center  px-6 py-3 rounded-t-sm  text-white  bg-primary"
           >
             Hiden Map
             <ArrowBigDown />

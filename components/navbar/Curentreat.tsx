@@ -80,7 +80,7 @@ export default function CurrencySelector() {
                 onClick={() => handleSelect(cur.value)}
                 className={
                   cur.value === currency
-                    ? "font-bold dark:bg-neutral-700 bg-neutral-500 text-primary"
+                    ? "font-bold dark:bg-neutral-700 bg-primary text-whait"
                     : ""
                 }
               >

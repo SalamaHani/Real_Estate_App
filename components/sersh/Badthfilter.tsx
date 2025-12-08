@@ -49,11 +49,10 @@ function Bathsfilter() {
                   variant="ghost"
                   size="sm"
                   onClick={() => handleSuggestedSearch(item.value, "Baths")}
-                  className={`flex items-center gap-1 cursor-pointer  transition-all duration-300  font-medium ${
-                    isSelected
-                      ? "bg-black dark:bg-white dark:text-black text-white shadow-sm   border border-gray-200 dark:border-gray-700"
+                  className={`flex items-center gap-1 cursor-pointer  transition-all duration-300  font-medium ${isSelected
+                      ? "bg-primary text-primary-foreground shadow-md border border-primary/20"
                       : "hover:bg-gray-200 g-card text-card-foreground  dark:text-white"
-                  }`}
+                    }`}
                 >
                   {item.Label}
                 </Button>

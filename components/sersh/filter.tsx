@@ -17,9 +17,9 @@ function Filter() {
 
   return (
     <nav
-      className={`top-23 left-0 w-full z-50 bg-gray-100 dark:bg-neutral-900 transition-all duration-500 shadow-md fixed`}
+      className={`top-23 left-0 w-full z-40 bg-gray-100 dark:bg-neutral-900 transition-all duration-500 shadow-md fixed`}
     >
-      <Continer className="mx-auto max-w-7xl xl:max-w-8xl px-4 md:px-8">
+      <Continer className="mx-auto max-w-8xl xl:max-w-8xl px-4 md:px-8">
         {/* Mobile Header with Toggle Button */}
         <div className="flex items-center justify-between py-3 lg:hidden">
           <div className="flex items-center gap-2 flex-1">

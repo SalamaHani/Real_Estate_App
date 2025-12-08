@@ -14,6 +14,7 @@ type SubmitButtonProps = {
   className?: string;
   text?: string;
   size?: btnSize;
+  onClick?: () => void;
   disabled?: boolean;
 };
 
@@ -21,6 +22,7 @@ export function SubmitButton({
   className = "",
   text = "submit",
   size = "lg",
+  onClick,
   disabled,
 }: SubmitButtonProps) {
   const { pending } = useFormStatus();
@@ -30,6 +32,7 @@ export function SubmitButton({
       disabled={pending || disabled}
       className={cn("capitalize", className)}
       size={size}
+      onClick={onClick}
     >
       {pending ? (
         <>

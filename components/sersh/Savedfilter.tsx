@@ -46,6 +46,9 @@ export function Savedfilter() {
   const [ParmesAll, setPramsAll] = React.useState(
     Object.fromEntries(searchParams.entries())
   );
+  const handleClose = () => {
+    setOpen(false);
+  };
   console.log(ParmesAll);
   const params = new URLSearchParams(searchParams);
   const URL = "" + params;
@@ -233,9 +236,8 @@ export function Savedfilter() {
             </Select>
           </div>
           <DialogFooter className="w-[100%]">
-            <SubmitButton className="w-full" text="Save Search" />
+            <SubmitButton onClick={handleClose} className="w-full" text="Save Search" />
           </DialogFooter>
-
           <input type="text" readOnly hidden name="url" value={URL} />
         </form>
       </DialogContent>

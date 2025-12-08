@@ -9,14 +9,40 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import CurrencySelector from "./Curentreat";
+import { useState, useEffect } from "react";
+import NotificationBell from "./NotificationBell";
+import NotificationDropdown from "./NotificationDropdown";
+
 function Navhero({ session }: { session: Session | null }) {
   const pathname = usePathname();
+
+  const [notificationOpen, setNotificationOpen] = useState(false);
+  const [unreadCount, setUnreadCount] = useState(0);
   const isSearchPage = pathname.replace(/\/$/, "") === "/listing";
+
+  // Fetch initial notification count when component mounts
+  useEffect(() => {
+    if (session?.user?.id) {
+      fetchNotificationCount();
+    }
+  }, [session?.user?.id]);
+
+  const fetchNotificationCount = async () => {
+    try {
+      const response = await fetch("/api/notification?limit=1");
+      if (response.ok) {
+        const data = await response.json();
+        setUnreadCount(data.unreadCount || 0);
+      }
+    } catch (error) {
+      console.error("Error fetching notification count:", error);
+    }
+  };
 
   return (
     <>
       <nav
-        className={` ${isSearchPage ? `top-0  left-0 w-full z-50  bg-white  overflow-y-hidden dark:bg-black  transition-all duration-500  shadow-md fixed` : ` border-b`}`}
+        className={` ${isSearchPage ? `top-0  left-0 w-full z-50  bg-white   dark:bg-black  transition-all duration-500  shadow-md fixed` : ` border-b`}`}
       >
         <Continer className="flex justify-between md:flex-row md:justify-between md:items-center flex-wrap py-5 gap-4">
           <div>
@@ -37,9 +63,23 @@ function Navhero({ session }: { session: Session | null }) {
               />
             </Link>
           </div>
-          <div className=" flex gap-4 items-center  ">
+          <div className="flex gap-4 items-center">
             <CurrencySelector />
             <DarkMode />
+            {session && (
+              <div className="relative">
+                <NotificationBell
+                  unreadCount={unreadCount}
+                  onClick={() => setNotificationOpen(!notificationOpen)}
+                  isOpen={notificationOpen}
+                />
+                <NotificationDropdown
+                  isOpen={notificationOpen}
+                  onClose={() => setNotificationOpen(false)}
+                  onUnreadCountChange={setUnreadCount}
+                />
+              </div>
+            )}
             <LinksDropdown session={session} />
           </div>
         </Continer>

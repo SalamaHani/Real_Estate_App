@@ -231,7 +231,7 @@ function Sershinout() {
   };
   ///return filter input sersh query
   return (
-    <div className=" relative min-w-[40%] max-w-[30%] ">
+    <div className=" relative md:min-w-[30%] md:max-w-[30%] sm:min-w-[30%] wm:max-w-[30%] min-w-[50%] max-w-[50%] ">
       <div
         className={`w-full  ${Object.entries(ParmesAll).length > 3 && isOpen ? `h-[50px] ` : ``}`}
       >
@@ -285,7 +285,7 @@ function Sershinout() {
       </div>
       {query.listing.length != 0 && isOpen && (
         <div
-          className={`absolute  left-0 right-0 mt-0 ${Object.entries(ParmesAll).length > 3 && isOpen ? (Object.entries(ParmesAll).length > 5 && isOpen ? `top-34` : `top-24`) : `top-full`} bg-white dark:bg-black rounded-b-xl shadow-xl z-50 overflow-hidden border border-gray-100 dark:border-gray-700 animate-in slide-in-from-top-2 duration-300`}
+          className={`absolute w-full  md:w-auto left-0 right-0 mt-0 ${Object.entries(ParmesAll).length > 3 && isOpen ? (Object.entries(ParmesAll).length > 5 && isOpen ? `top-34` : `top-24`) : `top-full`} bg-white dark:bg-black rounded-b-xl shadow-xl z-50 overflow-hidden border border-gray-100 dark:border-gray-700 animate-in slide-in-from-top-2 duration-300`}
         >
           <div
             className=" max-h-100 overflow-y-auto pb-1

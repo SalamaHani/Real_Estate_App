@@ -209,3 +209,15 @@ model user {
 model verification {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 }
+
+model notification {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String
+  type      String   // NEW_LISTING, PRICE_CHANGE, NEW_MESSAGE, REVIEW_REPLY, FAVORITE_UPDATE, SYSTEM
+  title     String
+  message   String
+  link      String?  // Optional link to navigate to
+  isRead    Boolean  @default(false)
+  metadata  String?  // JSON string for additional data
+  createdAt DateTime @default(now()) @db.Date
+}

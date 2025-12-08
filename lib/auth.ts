@@ -1,10 +1,10 @@
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
-// If your Prisma file is located elsewhere, you can change the path
 import { PrismaClient } from "@prisma/client";
 import { nextCookies } from "better-auth/next-js";
 
 const prisma = new PrismaClient();
+
 export const auth = betterAuth({
   trustedOrigins: ["http://localhost:3001", "http://10.30.0.85:3001"],
   emailAndPassword: {
@@ -21,4 +21,5 @@ export const auth = betterAuth({
   },
   plugins: [nextCookies()],
 });
+
 export type Session = typeof auth.$Infer.Session;

@@ -10,7 +10,7 @@ function FramMapscuntry({ Maps }: { Maps: string | null }) {
     <div>
       <Button
         onClick={() => setShowMap(true)}
-        className="px-6 py-3 italic bg-white text-black rounded-md text-lg font-medium shadow-md"
+        className="px-6 py-3 italic bg-primary text-primary-foreground rounded-md text-lg font-medium shadow-md hover:shadow-lg"
       >
         View Map
       </Button>
@@ -35,7 +35,7 @@ function FramMapscuntry({ Maps }: { Maps: string | null }) {
               ></iframe>
               <Button
                 onClick={() => setShowMap(false)}
-                className="absolute top-28 right-4 bg-red-500 hover:bg-red-600 text-white"
+                className="absolute top-28 right-4 bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg"
               >
                 Close Maps
               </Button>

@@ -46,9 +46,8 @@ export default function PaginationListing({
         onClick={() => {
           handleSearch(pageNumber.toString());
         }}
-        className={`'flex items-center justify-center pointer-coarse px-4 h-10 leading-tight text-gray-500  border border-gray-300 hover:bg-gray-100   dark:text-gray-100 dark:border-neutral-800 dark:hover:bg-neutral-800 dark:hover:text-white  dark:hover:text-white' ${
-          activeClass ? "bg-black  dark:bg-neutral-800" : ""
-        }`}
+        className={`'flex items-center justify-center pointer-coarse px-4 h-10 leading-tight text-gray-500  border border-gray-300 hover:bg-gray-100   dark:text-gray-100 dark:border-neutral-800 dark:hover:bg-neutral-800 dark:hover:text-white  dark:hover:text-white' ${activeClass ? "bg-primary text-primary-foreground shadow-md border border-primary/20 dark:bg-neutral-800" : "   "
+          }`}
       >
         {pageNumber}
       </button>
