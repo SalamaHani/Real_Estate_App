@@ -19,12 +19,12 @@ function LinksDropdown({ session }: { session: Session | null }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" className="flex gap-4 max-w-[100px]">
-          <LuAlignLeft className="w-6 h-6" />
+        <Button variant="outline" className="flex gap-4 max-w-[100px] dark:hover:bg-muted   hover:bg-muted ">
+          <LuAlignLeft className="w-6 h-6 text-primary" />
           {session ? (
             <Avatar>
               {/* <AvatarImage src="https://github.com/shadcn.png" /> */}
-              <AvatarFallback>{setstring(username ?? "")}</AvatarFallback>
+              <AvatarFallback className="text-primary">{setstring(username ?? "")}</AvatarFallback>
             </Avatar>
           ) : null}
         </Button>

@@ -34,25 +34,25 @@ function CardDilogAgent({ Agent }: { Agent?: Agent | null }) {
   React.useEffect(() => {
     if (state?.success) {
       setOpen(false);
-      toast.success(tsate.message);
+      toast.success(state?.message);
     }
   }, [state?.success, state?.message]);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        
+
         <Tooltip>
           <TooltipTrigger asChild>
             <Button
-          variant="outline"
-          className="p-2 rounded-sm"
-          onClick={() => {
-            setOpen(true);
-          }}
-        >
-          Send Message
-          <Send className="w-4 h-4 ml-1" />
-        </Button>
+              variant="outline"
+              className="p-2 rounded-sm"
+              onClick={() => {
+                setOpen(true);
+              }}
+            >
+              Send Message
+              <Send className="w-4 h-4 ml-1" />
+            </Button>
           </TooltipTrigger>
           <TooltipContent>
             <p>Send Message to Agent</p>

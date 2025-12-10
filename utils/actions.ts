@@ -591,42 +591,119 @@ export const deleteReview = async (
     return error;
   }
 };
+// export const SaveSearchUserAction = async (
+//   prevState: ActionUserSeavd,
+//   formData: FormData
+// ): Promise<ActionUserSeavd> => {
+//   const session = await getSession();
+//   const user = session?.user;
+//   const userId = user?.id;
+//   if (!user) redirect("/login");
+//   const UserData: UserFormDataSaved = {
+//     url: formData.get("url") as string,
+//     nameSearch: formData.get("nameSearch") as string,
+//     email_frequency: formData.get("email_frequency") as string,
+//   };
+//   const params = new URLSearchParams(UserData.url);
+//   const parmesAll = Object.fromEntries(params.entries());
+//   const validatedData = SavedcontactSchema.safeParse(UserData);
+//   if (!validatedData.success) {
+//     return {
+//       success: false,
+//       Data: {
+//         nameSearch: UserData.nameSearch,
+//         email_frequency: UserData.email_frequency,
+//         url: UserData.url,
+//       },
+//       message: "Please fix the errors in the form",
+//       errors: validatedData.error.flatten().fieldErrors,
+//     };
+//   }
+//   try {
+//     await db.seavdsearchuser.create({
+//       data: {
+//         userId: userId as string,
+//         url: validatedData.data.url as string,
+//         qury: parmesAll,
+//         nameSearch: validatedData.data.nameSearch as string,
+//         email_frequency: validatedData.data.email_frequency as string,
+//       },
+//     });
+//     return {
+//       success: true,
+//       message: "Successfully Saved Search!",
+//     };
+//   } catch (error) {
+//     console.error("Error creating Interest:", error);
+//     return {
+//       success: false,
+//       message: "Something went wrong while contacting the agent.",
+//     };
+//   }
+// };
 export const SaveSearchUserAction = async (
   prevState: ActionUserSeavd,
   formData: FormData
 ): Promise<ActionUserSeavd> => {
   const session = await getSession();
   const user = session?.user;
-  const userId = user?.id;
+
   if (!user) redirect("/login");
+
+  const userId = user.id;
+
+  const rawUrl = formData.get("url") as string;
+  let fullUrl = rawUrl;
+  if (!rawUrl.startsWith("http")) {
+    fullUrl = "https://example.com/?" + rawUrl;
+  }
   const UserData: UserFormDataSaved = {
-    url: formData.get("url") as string,
+    url: fullUrl,
     nameSearch: formData.get("nameSearch") as string,
     email_frequency: formData.get("email_frequency") as string,
   };
-  const params = new URLSearchParams(UserData.url);
-  const parmesAll = Object.fromEntries(params.entries());
-  const validatedData = SavedcontactSchema.safeParse(UserData);
-  if (!validatedData.success) {
+
+  const fixedUrl = fixUrl(UserData.url as string);
+  let parsedQuery: Record<string, string> = {};
+
+  try {
+    const urlObj = new URL(fixedUrl);
+    parsedQuery = Object.fromEntries(urlObj.searchParams.entries());
+  } catch (err) {
+    console.error("Invalid URL:", err);
     return {
       success: false,
-      Data: {
-        nameSearch: UserData.nameSearch,
-        email_frequency: UserData.email_frequency,
-        url: UserData.url,
-      },
-      message: "Please fix the errors in the form",
-      errors: validatedData.error.flatten().fieldErrors,
+      message: "The URL provided is invalid.",
+      Data: UserData,
+      errors: { url: ["Invalid URL"] },
     };
   }
+
+  const validated = SavedcontactSchema.safeParse({
+    ...UserData,
+    url: fixedUrl,
+  });
+
+  if (!validated.success) {
+    return {
+      success: false,
+      Data: UserData,
+      message: "Please fix the errors in the form",
+      errors: validated.error.flatten().fieldErrors,
+    };
+  }
+  console.log(validated.data.url)
+  console.log(validated)
   try {
     await db.seavdsearchuser.create({
       data: {
         userId: userId as string,
-        url: validatedData.data.url as string,
-        qury: parmesAll,
-        nameSearch: validatedData.data.nameSearch as string,
-        email_frequency: validatedData.data.email_frequency as string,
+        url: validated.data.url,
+        qury: parsedQuery,
+        nameSearch: validated.data.nameSearch,
+        email_frequency: validated.data.email_frequency,
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
     });
     return {
@@ -634,13 +711,21 @@ export const SaveSearchUserAction = async (
       message: "Successfully Saved Search!",
     };
   } catch (error) {
-    console.error("Error creating Interest:", error);
+    console.log(error)
     return {
       success: false,
-      message: "Something went wrong while contacting the agent.",
+      message: "Something went wrong while saving the search.",
+      errors: error
     };
   }
 };
+
+function fixUrl(url: string): string {
+  const parts = url.split("?");
+  if (parts.length <= 2) return url; // URL already valid
+  return parts[0] + "?" + parts.slice(1).join("&");
+}
+
 export const fetshAllSavedSearsh = async () => {
   const session = await getSession();
   const user = session?.user;

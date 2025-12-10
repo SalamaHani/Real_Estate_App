@@ -61,12 +61,6 @@ type ListingOffices {
   office_zip_code       String
 }
 
-type SeavdsearchuserQury {
-  Bads   String
-  Baths  String
-  Status String
-  city   String
-}
 
 model Areacuntry {
   id               String   @id @default(auto()) @map("_id") @db.ObjectId
@@ -93,14 +87,16 @@ model Areacuntry {
 
 model Seavdsearchuser {
   id              String              @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt       DateTime            @db.Date
+  createdAt       DateTime            @default(now())      @db.Date
+  updatedAt       DateTime            @updatedAt           @db.Date
   email_frequency String
   nameSearch      String
-  qury            SeavdsearchuserQury
-  updatedAt       DateTime            @db.Date
+  qury            Json   
   url             String
   userId          String
 }
+
+
 
 model account {
   id                   String    @id @map("_id")

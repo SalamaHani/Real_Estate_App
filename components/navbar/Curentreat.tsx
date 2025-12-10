@@ -51,16 +51,16 @@ export default function CurrencySelector() {
     router.refresh();
   }
   return (
-    <Menubar className="border rounded-md shadow-sm h-9">
+    <Menubar className="border-2 border-primary rounded-md  h-9">
       <MenubarMenu>
-        <MenubarTrigger className="px-3 py-1 dark:bg-input/30 cursor-pointer ">
+        <MenubarTrigger className="px-3 py-1 dark:bg-input/30 cursor-pointer relative hover:bg-muted dark:hover:bg-muted group ">
           {currencies.map((item) => {
             const Iconse = item.icon;
             if (item.value == currency) {
               return (
                 <div
                   key={item.value}
-                  className=" w-full flex justify-between items-center"
+                  className=" w-full flex justify-between items-center text-primary"
                 >
                   {item.value}
                   <Iconse className="w-3 mr-1 h-3" />
@@ -80,7 +80,7 @@ export default function CurrencySelector() {
                 onClick={() => handleSelect(cur.value)}
                 className={
                   cur.value === currency
-                    ? "font-bold dark:bg-neutral-700 bg-primary text-whait"
+                    ? "font-bold  bg-primary text"
                     : ""
                 }
               >

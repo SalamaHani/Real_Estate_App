@@ -39,21 +39,16 @@ type KeyValue = {
 };
 export function Savedfilter() {
   const searchParams = useSearchParams();
-  console.log(searchParams);
   const [open, setOpen] = React.useState(false);
   const [state, action] = useActionState(SaveSearchUserAction, initialState);
-  const [value, setValue] = React.useState<string>("");
+  const [value, setValue] = React.useState<string>("Dilay");
   const [ParmesAll, setPramsAll] = React.useState(
     Object.fromEntries(searchParams.entries())
   );
-  const handleClose = () => {
-    setOpen(false);
-  };
+
   console.log(ParmesAll);
   const params = new URLSearchParams(searchParams);
   const URL = "" + params;
-  const parmesAllQuery = Object.fromEntries(params.entries());
-  console.log(state.Data);
   React.useEffect(() => {
     if (!searchParams.get("Parmes")) {
     }
@@ -61,8 +56,8 @@ export function Savedfilter() {
   }, [searchParams]);
   React.useEffect(() => {
     if (state?.success) {
+      toast.success(state?.message);
       setOpen(false);
-      toast.success(state.message);
     }
   }, [state?.success, state?.message]);
   console.log(state?.message);
@@ -236,7 +231,7 @@ export function Savedfilter() {
             </Select>
           </div>
           <DialogFooter className="w-[100%]">
-            <SubmitButton onClick={handleClose} className="w-full" text="Save Search" />
+            <SubmitButton className="w-full" text="Save Search" />
           </DialogFooter>
           <input type="text" readOnly hidden name="url" value={URL} />
         </form>

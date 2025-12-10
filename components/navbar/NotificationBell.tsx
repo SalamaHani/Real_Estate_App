@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Bell } from "lucide-react";
+import { Button } from "../ui/button";
 
 interface NotificationBellProps {
     unreadCount: number;
@@ -15,15 +16,17 @@ export default function NotificationBell({
     isOpen,
 }: NotificationBellProps) {
     return (
-        <button
+        <Button
             onClick={onClick}
-            className="relative p-2 rounded-lg transition-all duration-300 hover:bg-muted group"
+            className="relative hover:bg-muted dark:hover:bg-muted  group"
             aria-label="Notifications"
+            variant="outline"
+            size="icon"
         >
             <Bell
-                className={`w-5 h-5 transition-all duration-300 ${isOpen
-                        ? "text-primary scale-110"
-                        : "text-foreground group-hover:text-primary"
+                className={`h-[1.2rem] w-[1.2rem] text-primary rotate-0 scale-100 transition-all ${isOpen
+                    ? " scale-110"
+                    : " group-hover:text-primary "
                     }`}
             />
             {unreadCount > 0 && (
@@ -34,6 +37,6 @@ export default function NotificationBell({
                     {unreadCount > 99 ? "99+" : unreadCount}
                 </span>
             )}
-        </button>
+        </Button>
     );
 }
