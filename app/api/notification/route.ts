@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/utils/db";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { sendNotificationEvent } from "@/lib/pusher-server";
 
 // GET - Fetch notifications for the current user
 export async function GET(request: NextRequest) {
@@ -89,6 +90,17 @@ export async function POST(request: NextRequest) {
                 metadata: metadata ? JSON.stringify(metadata) : null,
             },
         });
+
+        // Get updated unread count
+        const unreadCount = await prisma.notification.count({
+            where: {
+                userId: session.user.id,
+                isRead: false,
+            },
+        });
+
+        // Trigger Pusher event for real-time notification
+        await sendNotificationEvent(session.user.id, notification, unreadCount);
 
         return NextResponse.json(notification, { status: 201 });
     } catch (error) {

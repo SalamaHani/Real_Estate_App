@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "../globals.css";
 import Providers from "../Providers";
 import Navbar from "@/components/navbar/Navbar";
+import WelcomeNotificationTrigger from "@/components/auth/WelcomeNotificationTrigger";
 import { ReactNode } from "react";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
@@ -24,6 +25,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       <body>
         <Providers>
           <Navbar session={session} />
+          {session && <WelcomeNotificationTrigger />}
           {children}
         </Providers>
       </body>

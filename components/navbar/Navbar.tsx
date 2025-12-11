@@ -8,30 +8,14 @@ import NotificationBell from "./NotificationBell";
 import NotificationDropdown from "./NotificationDropdown";
 import { Session } from "@/lib/auth";
 import CurrencySelector from "./Curentreat";
+import { useNotificationPusher } from "@/hooks/useNotificationPusher";
 
 function Navbar({ session }: { session: Session | null }) {
   const [scrolled, setScrolled] = useState(false);
   const [notificationOpen, setNotificationOpen] = useState(false);
-  const [unreadCount, setUnreadCount] = useState(0);
 
-  // Fetch initial notification count when component mounts
-  useEffect(() => {
-    if (session?.user?.id) {
-      fetchNotificationCount();
-    }
-  }, [session?.user?.id]);
-
-  const fetchNotificationCount = async () => {
-    try {
-      const response = await fetch("/api/notification?limit=1");
-      if (response.ok) {
-        const data = await response.json();
-        setUnreadCount(data.unreadCount || 0);
-      }
-    } catch (error) {
-      console.error("Error fetching notification count:", error);
-    }
-  };
+  // Use Pusher hook for real-time notifications
+  const { unreadCount } = useNotificationPusher(session?.user?.id);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,6 +28,7 @@ function Navbar({ session }: { session: Session | null }) {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
   return (
     <>
       <nav
@@ -65,7 +50,7 @@ function Navbar({ session }: { session: Session | null }) {
                 <NotificationDropdown
                   isOpen={notificationOpen}
                   onClose={() => setNotificationOpen(false)}
-                  onUnreadCountChange={setUnreadCount}
+                  userId={session.user.id}
                 />
               </div>
             )}

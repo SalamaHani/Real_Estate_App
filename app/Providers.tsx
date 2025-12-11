@@ -1,6 +1,8 @@
 "use client";
 import { ThemeProvider } from "./theme-provider";
 import { Toaster } from "@/components/ui/sonner";
+import PusherProvider from "@/components/providers/PusherProvider";
+
 function Providers({ children }: { children: React.ReactNode }) {
   return (
     <>
@@ -10,8 +12,10 @@ function Providers({ children }: { children: React.ReactNode }) {
         enableSystem
         disableTransitionOnChange
       >
-        <Toaster />
-        {children}
+        <PusherProvider>
+          <Toaster />
+          {children}
+        </PusherProvider>
       </ThemeProvider>
     </>
   );

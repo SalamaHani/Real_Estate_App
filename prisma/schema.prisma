@@ -91,6 +91,7 @@ model Seavdsearchuser {
   updatedAt       DateTime            @updatedAt           @db.Date
   email_frequency String
   nameSearch      String
+  listingseent    String[]
   qury            Json   
   url             String
   userId          String

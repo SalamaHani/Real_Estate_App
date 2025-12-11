@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/utils/db";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { sendMarkAllReadEvent } from "@/lib/pusher-server";
 
 // POST - Mark all notifications as read
 export async function POST(request: NextRequest) {
@@ -25,6 +26,9 @@ export async function POST(request: NextRequest) {
                 isRead: true,
             },
         });
+
+        // Trigger Pusher event for real-time update
+        await sendMarkAllReadEvent(session.user.id);
 
         return NextResponse.json({ success: true });
     } catch (error) {

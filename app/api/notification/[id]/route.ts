@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/utils/db";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { sendReadStatusEvent, sendDeleteEvent } from "@/lib/pusher-server";
 
 // PATCH - Mark a notification as read/unread
 export async function PATCH(
@@ -47,6 +48,17 @@ export async function PATCH(
             where: { id },
             data: { isRead: isRead ?? true },
         });
+
+        // Get updated unread count
+        const unreadCount = await prisma.notification.count({
+            where: {
+                userId: session.user.id,
+                isRead: false,
+            },
+        });
+
+        // Trigger Pusher event for real-time update
+        await sendReadStatusEvent(session.user.id, id, unreadCount);
 
         return NextResponse.json(updated);
     } catch (error) {
@@ -99,6 +111,17 @@ export async function DELETE(
         await prisma.notification.delete({
             where: { id },
         });
+
+        // Get updated unread count
+        const unreadCount = await prisma.notification.count({
+            where: {
+                userId: session.user.id,
+                isRead: false,
+            },
+        });
+
+        // Trigger Pusher event for real-time update
+        await sendDeleteEvent(session.user.id, id, unreadCount);
 
         return NextResponse.json({ success: true });
     } catch (error) {

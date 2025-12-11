@@ -715,7 +715,6 @@ export const SaveSearchUserAction = async (
     return {
       success: false,
       message: "Something went wrong while saving the search.",
-      errors: error
     };
   }
 };

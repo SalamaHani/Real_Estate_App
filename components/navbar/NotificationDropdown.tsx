@@ -3,68 +3,34 @@
 import React, { useState, useEffect, useRef } from "react";
 import NotificationItem from "./NotificationItem";
 import { CheckCheck, Loader2 } from "lucide-react";
-
-interface Notification {
-    id: string;
-    type: string;
-    title: string;
-    message: string;
-    link?: string | null;
-    isRead: boolean;
-    createdAt: Date;
-}
+import { useNotificationPusher } from "@/hooks/useNotificationPusher";
 
 interface NotificationDropdownProps {
     isOpen: boolean;
     onClose: () => void;
-    onUnreadCountChange: (count: number) => void;
+    userId: string;
 }
 
 export default function NotificationDropdown({
     isOpen,
     onClose,
-    onUnreadCountChange,
+    userId,
 }: NotificationDropdownProps) {
-    const [notifications, setNotifications] = useState<Notification[]>([]);
-    const [loading, setLoading] = useState(false);
     const [markingAllRead, setMarkingAllRead] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
-    // Fetch notifications
-    const fetchNotifications = async () => {
-        try {
-            setLoading(true);
-            const response = await fetch("/api/notification?limit=20");
-            if (response.ok) {
-                const data = await response.json();
-                setNotifications(data.notifications || []);
-                onUnreadCountChange(data.unreadCount || 0);
-            }
-        } catch (error) {
-            console.error("Error fetching notifications:", error);
-        } finally {
-            setLoading(false);
-        }
-    };
+    // Use Pusher hook for real-time notifications
+    const { notifications, loading, refetch } = useNotificationPusher(userId);
 
     // Mark notification as read
     const markAsRead = async (id: string) => {
         try {
-            const response = await fetch(`/api/notification/${id}`, {
+            await fetch(`/api/notification/${id}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ isRead: true }),
             });
-
-            if (response.ok) {
-                setNotifications((prev) =>
-                    prev.map((notif) =>
-                        notif.id === id ? { ...notif, isRead: true } : notif
-                    )
-                );
-                const unreadCount = notifications.filter((n) => !n.isRead && n.id !== id).length;
-                onUnreadCountChange(unreadCount);
-            }
+            // Pusher will handle the state update automatically
         } catch (error) {
             console.error("Error marking notification as read:", error);
         }
@@ -74,16 +40,10 @@ export default function NotificationDropdown({
     const markAllAsRead = async () => {
         try {
             setMarkingAllRead(true);
-            const response = await fetch("/api/notification/mark-all-read", {
+            await fetch("/api/notification/mark-all-read", {
                 method: "POST",
             });
-
-            if (response.ok) {
-                setNotifications((prev) =>
-                    prev.map((notif) => ({ ...notif, isRead: true }))
-                );
-                onUnreadCountChange(0);
-            }
+            // Pusher will handle the state update automatically
         } catch (error) {
             console.error("Error marking all as read:", error);
         } finally {
@@ -94,19 +54,10 @@ export default function NotificationDropdown({
     // Delete notification
     const deleteNotification = async (id: string) => {
         try {
-            const response = await fetch(`/api/notification/${id}`, {
+            await fetch(`/api/notification/${id}`, {
                 method: "DELETE",
             });
-
-            if (response.ok) {
-                const deletedNotif = notifications.find((n) => n.id === id);
-                setNotifications((prev) => prev.filter((notif) => notif.id !== id));
-
-                if (deletedNotif && !deletedNotif.isRead) {
-                    const unreadCount = notifications.filter((n) => !n.isRead && n.id !== id).length;
-                    onUnreadCountChange(unreadCount);
-                }
-            }
+            // Pusher will handle the state update automatically
         } catch (error) {
             console.error("Error deleting notification:", error);
         }
@@ -131,13 +82,6 @@ export default function NotificationDropdown({
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [isOpen, onClose]);
-
-    // Fetch on open
-    useEffect(() => {
-        if (isOpen) {
-            fetchNotifications();
-        }
-    }, [isOpen]);
 
     if (!isOpen) return null;
 
