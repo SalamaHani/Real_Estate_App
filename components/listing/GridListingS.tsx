@@ -82,7 +82,7 @@ function GridListingS({
     >
       <Continer>
         <div
-          className={`grid ${hiden_map == "true" ? "sm:grid-cols-2" : "sm:grid-cols-4"} grid-cols-1 sm:grid-cols-2  gap-2 `}
+          className={`grid grid-cols-1 ${hiden_map == "true" ? "sm:grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"} gap-3 sm:gap-4 md:gap-5`}
         >
           {listing.map((listing) => {
             const {
@@ -99,8 +99,8 @@ function GridListingS({
             const listingId = listing.id;
             return (
               <div key={listingId}>
-                <article className="group relative ">
-                  <Card className=" overflow-hidden pt-0">
+                <article className="group relative h-full">
+                  <Card className="overflow-hidden pt-0 h-full flex flex-col">
                     <Carousel className="w-full">
                       <CarouselContent>
                         {photos.map((src, i) => (
@@ -109,7 +109,7 @@ function GridListingS({
                             className="relative aspect-[16/10]"
                           >
                             {photos.length == 1 ? null : (
-                              <CarouselPrevious className="left-8" />
+                              <CarouselPrevious className="left-4 sm:left-8" />
                             )}
                             <Link href={`/listing/${listingId}`}>
                               <Imaglisting src={src} alt={src} />
@@ -121,38 +121,40 @@ function GridListingS({
                         ))}
                       </CarouselContent>
                     </Carousel>
-                    <CardHeader className="space-y-2">
+                    <CardHeader className="space-y-2 flex-shrink-0">
                       <Cardprice price={price ?? 0} />
-                      <CardDescription className="flex ">
-                        <MapPin className="h-3 w-3 mt-1" />
-                        {location?.county} , {location?.city}
+                      <CardDescription className="flex items-center gap-1">
+                        <MapPin className="h-3 w-3 flex-shrink-0" />
+                        <span className="truncate">
+                          {location?.county} , {location?.city}
+                        </span>
                       </CardDescription>
                     </CardHeader>
-                    <CardContent className="flex items-center justify-between">
-                      <div className=" flex flex-col justify-between">
+                    <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 flex-grow">
+                      <div className="flex flex-col justify-between">
                         <CardDescription>
-                          <ul className="flex gap-4 mb-0">
+                          <ul className="flex gap-2 sm:gap-3 md:gap-4 mb-0">
                             <li className="text-center">
-                              <span className="block font-bold text-lg">
+                              <span className="block font-bold text-base sm:text-lg">
                                 {living_area}m
                               </span>
-                              <span className="block text-sm text-gray-600">
+                              <span className="block text-xs sm:text-sm text-muted-foreground">
                                 Sq Ft
                               </span>
                             </li>
                             <li className="text-center">
-                              <span className="block font-bold text-lg">
+                              <span className="block font-bold text-base sm:text-lg">
                                 {bedrooms}
                               </span>
-                              <span className="block text-sm text-gray-600">
+                              <span className="block text-xs sm:text-sm text-muted-foreground">
                                 Beds
                               </span>
                             </li>
                             <li className="text-center">
-                              <span className="block font-bold text-lg">
+                              <span className="block font-bold text-base sm:text-lg">
                                 {bathrooms}
                               </span>
-                              <span className="block text-sm text-gray-600">
+                              <span className="block text-xs sm:text-sm text-muted-foreground">
                                 Baths
                               </span>
                             </li>

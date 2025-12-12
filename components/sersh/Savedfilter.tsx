@@ -20,7 +20,7 @@ import {
 import { SubmitButton } from "../form/Buttons";
 import { SaveSearchUserAction } from "@/utils/actions";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { ActionUserSeavd } from "@/utils/Tayp";
 import React from "react";
 import { toast } from "sonner";
@@ -41,26 +41,24 @@ export function Savedfilter() {
   const searchParams = useSearchParams();
   const [open, setOpen] = React.useState(false);
   const [state, action] = useActionState(SaveSearchUserAction, initialState);
-  const [value, setValue] = React.useState<string>("Dilay");
+  const [value, setValue] = React.useState<string>("");
   const [ParmesAll, setPramsAll] = React.useState(
     Object.fromEntries(searchParams.entries())
   );
-
   console.log(ParmesAll);
   const params = new URLSearchParams(searchParams);
   const URL = "" + params;
-  React.useEffect(() => {
+  useEffect(() => {
     if (!searchParams.get("Parmes")) {
     }
     setPramsAll(Object.fromEntries(searchParams.entries()));
   }, [searchParams]);
-  React.useEffect(() => {
+  useEffect(() => {
     if (state?.success) {
       toast.success(state?.message);
       setOpen(false);
     }
   }, [state?.success, state?.message]);
-  console.log(state?.message);
   const prices = Object.entries(ParmesAll)
     .filter(([key]) => key === "Maximam" || key === "Minimam")
     .map(([key, value]) => ({ key, value }));
@@ -81,7 +79,7 @@ export function Savedfilter() {
       if (value == "Studio") {
         return (
           <Badge
-            className="dark:bg-neutral-700 my-3 bg-neutral-200 flex justify-between items-center"
+            className="bg-primary text-white dark:text-black my-3 flex justify-between items-center"
             variant="outline"
           >
             {value}
@@ -90,7 +88,7 @@ export function Savedfilter() {
       } else {
         return (
           <Badge
-            className="dark:bg-neutral-700 my-3 bg-neutral-200 flex justify-between items-center"
+            className="bg-primary text-white dark:text-black my-3 flex justify-between items-center"
             variant="outline"
           >
             {key}:{value}
@@ -101,7 +99,7 @@ export function Savedfilter() {
     if (key == "more") {
       return (
         <Badge
-          className="dark:bg-neutral-700 my-3 bg-neutral-200 flex justify-between items-center"
+          className="bg-primary text-white dark:text-black my-3 flex justify-between items-center"
           variant="outline"
         >
           {key}:({value})
@@ -113,7 +111,7 @@ export function Savedfilter() {
     }
     return (
       <Badge
-        className="dark:bg-neutral-700 my-3 bg-neutral-200 flex justify-between items-center"
+        className="bg-primary text-white dark:text-black my-3 flex justify-between items-center"
         variant="outline"
       >
         {value}
@@ -124,7 +122,7 @@ export function Savedfilter() {
     if (arr.length == 2) {
       return (
         <Badge
-          className="dark:bg-neutral-700 my-3 bg-neutral-200 flex justify-between items-center"
+          className="bg-primary text-white dark:text-black my-3 flex justify-between items-center"
           variant="outline"
         >
           Price:{" "}
@@ -138,7 +136,7 @@ export function Savedfilter() {
         <>
           {arr.find((p) => p.key === "Minimam")?.key == "Minimam" ? (
             <Badge
-              className="dark:bg-neutral-700 my-3 bg-neutral-200 flex justify-between items-center"
+              className="bg-primary text-white dark:text-black my-3 flex justify-between items-center"
               variant="outline"
             >
               Price: ovar{" "}
@@ -146,7 +144,7 @@ export function Savedfilter() {
             </Badge>
           ) : (
             <Badge
-              className="dark:bg-neutral-700 my-3 bg-neutral-200 flex justify-between items-center"
+              className="bg-primary text-white dark:text-black my-3 flex justify-between items-center"
               variant="outline"
             >
               Price: under{" "}
@@ -214,7 +212,7 @@ export function Savedfilter() {
             <Label className="mb-2" htmlFor="email_frequency">
               Email Alerts<span className="text-red-500">*</span>
             </Label>
-            <input type="hidden" name="email_frequency" value={value} />
+            <input type="hidden" readOnly name="email_frequency" value={value} />
             <Select value={value} onValueChange={setValue}>
               <SelectTrigger className="w-[100%]">
                 <SelectValue placeholder="Weekly" />

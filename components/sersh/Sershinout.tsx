@@ -86,7 +86,7 @@ function Sershinout() {
       if (value == "Studio") {
         return (
           <Badge
-            className="dark:bg-neutral-700 my-3 bg-neutral-200 flex justify-between items-center"
+            className=" my-3 bg-primary text-white dark:text-black flex justify-between items-center"
             variant="outline"
           >
             {value}
@@ -101,7 +101,7 @@ function Sershinout() {
       } else {
         return (
           <Badge
-            className="dark:bg-neutral-700 my-3 bg-neutral-200 flex justify-between items-center"
+            className=" my-3 bg-primary text-white dark:text-black flex justify-between items-center"
             variant="outline"
           >
             {key}:{value}
@@ -118,7 +118,7 @@ function Sershinout() {
     if (key == "more") {
       return (
         <Badge
-          className="dark:bg-neutral-700 my-3 bg-neutral-200 flex justify-between items-center"
+          className=" my-3 bg-primary text-white dark:text-black flex justify-between items-center"
           variant="outline"
         >
           {key}:({value})
@@ -130,7 +130,7 @@ function Sershinout() {
     }
     return (
       <Badge
-        className="dark:bg-neutral-700 my-3 bg-neutral-200 flex justify-between items-center"
+        className=" my-3 bg-primary text-white dark:text-black flex justify-between items-center"
         variant="outline"
       >
         {value}
@@ -147,7 +147,7 @@ function Sershinout() {
     if (arr.length == 2) {
       return (
         <Badge
-          className="dark:bg-neutral-700 my-3 bg-neutral-200 flex justify-between items-center"
+          className=" my-3 bg-primary text-white dark:text-black flex justify-between items-center"
           variant="outline"
         >
           Price:{" "}
@@ -167,7 +167,7 @@ function Sershinout() {
         <>
           {arr.find((p) => p.key === "Minimam")?.key == "Minimam" ? (
             <Badge
-              className="dark:bg-neutral-700 my-3 bg-neutral-200 flex justify-between items-center"
+              className=" my-3 bg-primary text-white dark:text-black flex justify-between items-center"
               variant="outline"
             >
               Price: ovar{" "}
@@ -181,7 +181,7 @@ function Sershinout() {
             </Badge>
           ) : (
             <Badge
-              className="dark:bg-neutral-700 my-3 bg-neutral-200 flex justify-between items-center"
+              className=" my-3 bg-primary text-white dark:text-black flex justify-between items-center"
               variant="outline"
             >
               Price: under{" "}
@@ -285,24 +285,24 @@ function Sershinout() {
       </div>
       {query.listing.length != 0 && isOpen && (
         <div
-          className={`absolute w-full  md:w-auto left-0 right-0 mt-0 ${Object.entries(ParmesAll).length > 3 && isOpen ? (Object.entries(ParmesAll).length > 5 && isOpen ? `top-34` : `top-24`) : `top-full`} bg-white dark:bg-black rounded-b-xl shadow-xl z-50 overflow-hidden border border-gray-100 dark:border-gray-700 animate-in slide-in-from-top-2 duration-300`}
+          className={`absolute w-full  md:w-auto left-0 right-0 mt-0 ${Object.entries(ParmesAll).length > 3 && isOpen ? (Object.entries(ParmesAll).length > 5 && isOpen ? `top-34` : `top-24`) : `top-full`} bg-white dark:bg-black rounded-b-xl shadow-xl z-50 overflow-hidden border border-primary/10 dark:border-gray-700 animate-in slide-in-from-top-2 duration-300`}
         >
           <div
             className=" max-h-100 overflow-y-auto pb-1
-                [&::-webkit-scrollbar]:w-2
-                [&::-webkit-scrollbar]:h-5
+                [&::-webkit-scrollbar]:w-1
+                [&::-webkit-scrollbar]:h-2
                 [&::-webkit-scrollbar-track]:rounded-full
-              [&::-webkit-scrollbar-track]:bg-gray-100
+              [&::-webkit-scrollbar-track]:bg-primary/10
                   [&::-webkit-scrollbar-thumb]:rounded-full
-                [&::-webkit-scrollbar-thumb]:bg-gray-400
-                  dark:[&::-webkit-scrollbar-track]:bg-neutral-400
-                dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
+                [&::-webkit-scrollbar-thumb]:bg-primary/50
+                  dark:[&::-webkit-scrollbar-track]:bg-primary/50
+                dark:[&::-webkit-scrollbar-thumb]:bg-primary/50"
           >
             {query.citys.length != 0 && (
               <div>
-                <div className="mb-1 bg-gray-100 dark:bg-neutral-800 p-2 flex items-center gap-2">
-                  <div className="w-2 h-2  rounded-full animate-pulse"></div>
-                  <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                <div className="mb-1 bg-primary/30 dark:bg-primary/30 p-2 flex items-center gap-2">
+                  <div className="w-2 h-2 bg-primary  rounded-full animate-pulse"></div>
+                  <span className="text-sm font-medium text-primary animate-pulse">
                     City
                   </span>
                 </div>
@@ -317,15 +317,15 @@ function Sershinout() {
                           handleSuggestedSearch(city ?? "", "city")
                         }
                         onFocus={() => setActiveIndex(globalIndex)}
-                        className={`focus:bg-accent focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-gray-200 hover:border-l-2 dark:hover:bg-neutral-700 border-gray-500 w-full ${activeIndex == globalIndex ? "bg-gray-200 border-l-2 dark:bg-neutral-700 border-gray-500" : ""} data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4`}
+                        className={` focus:text-accent-foreground data-[variant=destructive]:text-destructive hover:border-l-2 hover:border-primary cursor-pointer data-[variant=destructive]:focus:bg-muted dark:data-[variant=destructive]:focus:bg-muted/20   data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-muted :hoverborder-l-2 hover:border-primary border-primary  w-full ${activeIndex == globalIndex ? "bg-muted  border-l-2  border-primary" : ""} data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4`}
                         style={{
                           animationDelay: `${index * 50}ms`,
                         }}
                       >
                         <span>{city}</span>
-                        <div className="ml-auto opacity-10 group-hover:opacity-100 transition-opacity duration-200">
+                        <div className="ml-auto    opacity-10 group-hover:opacity-50 dark:opacity-50 transition-opacity duration-200">
                           <div className="w-5 h-5  rounded-full flex items-center justify-center">
-                            <Search className="h-2 w-2 text-black " />
+                            <Search className="h-2 w-2 text-primary " />
                           </div>
                         </div>
                       </button>
@@ -334,9 +334,9 @@ function Sershinout() {
                 </div>
               </div>
             )}
-            <div className="mb-1 mt-1 bg-gray-100 dark:bg-neutral-800 p-2 flex items-center gap-2">
-              <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-              <span className="text-sm  font-medium text-gray-500 dark:text-gray-400">
+            <div className="mb-1 mt-1 bg-primary/30 dark:bg-primary/30 p-2 flex items-center gap-2">
+              <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+              <span className="text-sm  font-medium text-primary animate-pulse">
                 Address
               </span>
             </div>
@@ -354,15 +354,15 @@ function Sershinout() {
                       )
                     }
                     onFocus={() => setActiveIndex(globalIndex)}
-                    className={`focus:bg-accent focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-gray-200 hover:border-l-2 dark:hover:bg-neutral-700 border-gray-500 w-full ${activeIndex == globalIndex ? "bg-gray-200 border-l-2 dark:bg-neutral-700 border-gray-500" : ""} data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4`}
+                    className={` focus:text-accent-foreground data-[variant=destructive]:text-destructive cursor-pointer data-[variant=destructive]:focus:bg-muted dark:data-[variant=destructive]:focus:bg-muted/20   data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-muted :hoverborder-l-2 hover:border-primary hover:border-l-2 hover:border-primary  w-full ${activeIndex == globalIndex ? "bg-muted  border-l-2  border-primary" : ""} data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4`}
                     style={{
                       animationDelay: `${index * 50}ms`,
                     }}
                   >
                     {search.location.street_address}
-                    <div className="ml-auto opacity-10 group-hover:opacity-100 transition-opacity duration-200">
+                    <div className="ml-auto opacity-10 group-hover:opacity-100 dark:opacity-50 transition-opacity duration-200">
                       <div className="w-5 h-5 z-99  rounded-full flex items-center justify-center">
-                        <Search className="h-2 w-2 text-black" />
+                        <Search className="h-2 w-2 text-primary" />
                       </div>
                     </div>
                   </button>

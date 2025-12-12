@@ -39,30 +39,30 @@ function CardAgent({ Agent }: { Agent: Agent }) {
             </p>
           </CardDescription>
         </div>
-        <div className="mt-3 space-x-1">
+        <div className="mt-3 flex gap-2">
           <Link
-            className="inline-flex justify-center items-center size-8 text-sm font-semibold rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-400 dark:border-neutral-700 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+            className="inline-flex justify-center items-center size-9 text-sm font-semibold rounded-lg border border-border bg-card text-muted-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-200 hover:scale-110 focus:outline-hidden focus:ring-2 focus:ring-primary/50"
             href={Agent.social_media?.facebook ?? ""}
           >
-            <Facebook />
+            <Facebook className="w-4 h-4" />
           </Link>
           <Link
-            className="inline-flex justify-center items-center size-8 text-sm font-semibold rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-400 dark:border-neutral-700 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+            className="inline-flex justify-center items-center size-9 text-sm font-semibold rounded-lg border border-border bg-card text-muted-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-200 hover:scale-110 focus:outline-hidden focus:ring-2 focus:ring-primary/50"
             href={Agent.social_media?.instagram ?? ""}
           >
-            <Instagram />
+            <Instagram className="w-4 h-4" />
           </Link>
           <Link
-            className="inline-flex justify-center items-center size-8 text-sm font-semibold rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-400 dark:border-neutral-700 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+            className="inline-flex justify-center items-center size-9 text-sm font-semibold rounded-lg border border-border bg-card text-muted-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-200 hover:scale-110 focus:outline-hidden focus:ring-2 focus:ring-primary/50"
             href={Agent.social_media?.linkedin ?? ""}
           >
-            <Linkedin />
+            <Linkedin className="w-4 h-4" />
           </Link>
           <Link
-            className="inline-flex justify-center items-center size-8 text-sm font-semibold rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-400 dark:border-neutral-700 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+            className="inline-flex justify-center items-center size-9 text-sm font-semibold rounded-lg border border-border bg-card text-muted-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-200 hover:scale-110 focus:outline-hidden focus:ring-2 focus:ring-primary/50"
             href={Agent.social_media?.twitter ?? ""}
           >
-            <Twitter />
+            <Twitter className="w-4 h-4" />
           </Link>
         </div>
       </CardContent>

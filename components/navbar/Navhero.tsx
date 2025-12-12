@@ -1,12 +1,9 @@
 "use client";
 import Continer from "../global/Continer";
-import imgdark from "../../public/imges/app_uploads_sites_barringtonteam_2024_04_Barrington-Group-Logo-lg-text-1 (laiet).webp";
-import imglhait from "../../public/imges/output-onlinepngtools.png";
 import DarkMode from "./DarkMode";
 import LinksDropdown from "./LinksDropdown";
+import Logo from "./Logo";
 import { Session } from "@/lib/auth";
-import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import CurrencySelector from "./Curentreat";
 import { useState, useEffect } from "react";
@@ -44,27 +41,16 @@ function Navhero({ session }: { session: Session | null }) {
       <nav
         className={` ${isSearchPage ? `top-0  left-0 w-full z-50  bg-white   dark:bg-black  transition-all duration-500  shadow-md fixed` : ` border-b`}`}
       >
-        <Continer className="flex justify-between md:flex-row md:justify-between md:items-center flex-wrap py-5 gap-4">
-          <div>
-            <Link href="/">
-              <Image
-                width="178"
-                height="58"
-                src={imgdark}
-                alt="hero"
-                className="col-span-2 w-24 sm:w-32 md:w-40 h-auto fixed-logo ls-is-cached lazyloaded object-contain lg:col-span-1  hidden dark:block"
-              />
-              <Image
-                width="178"
-                height="58"
-                src={imglhait}
-                alt="hero"
-                className="col-span-2 w-24 sm:w-32 md:w-40 h-auto fixed-logo ls-is-cached lazyloaded object-contain lg:col-span-1 block dark:hidden"
-              />
-            </Link>
-          </div>
-          <div className="flex gap-4 items-center">
-            <CurrencySelector />
+        <Continer className="flex justify-between items-center py-3 sm:py-4 md:py-5 gap-3 md:gap-4">
+          {/* Logo */}
+          <Logo scrolled={isSearchPage} />
+
+          {/* Right Side Actions */}
+          <div className="flex gap-2 sm:gap-3 md:gap-4 items-center">
+            {/* Hide currency selector on very small screens */}
+            <div className="hidden sm:block">
+              <CurrencySelector />
+            </div>
             <DarkMode />
             {session && (
               <div className="relative">
@@ -88,3 +74,4 @@ function Navhero({ session }: { session: Session | null }) {
   );
 }
 export default Navhero;
+

@@ -1,150 +1,199 @@
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
-import imgdark from "../../public/imges/app_uploads_sites_barringtonteam_2024_04_Barrington-Group-Logo-lg-text-1 (laiet).webp";
-import imglhait from "../../public/imges/output-onlinepngtools.png";
-import TitelSection from "../global/TitelSection";
+import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import Logo from "../navbar/Logo";
+import Continer from "../global/Continer";
+
 function Footer() {
   return (
-    <div>
-      <TitelSection text={""} />
-      <footer className=" py-5  pt-10  text-center ">
-        <div className="  ">
-          <div className="flex  flex-wrap justify-between">
-            {/* Office Location */}
-            <div
-              id="office-location-1"
-              className="w-full sm:w-1/2 md:w-1/3 mb-4"
-            >
-              <h5 className="mb-2 lg:mb-3 font-semibold text-white">
-                Barrington Group Fine Properties
-              </h5>
-              <address className="not-italic mb-0">
-                Samson Properties
-                <br />
-                6363 Walker Ln Suite 130 <br />
+    <footer className="bg-gradient-to-br from-card via-card to-muted border-t border-border/50">
+      {/* Main Footer Content */}
+      <Continer className="py-12 lg:py-16">
+        {/* Top Section - Grid Layout */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+          {/* Column 1: Company Info */}
+          <div className="space-y-4 text-center sm:text-left">
+            <Logo scrolled={false} />
+            <p className="text-muted-foreground text-sm leading-relaxed max-w-xs mx-auto sm:mx-0">
+              Premier real estate services delivering exceptional results for buyers and sellers across the region.
+            </p>
+          </div>
+
+          {/* Column 2: Contact Information */}
+          <div className="space-y-4 text-center sm:text-left">
+            <h3 className="text-lg font-semibold text-foreground flex items-center justify-center sm:justify-start gap-2">
+              <MapPin className="w-5 h-5 text-primary" />
+              Contact Us
+            </h3>
+            <address className="not-italic text-muted-foreground text-sm space-y-2">
+              <p className="leading-relaxed">
+                Samson Properties<br />
+                6363 Walker Ln Suite 130<br />
                 Alexandria, VA 22310
-              </address>
-              <p className="mb-0">
-                <span>O:</span>{" "}
-                <a href="tel:(703) 763-0949" className="hover:underline">
+              </p>
+              <p className="flex items-center justify-center sm:justify-start gap-2 group">
+                <Phone className="w-4 h-4 text-primary" />
+                <a
+                  href="tel:(703) 763-0949"
+                  className="hover:text-primary transition-colors group-hover:underline"
+                >
                   (703) 763-0949
                 </a>
               </p>
-              <p className="truncate mb-0">
-                <span>E:</span>{" "}
+              <p className="flex items-center justify-center sm:justify-start gap-2 group">
+                <Mail className="w-4 h-4 text-primary" />
                 <a
                   href="mailto:Barry@BarringtonGroupFP.com"
-                  className="hover:underline"
+                  className="hover:text-primary transition-colors group-hover:underline truncate"
                 >
                   Barry@BarringtonGroupFP.com
                 </a>
               </p>
-            </div>
-
-            {/* Logo Center */}
-            <div className="w-full md:w-1/3 text-center mb-4">
-              <Link href="/">
-                <Image
-                  width="150"
-                  src={imgdark}
-                  alt="hero"
-                  className="mx-auto mb-1  hidden dark:block"
-                />
-                <Image
-                  width="150"
-                  src={imglhait}
-                  alt="hero"
-                  className="mx-auto block dark:hidden"
-                />
-              </Link>
-            </div>
-
-            {/* Other Stuff */}
-            <div className="w-full sm:w-1/2 md:w-1/3 mb-4">
-              <h5 className="mb-2 lg:mb-3 font-semibold text-white">
-                Other Stuff
-              </h5>
-              <ul className="list-none m-0 p-0 space-y-2">
-                <li>
-                  <a
-                    href="https://barringtongroupfp.com/privacy-policy/"
-                    className="hover:underline"
-                  >
-                    Privacy Policy
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://barringtongroupfp.com/terms-of-use/"
-                    className="hover:underline"
-                  >
-                    Terms &amp; Conditions
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:underline">
-                    Contact Us
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:underline">
-                    Login (Buyers &amp; Sellers)
-                  </a>
-                </li>
-              </ul>
-            </div>
+            </address>
           </div>
 
-          {/* Copyright Row */}
-          <div className="flex flex-wrap items-center mt-6">
-            <div className="w-full xl:w-2/3">
-              <p className="font-medium uppercase mb-0">
-                © 2025 &amp; BEYOND. Barrington Group Fine Properties ・ ALL
-                RIGHTS RESERVED
-              </p>
-            </div>
-            <div className="w-full xl:w-1/3">
-              <ul className="flex justify-center xl:justify-end space-x-4 mt-3 xl:mt-0">
-                {/* Social icons go here */}
-              </ul>
-            </div>
+          {/* Column 3: Quick Links */}
+          <div className="space-y-4 text-center sm:text-left">
+            <h3 className="text-lg font-semibold text-foreground">Quick Links</h3>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <Link
+                  href="/"
+                  className="text-muted-foreground hover:text-primary transition-colors hover:translate-x-1 inline-block"
+                >
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/listings"
+                  className="text-muted-foreground hover:text-primary transition-colors hover:translate-x-1 inline-block"
+                >
+                  Listings
+                </Link>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-muted-foreground hover:text-primary transition-colors hover:translate-x-1 inline-block"
+                >
+                  Contact Us
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-muted-foreground hover:text-primary transition-colors hover:translate-x-1 inline-block"
+                >
+                  Login
+                </a>
+              </li>
+            </ul>
           </div>
 
-          {/* Disclaimer */}
-          <small className="block mt-3 text-sm text-gray-300">
-            <p className="flex items-center justify-center gap-2">
-              <Image
-                loading="lazy"
-                width="71"
-                height="35"
-                src="https://barringtonteam.virtualresults.com/app/uploads/sites/barringtonteam/2024/03/footer-logo.png"
-                alt="Fair Housing Logo"
-              />
-              Barrington Group Fine Properties fully supports the principles of
-              the Fair Housing Act and the Equal Opportunity Act.
+          {/* Column 4: Legal & Social */}
+          <div className="space-y-4 text-center sm:text-left">
+            <h3 className="text-lg font-semibold text-foreground">Legal</h3>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <a
+                  href="https://barringtongroupfp.com/privacy-policy/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors hover:translate-x-1 inline-block"
+                >
+                  Privacy Policy
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://barringtongroupfp.com/terms-of-use/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors hover:translate-x-1 inline-block"
+                >
+                  Terms & Conditions
+                </a>
+              </li>
+            </ul>
+
+            {/* Social Media Icons */}
+            <div className="pt-4">
+              <h4 className="text-sm font-medium text-foreground mb-3">Follow Us</h4>
+              <div className="flex gap-3 justify-center sm:justify-start">
+                <a
+                  href="#"
+                  className="w-10 h-10 flex items-center justify-center rounded-full bg-muted hover:bg-primary hover:text-primary-foreground transition-all duration-200 hover:scale-110"
+                  aria-label="Facebook"
+                >
+                  <Facebook className="w-4 h-4" />
+                </a>
+                <a
+                  href="#"
+                  className="w-10 h-10 flex items-center justify-center rounded-full bg-muted hover:bg-primary hover:text-primary-foreground transition-all duration-200 hover:scale-110"
+                  aria-label="Twitter"
+                >
+                  <Twitter className="w-4 h-4" />
+                </a>
+                <a
+                  href="#"
+                  className="w-10 h-10 flex items-center justify-center rounded-full bg-muted hover:bg-primary hover:text-primary-foreground transition-all duration-200 hover:scale-110"
+                  aria-label="Instagram"
+                >
+                  <Instagram className="w-4 h-4" />
+                </a>
+                <a
+                  href="#"
+                  className="w-10 h-10 flex items-center justify-center rounded-full bg-muted hover:bg-primary hover:text-primary-foreground transition-all duration-200 hover:scale-110"
+                  aria-label="LinkedIn"
+                >
+                  <Linkedin className="w-4 h-4" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Divider */}
+        <div className="my-8 lg:my-12 border-t border-border/50"></div>
+
+        {/* Bottom Section */}
+        <div className="space-y-4">
+          {/* Fair Housing Disclaimer */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 text-xs text-muted-foreground bg-muted/30 rounded-lg p-4">
+            <Image
+              loading="lazy"
+              width="50"
+              height="25"
+              src="https://barringtonteam.virtualresults.com/app/uploads/sites/barringtonteam/2024/03/footer-logo.png"
+              alt="Fair Housing Logo"
+              className="opacity-70"
+            />
+            <p className="text-center sm:text-left">
+              Barrington Group Fine Properties fully supports the principles of the Fair Housing Act and the Equal Opportunity Act.
             </p>
-          </small>
+          </div>
 
-          {/* Footer Logos */}
-          <div className="text-center mt-3">
+          {/* Copyright */}
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted-foreground pt-2">
+            <p className="text-center sm:text-left order-2 sm:order-1">
+              © {new Date().getFullYear()} <span className="text-primary font-medium">Barrington Group</span>. All Rights Reserved.
+            </p>
             <a
               href="https://virtualresults.com/learnmore/?name=The%20Barrington%20Group%20Trusts"
               target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-primary transition-colors order-1 sm:order-2"
             >
-              {/* <Image
-                 width="120"
-                 height="120"
-                 className="mx-auto"
-                 src="https://ik.imagekit.io/virtualresults/wp-sites/tr:di-noimage.png,t-true,f-auto,pr-true/https%3A%2F%2Fvirtualresultsseo.com%2Fapp%2Fuploads%2F2019%2F08%2FVR-Platform-Powered-White.png"
-                 alt="VR Platform Logo"
-               /> */}
+              Powered by Virtual Results
             </a>
           </div>
         </div>
-      </footer>
-    </div>
+      </Continer>
+    </footer>
   );
 }
 
 export default Footer;
+

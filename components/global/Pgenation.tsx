@@ -46,7 +46,9 @@ export default function PaginationListing({
         onClick={() => {
           handleSearch(pageNumber.toString());
         }}
-        className={`'flex items-center justify-center pointer-coarse px-4 h-10 leading-tight text-gray-500  border border-gray-300 hover:bg-gray-100   dark:text-gray-100 dark:border-neutral-800 dark:hover:bg-neutral-800 dark:hover:text-white  dark:hover:text-white' ${activeClass ? "bg-primary text-primary-foreground shadow-md border border-primary/20 dark:bg-neutral-800" : "   "
+        className={`flex items-center justify-center pointer-coarse px-4 h-10 leading-tight transition-all duration-200 ${activeClass
+          ? "bg-primary text-primary-foreground shadow-md border border-primary/20"
+          : "text-foreground/70 border border-border hover:bg-muted hover:text-foreground"
           }`}
       >
         {pageNumber}
@@ -63,7 +65,7 @@ export default function PaginationListing({
     if (Page > 2) {
       pageButtons.push(
         <button
-          className="flex items-center justify-center px-4 h-10 leading-tight pointer-coarse text-gray-500  border border-gray-300 hover:bg-gray-100 dark:bg-neutral-900  dark:text-gray-100 dark:border-neutral-800 dark:hover:bg-neutral-800 dark:hover:text-white"
+          className="flex items-center justify-center px-4 h-10 leading-tight pointer-coarse text-foreground/70 border border-border hover:bg-muted hover:text-foreground transition-all duration-200"
           key="dots-1"
         >
           ...
@@ -79,7 +81,7 @@ export default function PaginationListing({
     if (Page < totalPage - 1) {
       pageButtons.push(
         <button
-          className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 pointer-coarse  border border-gray-300 hover:bg-gray-100 hover:text-gray-700  dark:text-gray-100 dark:border-neutral-800 dark:hover:bg-neutral-800 dark:hover:text-white"
+          className="flex items-center justify-center px-4 h-10 leading-tight text-foreground/70 pointer-coarse border border-border hover:bg-muted hover:text-foreground transition-all duration-200"
           key="dots-2"
         >
           ...
@@ -111,7 +113,7 @@ export default function PaginationListing({
               if (prevpage < 1) prevpage = totalPage;
               handleSearch(prevpage.toString());
             }}
-            className="flex items-center justify-center px-4 h-10 ms-0 pointer-coarse leading-tight text-gray-500  border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700   dark:text-gray-100 dark:border-neutral-800 dark:hover:bg-neutral-800 dark:hover:text-white"
+            className="flex items-center justify-center px-4 h-10 ms-0 pointer-coarse leading-tight text-foreground/70 border border-e-0 border-border rounded-s-lg hover:bg-muted hover:text-foreground transition-all duration-200"
           >
             Prev
           </button>
@@ -123,7 +125,7 @@ export default function PaginationListing({
 
               handleSearch(nextpage.toString());
             }}
-            className="flex items-center justify-center px-4 h-10 pointer-coarse leading-tight text-gray-500  border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700   dark:text-gray-100 dark:border-neutral-800 dark:hover:bg-neutral-800 dark:hover:text-white"
+            className="flex items-center justify-center px-4 h-10 pointer-coarse leading-tight text-foreground/70 border border-border rounded-e-lg hover:bg-muted hover:text-foreground transition-all duration-200"
           >
             Next
           </button>

@@ -80,9 +80,9 @@ function ListingGrid({ listing }: { listing: Listing[] }) {
           const StatusIcon = statusConfig.icon;
           const listingId = listing.id;
           return (
-            <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-              <article className="group relative ">
-                <Card className=" overflow-hidden pt-0">
+            <CarouselItem key={index} className="basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+              <article className="group relative h-full">
+                <Card className="overflow-hidden pt-0 h-full flex flex-col">
                   <Carousel className="w-full">
                     <CarouselContent>
                       {photos.map((src, i) => (
