@@ -31,7 +31,6 @@ function GridListingS({
   listing: Listing[];
   hiden_map?: string;
 }) {
-
   const getStatusConfig = (statusName: string) => {
     return statuse.find((s) => s.states === statusName) || statuse[3];
   };
@@ -82,7 +81,7 @@ function GridListingS({
     >
       <Continer>
         <div
-          className={`grid grid-cols-1 ${hiden_map == "true" ? "sm:grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"} gap-3 sm:gap-4 md:gap-5`}
+          className={`grid grid-cols-1 ${hiden_map == "true" ? "sm:grid-cols-2 lg:grid-cols-2" : "sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"} gap-3 sm:gap-4 md:gap-5`}
         >
           {listing.map((listing) => {
             const {

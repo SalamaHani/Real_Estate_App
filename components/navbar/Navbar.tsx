@@ -32,7 +32,7 @@ function Navbar({ session }: { session: Session | null }) {
   return (
     <>
       <nav
-        className={` absolute  top-0 left-0 w-full z-50 transition-all duration-500 ${scrolled ? "bg-white dark:bg-black shadow-md fixed" : "bg-transparent"
+        className={` absolute  top-0 left-0 w-full z-50 transition-all duration-500 ${scrolled ? "bg-white dark:bg-gradient-to-br dark:from-card dark:via-card dark:to-muted shadow-md fixed" : "bg-transparent"
           }`}
       >
         <Continer className="flex justify-between md:flex-row md:justify-between md:items-center flex-wrap py-5 gap-4">
@@ -43,8 +43,12 @@ function Navbar({ session }: { session: Session | null }) {
             {session && (
               <div className="relative">
                 <NotificationBell
-                  unreadCount={unreadCount}
-                  onClick={() => setNotificationOpen(!notificationOpen)}
+                  unreadCount={0}
+                  pusherUnreadCount={unreadCount}
+                  onClick={() => {
+                    setNotificationOpen(!notificationOpen);
+                    console.log(`🔔 [NAVBAR] Toggling notification dropdown - Open: ${!notificationOpen}`);
+                  }}
                   isOpen={notificationOpen}
                 />
                 <NotificationDropdown

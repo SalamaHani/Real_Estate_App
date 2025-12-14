@@ -1,6 +1,7 @@
 import { pusherServesr } from "./Pusher";
 
 export interface NotificationEventData {
+    userId?: string;
     notification?: {
         id: string;
         type: string;
@@ -13,6 +14,7 @@ export interface NotificationEventData {
     };
     notificationId?: string;
     unreadCount: number;
+    countIncrement?: number;
 }
 
 /**
@@ -24,14 +26,22 @@ export async function sendNotificationEvent(
     unreadCount: number
 ) {
     try {
+        const eventData: NotificationEventData = {
+            userId: userId,
+            notification,
+            unreadCount,
+            countIncrement: unreadCount > 0 ? 1 : 0,
+        };
+
         await pusherServesr.trigger(
             `private-user-${userId}`,
             "notification:new",
-            {
-                notification,
-                unreadCount,
-            } as NotificationEventData
+            eventData
         );
+
+
+
+
     } catch (error) {
         console.error("Error sending notification event:", error);
     }
@@ -46,14 +56,20 @@ export async function sendReadStatusEvent(
     unreadCount: number
 ) {
     try {
+        const eventData: NotificationEventData = {
+            userId: userId,
+            notificationId,
+            unreadCount,
+            countIncrement: -1,
+        };
+
         await pusherServesr.trigger(
             `private-user-${userId}`,
             "notification:read",
-            {
-                notificationId,
-                unreadCount,
-            } as NotificationEventData
+            eventData
         );
+
+
     } catch (error) {
         console.error("Error sending read status event:", error);
     }
@@ -68,15 +84,26 @@ export async function sendDeleteEvent(
     unreadCount: number
 ) {
     try {
+        const eventData: NotificationEventData = {
+            userId: userId,
+            notificationId,
+            unreadCount,
+            countIncrement: -1,
+        };
+
         await pusherServesr.trigger(
             `private-user-${userId}`,
             "notification:deleted",
-            {
-                notificationId,
-                unreadCount,
-            } as NotificationEventData
+            eventData
         );
-    } catch (error) {
+
+        console.log(`
+🗑️  [NOTIFICATION DELETED]
+   User ID: ${userId}
+   Notification ID: ${notificationId}
+   Unread Count: ${unreadCount}
+   Count Increment: ${eventData.countIncrement}
+        `);} catch (error) {
         console.error("Error sending delete event:", error);
     }
 }
@@ -86,13 +113,19 @@ export async function sendDeleteEvent(
  */
 export async function sendMarkAllReadEvent(userId: string) {
     try {
+        const eventData: NotificationEventData = {
+            userId: userId,
+            unreadCount: 0,
+            countIncrement: 0,
+        };
+
         await pusherServesr.trigger(
             `private-user-${userId}`,
             "notification:all-read",
-            {
-                unreadCount: 0,
-            } as NotificationEventData
+            eventData
         );
+
+
     } catch (error) {
         console.error("Error sending mark all read event:", error);
     }

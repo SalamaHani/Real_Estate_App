@@ -9,37 +9,20 @@ import CurrencySelector from "./Curentreat";
 import { useState, useEffect } from "react";
 import NotificationBell from "./NotificationBell";
 import NotificationDropdown from "./NotificationDropdown";
+import { useNotificationPusher } from "@/hooks/useNotificationPusher";
 
 function Navhero({ session }: { session: Session | null }) {
   const pathname = usePathname();
-
   const [notificationOpen, setNotificationOpen] = useState(false);
-  const [unreadCount, setUnreadCount] = useState(0);
+
+  // Use Pusher hook for real-time notifications
+  const { unreadCount } = useNotificationPusher(session?.user?.id);
   const isSearchPage = pathname.replace(/\/$/, "") === "/listing";
-
-  // Fetch initial notification count when component mounts
-  useEffect(() => {
-    if (session?.user?.id) {
-      fetchNotificationCount();
-    }
-  }, [session?.user?.id]);
-
-  const fetchNotificationCount = async () => {
-    try {
-      const response = await fetch("/api/notification?limit=1");
-      if (response.ok) {
-        const data = await response.json();
-        setUnreadCount(data.unreadCount || 0);
-      }
-    } catch (error) {
-      console.error("Error fetching notification count:", error);
-    }
-  };
 
   return (
     <>
       <nav
-        className={` ${isSearchPage ? `top-0  left-0 w-full z-50  bg-white   dark:bg-black  transition-all duration-500  shadow-md fixed` : ` border-b`}`}
+        className={` ${isSearchPage ? `top-0  left-0 w-full z-50  bg-white   dark:bg-gradient-to-br dark:from-card dark:via-card dark:to-muted  transition-all duration-500  shadow-md fixed` : ` border-b`}`}
       >
         <Continer className="flex justify-between items-center py-3 sm:py-4 md:py-5 gap-3 md:gap-4">
           {/* Logo */}
@@ -55,14 +38,20 @@ function Navhero({ session }: { session: Session | null }) {
             {session && (
               <div className="relative">
                 <NotificationBell
-                  unreadCount={unreadCount}
-                  onClick={() => setNotificationOpen(!notificationOpen)}
+                  unreadCount={0}
+                  pusherUnreadCount={unreadCount}
+                  onClick={() => {
+                    setNotificationOpen(!notificationOpen);
+                    console.log(
+                      `🔔 [NAVBAR] Toggling notification dropdown - Open: ${!notificationOpen}`
+                    );
+                  }}
                   isOpen={notificationOpen}
                 />
                 <NotificationDropdown
                   isOpen={notificationOpen}
                   onClose={() => setNotificationOpen(false)}
-                  onUnreadCountChange={setUnreadCount}
+                  userId={session.user.id}
                 />
               </div>
             )}
@@ -74,4 +63,3 @@ function Navhero({ session }: { session: Session | null }) {
   );
 }
 export default Navhero;
-

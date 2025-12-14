@@ -1,8 +1,9 @@
 # 🏡 Real Estate App - Barrington Group
 
-![Barrington Group Screenshot](./public/imges/لقطة%20شاشة%202025-12-03%20132708.png)
-![alt text](image.png)
-![Barrington Group Screenshot](./public/imges/لقطة%20شاشة%202025-12-03%20141220.png)
+![Barrington Group Screenshot](.c:\Users\xtrem\Downloads\screencapture-localhost-3000-2025-12-14-13_55_18.png)
+![alt text](<لقطة شاشة 2025-12-14 134756.png>)
+![alt text](screencapture-localhost-3000-2025-12-14-13_55_18.png)
+![alt text](screencapture-localhost-3000-communities-Northampton-2025-12-14-13_50_50.png)
 ![React](https://img.shields.io/badge/React-18-blue?logo=react)
 ![Next.js](https://img.shields.io/badge/Next.js-15.5.6-black?logo=next.js)
 ![Prisma](https://img.shields.io/badge/Prisma-6.19.0-blue)

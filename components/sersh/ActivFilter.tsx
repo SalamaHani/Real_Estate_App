@@ -30,7 +30,7 @@ function Activfilter() {
     replace(`/listing?${params.toString()}`);
   };
   return (
-    <div className="flex  dark:bg-black items-center p-1 border rounded-xl   bg-white shadow-sm ">
+    <div className="flex   items-center p-1 border rounded-xl   shadow-sm ">
       {filterOptionsTyep.map((item) => {
         const isSelected = item.value == isactiv;
         return (
@@ -38,10 +38,11 @@ function Activfilter() {
             key={item.id}
             variant="ghost"
             size="lg"
-            className={`flex items-center gap-1 cursor-pointer  transition-all duration-300  font-medium ${isSelected
-              ? "bg-primary text-primary-foreground shadow-md border border-primary/20"
-              : "text-card-foreground dark:text-white"
-              }`}
+            className={`flex items-center gap-1 cursor-pointer  transition-all duration-300  font-medium ${
+              isSelected
+                ? "bg-primary text-primary-foreground shadow-md border border-primary/20"
+                : "text-card-foreground dark:text-white"
+            }`}
             onClick={() => handleSuggestedSearch(item.value, item.label)}
           >
             {item.id}

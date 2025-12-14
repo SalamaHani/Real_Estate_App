@@ -99,7 +99,7 @@ function HeroSection() {
                 setIsopen(false);
               }}
               value={Parmes}
-              className={`pl-3 py-3 bg-gray-50 h-15  flex-1 px-3  border-none  outline-none transition-all duration-300  focus:border-none  rounded-md ${isOpen ? "rounded-b-none" : ""}    text-black  placeholder:text-gray-800 `}
+              className={`pl-3 py-3 bg-gray-50 dark:bg-popover dark:text-white  h-15  flex-1 px-3  border-none  outline-none transition-all duration-300  focus:border-none  rounded-md ${isOpen ? "rounded-b-none" : ""}    text-black dark:placeholder:text-white placeholder:text-gray-800 `}
             />
             <button className="px-4 absolute right-0 top-[16px]  text-gray-400  hover:text-gray-700">
               <Search />
@@ -108,28 +108,28 @@ function HeroSection() {
         </div>
         {query.listing.length != 0 && isOpen && (
           <div
-            className={`absolute  left-0 right-0 mt-0 top-45 bg-white  rounded-b-xl shadow-xl z-50 overflow-hidden border border-gray-100 dark:border-gray-700 animate-in slide-in-from-top-2 duration-300`}
+            className={`absolute  left-0 right-0 mt-0 top-45   rounded-b-xl shadow-xl z-50 overflow-hidden  bg-popover   border border-primary/10 dark:border-gray-700 animate-in slide-in-from-top-2 duration-300`}
           >
             <div
               className=" max-h-100 overflow-y-auto pb-1
-                        [&::-webkit-scrollbar]:w-2
-                        [&::-webkit-scrollbar]:h-5
-                        [&::-webkit-scrollbar-track]:rounded-full
-                      [&::-webkit-scrollbar-track]:bg-gray-100
-                          [&::-webkit-scrollbar-thumb]:rounded-full
-                        [&::-webkit-scrollbar-thumb]:bg-gray-400
-                          dark:[&::-webkit-scrollbar-track]:bg-neutral-400
-                        dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
+                [&::-webkit-scrollbar]:w-1
+                [&::-webkit-scrollbar]:h-2
+                [&::-webkit-scrollbar-track]:rounded-full
+              [&::-webkit-scrollbar-track]:bg-primary/10
+                  [&::-webkit-scrollbar-thumb]:rounded-full
+                [&::-webkit-scrollbar-thumb]:bg-primary/50
+                  dark:[&::-webkit-scrollbar-track]:bg-primary/50
+                dark:[&::-webkit-scrollbar-thumb]:bg-primary/50"
             >
               {query.citys.length != 0 && (
                 <div>
-                  <div className="mb-1 bg-gray-100  p-2 flex items-center gap-2">
+                  <div className="mb-1 mt-1 bg-primary/30 dark:bg-primary/30 p-2 flex items-center gap-2">
                     <div className="w-2 h-2  rounded-full animate-pulse"></div>
-                    <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                    <span className="text-sm  font-medium text-primary dark:text-white animate-pulse">
                       City
                     </span>
                   </div>
-                  <div className="space-y-1 text-black ">
+                  <div className="space-y-1  ">
                     {query.citys.map((city, index) => {
                       const globalIndex = index;
                       return (
@@ -140,7 +140,7 @@ function HeroSection() {
                           //     handleSuggestedSearch(city ?? "", "city")
                           //   }
                           onFocus={() => setActiveIndex(globalIndex)}
-                          className={`focus:bg-accent focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-gray-200 hover:border-l-2  border-gray-500 w-full ${activeIndex == globalIndex ? "bg-gray-200 border-l-2  border-gray-500" : ""} data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4`}
+                          className={`focus:bg-accent focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-primary/10 dark:data-[variant=destructive]:focus:bg-primary/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-muted :hoverborder-l-2 hover:border-primary border-primary  w-full ${activeIndex == globalIndex ? "bg-muted  border-l-2  border-primary" : ""} data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4`}
                           style={{
                             animationDelay: `${index * 50}ms`,
                           }}
@@ -157,13 +157,13 @@ function HeroSection() {
                   </div>
                 </div>
               )}
-              <div className="mb-1 mt-1 bg-gray-100  p-2 flex items-center gap-2">
-                <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-                <span className="text-sm  font-medium text-gray-500 dark:text-gray-400">
+              <div className="mb-1 mt-1 bg-primary/30 dark:bg-primary/30 p-2 flex items-center gap-2">
+                <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+                <span className="text-sm  font-medium text-primary dark:text-white animate-pulse">
                   Address
                 </span>
               </div>
-              <div className="space-y-1 text-black ">
+              <div className="space-y-1  ">
                 {query.listing.map((search, index) => {
                   const globalIndex = query.citys.length + index;
                   return (
@@ -177,7 +177,7 @@ function HeroSection() {
                       //     )
                       //   }
                       onFocus={() => setActiveIndex(globalIndex)}
-                      className={`focus:bg-accent focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-gray-200 hover:border-l-2  border-gray-500 w-full ${activeIndex == globalIndex ? "bg-gray-200 border-l-2  border-gray-500" : ""} data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4`}
+                      className={`focus:bg-accent focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-muted :hoverborder-l-2 hover:border-primary border-primary  w-full ${activeIndex == globalIndex ? "bg-muted  border-l-2  border-primary" : ""} data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4`}
                       style={{
                         animationDelay: `${index * 50}ms`,
                       }}

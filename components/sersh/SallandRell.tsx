@@ -30,7 +30,7 @@ function SallandRell() {
     replace(`/listing?${params.toString()}`);
   };
   return (
-    <div className="flex dark:bg-black items-center p-1 border rounded-xl  bg-white shadow-sm ">
+    <div className="flex  items-center p-1 border rounded-xl  shadow-sm ">
       {filterOptionsTyep.map((item) => {
         const isSelected = item.value == isactiv;
         return (
@@ -40,8 +40,8 @@ function SallandRell() {
             size="lg"
             className={`flex items-center gap-1 cursor-pointer  transition-all duration-300  font-medium ${
               isSelected
-                ? "bg-black dark:bg-white dark:text-black text-white shadow-sm   border border-gray-200 "
-                : " g-card text-card-foreground  dark:text-white"
+                ? "  bg-primary text-black  shadow-sm   border  "
+                : " g-card text-card-foreground  "
             }`}
             onClick={() => handleSuggestedSearch(item.value, item.label)}
           >

@@ -14,17 +14,25 @@ import { links } from "@/utils/links";
 import { Logout } from "../logout";
 import { Session } from "@/lib/auth";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+
 function LinksDropdown({ session }: { session: Session | null }) {
   const username = session?.user.name;
+  const pathname = usePathname();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" className="flex gap-4 max-w-[100px] dark:hover:bg-muted   hover:bg-muted ">
+        <Button
+          variant="outline"
+          className="flex gap-4 max-w-[100px] dark:hover:bg-muted   hover:bg-muted "
+        >
           <LuAlignLeft className="w-6 h-6 text-primary" />
           {session ? (
             <Avatar>
               {/* <AvatarImage src="https://github.com/shadcn.png" /> */}
-              <AvatarFallback className="text-primary">{setstring(username ?? "")}</AvatarFallback>
+              <AvatarFallback className="text-primary">
+                {setstring(username ?? "")}
+              </AvatarFallback>
             </Avatar>
           ) : null}
         </Button>
@@ -47,9 +55,15 @@ function LinksDropdown({ session }: { session: Session | null }) {
           <div>
             {links.map((link) => {
               if (link.label === "dashboard") return null;
+              const isActive = pathname === link.href;
               return (
-                <DropdownMenuItem key={link.href}>
-                  <Link href={link.href} className="capitalize w-full">
+                <DropdownMenuItem
+                  key={link.href}
+                  className={
+                    isActive ? "bg-primary text-primary-foreground " : ""
+                  }
+                >
+                  <Link href={link.href} className={`capitalize w-full`}>
                     {link.label}
                   </Link>
                 </DropdownMenuItem>
@@ -61,7 +75,10 @@ function LinksDropdown({ session }: { session: Session | null }) {
             {session?.user?.email === "salamhani697@gmail.com" && (
               <>
                 <DropdownMenuItem asChild>
-                  <Link href="/admin" className="flex items-center gap-2 cursor-pointer">
+                  <Link
+                    href="/admin"
+                    className="flex items-center gap-2 cursor-pointer"
+                  >
                     <svg
                       className="w-4 h-4"
                       fill="none"

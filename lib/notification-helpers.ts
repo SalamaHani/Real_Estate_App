@@ -2,10 +2,27 @@ import prisma from "@/utils/db";
 import { sendNotificationEvent } from "./pusher-server";
 
 /**
- * Create a welcome notification for a new user
+ * Create a welcome notification for a new user (only once)
  */
 export async function createWelcomeNotification(userId: string, userName: string) {
     try {
+        // Check if welcome notification already exists for this user
+        const existingWelcome = await prisma.notification.findFirst({
+            where: {
+                userId: userId,
+                type: "SYSTEM",
+                metadata: {
+                    contains: "welcomeNotification",
+                },
+            },
+        });
+
+        // Skip if welcome notification already sent
+        if (existingWelcome) {
+            console.log(`Welcome notification already sent to user ${userId}`);
+            return null;
+        }
+
         // Create welcome notification in database
         const notification = await prisma.notification.create({
             data: {
@@ -15,7 +32,7 @@ export async function createWelcomeNotification(userId: string, userName: string
                 message: `Hello ${userName}! Welcome to our real estate platform. We're excited to have you here. Start exploring amazing properties today!`,
                 link: "/",
                 isRead: false,
-                metadata: JSON.stringify({ welcomeNotification: true }),
+                metadata: JSON.stringify({ welcomeNotification: true, onlyOnce: true }),
             },
         });
 

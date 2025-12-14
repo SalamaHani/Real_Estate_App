@@ -238,7 +238,7 @@ function Sershinout() {
         <div className={` relative`}>
           {/* Filter Pills */}
           <div
-            className={`flex dark:bg-black ${Object.entries(ParmesAll).length > 3 && isOpen ? `flex-col absolute left-0 top-0` : `flex-row block`} items-center w-full  max-w-lg border  border-gray-300 dark:border-none rounded-xl  ${isOpen ? "rounded-b-none" : ""}  bg-white shadow-sm overflow-hidden`}
+            className={`flex  ${Object.entries(ParmesAll).length > 3 && isOpen ? `flex-col absolute left-0 top-0` : `flex-row block`} items-center w-full  max-w-lg  border rounded-xl  shadow-sm   ${isOpen ? "rounded-b-none" : ""}   shadow-sm overflow-hidden`}
           >
             <div
               className={`flex ${Object.entries(ParmesAll).length > 3 && isOpen ? `flex-wrap w-full  justify-start ` : `flex-nowrap`}     space-x-2  px-2 `}
@@ -274,7 +274,7 @@ function Sershinout() {
                   setIsopen(false);
                 }}
                 value={Parmes}
-                className={`pl-3 py-3 bg-gray-50 dark:bg-black  flex-1 px-3  border-none  outline-none transition-all duration-300  focus:border-none  rounded-xl ${isOpen ? "rounded-b-none" : ""}  text-base dark:placeholder:text-white placeholder:text-gray-500 `}
+                className={`pl-3 py-3   flex-1 px-3  border-none  outline-none transition-all duration-300  focus:border-none  rounded-xl ${isOpen ? "rounded-b-none" : ""}  text-base dark:placeholder:text-white placeholder:text-gray-500 `}
               />
               <button className="px-4  text-gray-500 hover:text-gray-700">
                 <Search />
@@ -285,7 +285,7 @@ function Sershinout() {
       </div>
       {query.listing.length != 0 && isOpen && (
         <div
-          className={`absolute w-full  md:w-auto left-0 right-0 mt-0 ${Object.entries(ParmesAll).length > 3 && isOpen ? (Object.entries(ParmesAll).length > 5 && isOpen ? `top-34` : `top-24`) : `top-full`} bg-white dark:bg-black rounded-b-xl shadow-xl z-50 overflow-hidden border border-primary/10 dark:border-gray-700 animate-in slide-in-from-top-2 duration-300`}
+          className={`absolute w-full  md:w-auto left-0 right-0 mt-0 ${Object.entries(ParmesAll).length > 3 && isOpen ? (Object.entries(ParmesAll).length > 5 && isOpen ? `top-34` : `top-24`) : `top-full`} bg-popover  rounded-b-xl shadow-xl z-50 overflow-hidden border border-primary/10 dark:border-gray-700 animate-in slide-in-from-top-2 duration-300`}
         >
           <div
             className=" max-h-100 overflow-y-auto pb-1
@@ -302,7 +302,7 @@ function Sershinout() {
               <div>
                 <div className="mb-1 bg-primary/30 dark:bg-primary/30 p-2 flex items-center gap-2">
                   <div className="w-2 h-2 bg-primary  rounded-full animate-pulse"></div>
-                  <span className="text-sm font-medium text-primary animate-pulse">
+                  <span className="text-sm font-medium text-primary dark:text-white animate-pulse">
                     City
                   </span>
                 </div>
@@ -336,7 +336,7 @@ function Sershinout() {
             )}
             <div className="mb-1 mt-1 bg-primary/30 dark:bg-primary/30 p-2 flex items-center gap-2">
               <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
-              <span className="text-sm  font-medium text-primary animate-pulse">
+              <span className="text-sm  font-medium text-primary dark:text-white animate-pulse">
                 Address
               </span>
             </div>

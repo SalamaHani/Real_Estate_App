@@ -163,7 +163,7 @@ export function Savedfilter() {
       <DialogTrigger asChild>
         <Tooltip>
           <TooltipTrigger asChild>
-            <div className="flex dark:bg-black items-center p-1 border rounded-xl  bg-white shadow-sm">
+            <div className="flex items-center p-1 border rounded-xl   shadow-sm">
               <Button
                 variant="ghost"
                 size="lg"

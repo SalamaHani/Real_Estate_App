@@ -65,9 +65,9 @@ export async function GET(request: NextRequest) {
           filter.bathrooms = { $gte: Number(query.Baths.replace("+", "")) };
         }
 
-        // Status
+        // Status filter (e.g., "Active", "Pending", "Sold")
         if (query.Status) {
-          filter.listing_status = { $regex: query.Status, $options: "i" };
+          filter.listing_status = { $regex: `^${query.Status}`, $options: "i" };
         }
 
         // Listing type (rental or sale)

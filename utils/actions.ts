@@ -16,6 +16,7 @@ import prisma from "./db";
 import { cookies } from "next/headers";
 import { ListingAgents } from "@prisma/client";
 import { console } from "inspector";
+import { checkSavedSearchForUser } from "@/lib/saved-search-helper";
 
 // const session = await auth.api.getSession({
 //   headers: await headers(),
@@ -692,10 +693,10 @@ export const SaveSearchUserAction = async (
       errors: validated.error.flatten().fieldErrors,
     };
   }
-  console.log(validated.data.url)
-  console.log(validated)
+  console.log(validated.data.url);
+  console.log(validated);
   try {
-    await db.seavdsearchuser.create({
+    const saversersh = await db.seavdsearchuser.create({
       data: {
         userId: userId as string,
         url: validated.data.url,
@@ -706,12 +707,13 @@ export const SaveSearchUserAction = async (
         updatedAt: new Date(),
       },
     });
+    await checkSavedSearchForUser(userId, saversersh.id);
     return {
       success: true,
       message: "Successfully Saved Search!",
     };
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return {
       success: false,
       message: "Something went wrong while saving the search.",

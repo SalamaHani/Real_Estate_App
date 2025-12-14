@@ -87,8 +87,8 @@
 }
 
 .dark {
-  --background: oklch(0.15 0.02 55);
-  /* Dark warm background */
+  --background: oklch(0.18 0.025 55);
+  /* Matches footer card gradient - professional warm dark */
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.22 0.03 55);
   /* Dark card with amber tint */
