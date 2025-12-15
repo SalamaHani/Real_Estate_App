@@ -28,7 +28,7 @@ function Filtringbutglink({ Link }: { Link: string }) {
       if (value == "Studio") {
         return (
           <Badge
-            className="dark:bg-neutral-700 my-3 bg-neutral-200 flex justify-between items-center"
+            className="bg-primary text-white dark:text-black flex justify-between items-center"
             variant="outline"
           >
             {value}
@@ -37,7 +37,7 @@ function Filtringbutglink({ Link }: { Link: string }) {
       } else {
         return (
           <Badge
-            className="dark:bg-neutral-700 my-3 bg-neutral-200 flex justify-between items-center"
+            className="bg-primary text-white dark:text-black flex justify-between items-center"
             variant="outline"
           >
             {key}:{value}
@@ -48,7 +48,7 @@ function Filtringbutglink({ Link }: { Link: string }) {
     if (key == "more") {
       return (
         <Badge
-          className="dark:bg-neutral-700 my-3 bg-neutral-200 flex justify-between items-center"
+          className="bg-primary text-white dark:text-black flex justify-between items-center"
           variant="outline"
         >
           {key}:({value})
@@ -60,7 +60,7 @@ function Filtringbutglink({ Link }: { Link: string }) {
     }
     return (
       <Badge
-        className="dark:bg-neutral-700 my-3 bg-neutral-200 flex justify-between items-center"
+        className="bg-primary text-white dark:text-black flex justify-between items-center"
         variant="outline"
       >
         {value}
@@ -71,7 +71,7 @@ function Filtringbutglink({ Link }: { Link: string }) {
     if (arr.length == 2) {
       return (
         <Badge
-          className="dark:bg-neutral-700 my-3 bg-neutral-200 flex justify-between items-center"
+          className="bg-primary text-white dark:text-black flex justify-between items-center"
           variant="outline"
         >
           Price:{" "}
@@ -85,7 +85,7 @@ function Filtringbutglink({ Link }: { Link: string }) {
         <>
           {arr.find((p) => p.key === "Minimam")?.key == "Minimam" ? (
             <Badge
-              className="dark:bg-neutral-700 my-3 bg-neutral-200 flex justify-between items-center"
+              className="bg-primary text-white dark:text-black flex justify-between items-center"
               variant="outline"
             >
               Price: ovar{" "}
@@ -93,7 +93,7 @@ function Filtringbutglink({ Link }: { Link: string }) {
             </Badge>
           ) : (
             <Badge
-              className="dark:bg-neutral-700 my-3 bg-neutral-200 flex justify-between items-center"
+              className="bg-primary text-white dark:text-black flex justify-between items-center"
               variant="outline"
             >
               Price: under{" "}

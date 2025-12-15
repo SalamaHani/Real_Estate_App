@@ -11,7 +11,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { listing } from "@prisma/client";
+
 import TextAreaInput from "../form/TextAreaInput";
 import { SubmitButton } from "../form/Buttons";
 import { Input } from "../ui/input";
@@ -70,7 +70,7 @@ function CardDilogAgent({ Agent }: { Agent?: AgentData | null }) {
           </TooltipContent>
         </Tooltip>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[725px]">
+      <DialogContent className="sm:max-w-181.25">
         <DialogHeader className="flex flex-row  justify-around items-center">
           <div className="flex  flex-col justify-center items-center">
             <Avatar className="w-17 h-17">
@@ -177,8 +177,7 @@ function CardDilogAgent({ Agent }: { Agent?: AgentData | null }) {
                 <TextAreaInput
                   name="message"
                   labelText="Message"
-                  defaultValue=""
-                  placeholder="Add any questions or additional information here..."
+                  defaultValue="Add any questions or additional information here..."
                 />
                 <input
                   type="hidden"
@@ -197,7 +196,6 @@ function CardDilogAgent({ Agent }: { Agent?: AgentData | null }) {
               <SubmitButton 
                 text="Contact Agent"
                 disabled={isPending}
-                loading={isPending}
               />
             </DialogFooter>
           </form>

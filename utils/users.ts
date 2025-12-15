@@ -1,7 +1,7 @@
 "use server";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import prisma from "@/utils/db";
+
 
 export const signIn = async (email: string, password: string) => {
   try {

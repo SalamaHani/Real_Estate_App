@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { CuantersT } from "@/utils/Type";
+import type { CuantersT } from "@/utils/Tayp";
 
 export function Selectcuntery({ Arr }: { Arr: CuantersT[] }) {
   return (

@@ -94,7 +94,6 @@ export async function GET() {
         // Find new listings matching the criteria that haven't been seen
         const matchingListings = await prisma.$runCommandRaw({
           find: "listing",
-          filter: filter as Record<string, unknown>,
           limit: 10, // Limit to prevent overwhelming users
           sort: { createdAt: -1 }, // Get newest first
         }) as { cursor: { firstBatch: Array<Record<string, unknown>> } };

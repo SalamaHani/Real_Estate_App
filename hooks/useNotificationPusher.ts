@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { usePusher } from "@/components/providers/PusherProvider";
-import type { Channel } from "pusher-js";
+
 
 export interface Notification {
   id: string;

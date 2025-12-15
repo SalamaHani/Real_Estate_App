@@ -76,7 +76,7 @@ async function page() {
                     </div>
                     <Link
                       href={`/listing?${url}`}
-                      className="cursor-pointer flex items-center text-center text-sm  italic  hover:bg-neutral-200 dark:hover:bg-neutral-600 rounded-lg p-1"
+                      className="cursor-pointer flex items-center text-center text-sm  italic  hover:bg-primary/30 dark:hover:bg-primary rounded-lg p-1"
                     >
                       View Map <Map className="w-3 h-3 ml-1" />
                     </Link>

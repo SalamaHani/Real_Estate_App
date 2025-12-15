@@ -1,15 +1,33 @@
 import React from "react";
 import Imaglisting from "../listing/Imaglisting";
-import { Agent } from "@prisma/client";
 import CardDilogAgent from "./CardDilogAgent";
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import Link from "next/link";
-// import ShareButton from "../listings/ShareButton";
-function AgentHero({ Agent }: { Agent?: Agent | null }) {
+
+// Define Agent type based on database schema
+interface AgentType {
+  id?: string;
+  photo?: string;
+  full_name?: string;
+  brokerage_name?: string;
+  office_name?: string;
+  office_city?: string;
+  broker_email?: string;
+  office_line_number?: string;
+  email?: string;
+  social_media?: {
+    facebook?: string;
+    instagram?: string;
+    linkedin?: string;
+    twitter?: string;
+  };
+}
+
+function AgentHero({ Agent }: { Agent?: AgentType | null }) {
   return (
     <div className="w-full flex flex-wrap md:flex-nowrap  justify-between gap-6 mt-20 mb-20 ">
       <div className="w-full md:w-[40%] cursor-pointer">
-        <div className="relative aspect-[8/10] ">
+        <div className="relative aspect-8/10">
           <Imaglisting src={Agent?.photo ?? ""} alt={""} />
         </div>
       </div>

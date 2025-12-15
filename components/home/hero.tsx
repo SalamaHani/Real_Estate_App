@@ -43,24 +43,47 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1, duration: 1 }}
         >
-          <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-3 sm:gap-4">
+          <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-4 sm:gap-6">
+            {/* Search Sell Home Button */}
             <Link
               href="/sell"
-              className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 flex items-center justify-center italic bg-primary text-primary-foreground rounded-md shadow-lg text-base sm:text-lg font-semibold 
-             transition-all duration-300 ease-in-out 
-               hover:scale-105 hover:shadow-xl hover:opacity-90"
+              className="group relative w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-4 overflow-hidden rounded-xl text-base sm:text-lg font-semibold italic transition-all duration-500"
             >
-              Search Sell Home
-              <House className="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
+              {/* Background Gradient */}
+              <div className="absolute inset-0 bg-linear-to-r from-primary via-primary to-primary/80 rounded-xl transition-all duration-500 group-hover:via-primary/80 group-hover:scale-110" />
+              
+              {/* Shine Effect */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-20 bg-linear-to-r from-transparent via-white to-transparent animate-pulse rounded-xl" />
+              
+              {/* Content */}
+              <div className="relative z-10 flex items-center justify-center gap-2 text-primary-foreground">
+                <span className="transition-all duration-300 group-hover:translate-x-1">Search Sell Home</span>
+                <House className="w-4 h-4 sm:w-5 sm:h-5 transition-all duration-300 group-hover:translate-x-1 group-hover:scale-110" />
+              </div>
+              
+              {/* Hover Shadow */}
+              <div className="absolute inset-0 rounded-xl shadow-lg shadow-primary/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
             </Link>
+
+            {/* Search Buy Homes Button */}
             <Link
               href="/listing"
-              className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-accent flex items-center justify-center text-white italic rounded-md shadow-lg text-base sm:text-lg font-semibold 
-             transition-all duration-300 ease-in-out 
-             hover:scale-105 hover:shadow-xl hover:opacity-90"
+              className="group relative w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-4 overflow-hidden rounded-xl text-base sm:text-lg font-semibold italic transition-all duration-500"
             >
-              Search Buy Homes
-              <House className="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
+              {/* Background Gradient */}
+              <div className="absolute inset-0 bg-linear-to-r from-primary via-primary to-primary/80 rounded-xl transition-all duration-500 group-hover:via-primary/80 group-hover:scale-110" />
+              
+              {/* Shine Effect */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-20 bg-linear-to-r from-transparent via-white to-transparent animate-pulse rounded-xl" />
+              
+              {/* Content */}
+              <div className="relative z-10 flex items-center justify-center gap-2 text-primary-foreground">
+                <span className="transition-all duration-300 group-hover:translate-x-1">Search Buy Homes</span>
+                <House className="w-4 h-4 sm:w-5 sm:h-5 transition-all duration-300 group-hover:translate-x-1 group-hover:scale-110" />
+              </div>
+              
+              {/* Hover Shadow */}
+              <div className="absolute inset-0 rounded-xl shadow-lg shadow-primary/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
             </Link>
           </div>
         </MotionDiv>

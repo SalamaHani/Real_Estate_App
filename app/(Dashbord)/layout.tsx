@@ -16,7 +16,7 @@ export default function AdminLayout({
     return (
         <div className="min-h-screen bg-background">
             {/* Admin Navbar */}
-            <nav className="border-b bg-card/50 backdrop-blur supports-[backdrop-filter]:bg-card/50">
+            <nav className="border-b bg-card/50 backdrop-blur supports-backdrop-filter:bg-card/50">
                 <div className="container mx-auto px-6 py-4">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-6">

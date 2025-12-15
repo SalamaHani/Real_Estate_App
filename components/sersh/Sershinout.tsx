@@ -233,7 +233,7 @@ function Sershinout() {
   return (
     <div className=" relative md:min-w-[30%] md:max-w-[30%] sm:min-w-[30%] wm:max-w-[30%] min-w-[50%] max-w-[50%] ">
       <div
-        className={`w-full  ${Object.entries(ParmesAll).length > 3 && isOpen ? `h-[50px] ` : ``}`}
+        className={`w-full ${Object.entries(ParmesAll).length > 3 && isOpen ? "h-12.5" : ""}`}
       >
         <div className={` relative`}>
           {/* Filter Pills */}

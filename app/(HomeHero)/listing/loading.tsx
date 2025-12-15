@@ -5,11 +5,11 @@ import React from "react";
 
 function loading() {
   return (
-    <div className="h-[100vh] overflow-y-hidden">
+    <div className="h-screen overflow-y-hidden">
       <FilterNavSkeleton />
 
       <div
-        className={` mt-50  w-[100%] overflow-hidden  grid grid-cols-1 sm:grid-cols-1 gap-2 `}
+        className="mt-50 w-full overflow-hidden grid grid-cols-1 sm:grid-cols-1 gap-2"
       >
         <div>
           <div>
@@ -33,7 +33,7 @@ export const Cardloding = () => {
   return (
     <article className="group relative ">
       <Card className="overflow-hidden pt-0">
-        <Skeleton className="w-full aspect-[16/10]" />
+        <Skeleton className="w-full aspect-16/10" />
         <CardHeader className="space-y-2">
           <Skeleton className="h-4 w-32" />
           <Skeleton className="h-2 w-48" />

@@ -59,3 +59,7 @@ export interface RevierFormData {
   authorName?: string;
   listingId: string;
 }
+export interface CuantersT {
+  country: string;
+  iso_code: string;
+}

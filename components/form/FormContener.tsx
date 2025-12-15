@@ -2,7 +2,7 @@
 
 import { useActionState, useEffect } from "react";
 import { toast } from "sonner";
-import { actionFunction } from "@/utils";
+import type { actionFunction } from "@/utils/Tayp";
 import { cn } from "@/lib/utils";
 
 const initialState = {

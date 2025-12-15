@@ -181,7 +181,7 @@ export function Savedfilter() {
           </TooltipContent>
         </Tooltip>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-106.25">
         <DialogHeader className="mb-3">
           <DialogTitle>Save Your Search</DialogTitle>
         </DialogHeader>
@@ -208,13 +208,13 @@ export function Savedfilter() {
               return <div key={key}>{formatBedge(key, value)}</div>;
             })}
           </div>
-          <div className="w-[100%] mb-10">
+          <div className="w-full mb-10">
             <Label className="mb-2" htmlFor="email_frequency">
               Email Alerts<span className="text-red-500">*</span>
             </Label>
             <input type="hidden" readOnly name="email_frequency" value={value} />
             <Select value={value} onValueChange={setValue}>
-              <SelectTrigger className="w-[100%]">
+              <SelectTrigger className="w-full">
                 <SelectValue placeholder="Weekly" />
               </SelectTrigger>
               <SelectContent side="top" align="center">
@@ -228,7 +228,7 @@ export function Savedfilter() {
               </SelectContent>
             </Select>
           </div>
-          <DialogFooter className="w-[100%]">
+          <DialogFooter className="w-full">
             <SubmitButton className="w-full" text="Save Search" />
           </DialogFooter>
           <input type="text" readOnly hidden name="url" value={URL} />
