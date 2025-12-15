@@ -513,16 +513,19 @@ export const createReviewAction = async (
   const userId = user?.id as string;
   if (!user) redirect("/login");
   const UserData: RevierFormData = {
-    comment: formData.get("comment") as string,
+    comment: (formData.get("comment") as string) || "",
     listingId: formData.get("listingId") as string,
-    authorName: user.name as string,
+    authorName: (user.name || "Anonymous") as string,
     rating: Number(formData.get("rating")),
   };
 
   try {
     await db.review.create({
       data: {
-        ...UserData,
+        comment: UserData.comment || "No comment provided",
+        authorName: UserData.authorName || "No comment provided",
+        listingId: UserData.listingId,
+        rating: BigInt(UserData.rating),
         userId: userId!,
         createdAt: new Date(),
         updatedAt: new Date(),

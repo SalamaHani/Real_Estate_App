@@ -6,7 +6,7 @@ import Logo from "./Logo";
 import { Session } from "@/lib/auth";
 import { usePathname } from "next/navigation";
 import CurrencySelector from "./Curentreat";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import NotificationBell from "./NotificationBell";
 import NotificationDropdown from "./NotificationDropdown";
 import { useNotificationPusher } from "@/hooks/useNotificationPusher";
@@ -22,7 +22,7 @@ function Navhero({ session }: { session: Session | null }) {
   return (
     <>
       <nav
-        className={` ${isSearchPage ? `top-0  left-0 w-full z-50  bg-white   dark:bg-gradient-to-br dark:from-card dark:via-card dark:to-muted  transition-all duration-500  shadow-md fixed` : ` border-b`}`}
+        className={` ${isSearchPage ? `top-0  left-0 w-full z-50  bg-white   dark:bg-linear-to-br dark:from-card dark:via-card dark:to-muted  transition-all duration-500  shadow-md fixed` : ` border-b`}`}
       >
         <Continer className="flex justify-between items-center py-3 sm:py-4 md:py-5 gap-3 md:gap-4">
           {/* Logo */}

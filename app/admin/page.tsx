@@ -9,8 +9,15 @@ import { toast } from "sonner";
 // Animated Counter Component
 function AnimatedCounter({ value, duration = 2000 }: { value: number; duration?: number }) {
     const [count, setCount] = useState(0);
+    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    useEffect(() => {
+        if (!mounted) return;
+
         let startTime: number;
         let animationFrame: number;
 
@@ -30,7 +37,12 @@ function AnimatedCounter({ value, duration = 2000 }: { value: number; duration?:
         animationFrame = requestAnimationFrame(animate);
 
         return () => cancelAnimationFrame(animationFrame);
-    }, [value, duration]);
+    }, [value, duration, mounted]);
+
+    // Return initial value on server/hydration to prevent mismatch
+    if (!mounted) {
+        return <span>{value}</span>;
+    }
 
     return <span>{count.toLocaleString()}</span>;
 }

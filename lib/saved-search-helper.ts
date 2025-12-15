@@ -92,7 +92,6 @@ export async function checkSavedSearchForUser(
 
       // Update seen listings
       const newListingIds = newListings.map((l: any) => l._id.$oid);
-      const updatedSeen = [...seenListingIds, ...newListingIds];
       await markListingsAsSeen(savedSearchId, newListingIds);
     }
 

@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 
-export default function Loading() {
+export default function ProfileLoading() {
   return (
     <div className="min-h-screen bg-linear-to-b from-background to-muted/30 py-8 px-4 md:px-0">
       <div className="max-w-2xl mx-auto">
@@ -25,7 +25,7 @@ export default function Loading() {
                   <Skeleton className="h-4 w-48" />
                 </div>
               </div>
-              {/* Button Skeleton */}
+              {/* Edit Button Skeleton */}
               <Skeleton className="h-10 w-32" />
             </div>
           </CardHeader>
@@ -40,14 +40,19 @@ export default function Loading() {
 
               {/* Email Field Skeleton */}
               <div className="p-4 rounded-lg bg-muted/50">
-                <Skeleton className="h-4 w-20 mb-3" />
-                <Skeleton className="h-6 w-48" />
+                <div className="flex items-center gap-3">
+                  <Skeleton className="w-5 h-5" />
+                  <div className="flex-1">
+                    <Skeleton className="h-4 w-20 mb-3" />
+                    <Skeleton className="h-6 w-48" />
+                  </div>
+                </div>
               </div>
 
               {/* Avatar Status Skeleton */}
               <div className="p-4 rounded-lg bg-muted/50">
                 <Skeleton className="h-4 w-28 mb-3" />
-                <Skeleton className="h-6 w-24" />
+                <Skeleton className="h-6 w-40" />
               </div>
 
               {/* Member Since Skeleton */}
@@ -59,10 +64,11 @@ export default function Loading() {
           </CardContent>
         </Card>
 
-        {/* Additional Info Skeleton */}
+        {/* Account Security Section Skeleton */}
         <div className="mt-8 p-6 rounded-lg bg-muted/30 border border-muted/50">
           <Skeleton className="h-6 w-40 mb-4" />
           <Skeleton className="h-4 w-full mb-3" />
+          <Skeleton className="h-4 w-96 mb-4" />
           <Skeleton className="h-10 w-40" />
         </div>
       </div>

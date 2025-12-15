@@ -32,7 +32,7 @@ function Navbar({ session }: { session: Session | null }) {
   return (
     <>
       <nav
-        className={` absolute  top-0 left-0 w-full z-50 transition-all duration-500 ${scrolled ? "bg-white dark:bg-gradient-to-br dark:from-card dark:via-card dark:to-muted shadow-md fixed" : "bg-transparent"
+        className={` absolute  top-0 left-0 w-full z-50 transition-all duration-500 ${scrolled ? "bg-white dark:bg-linear-to-br dark:from-card dark:via-card dark:to-muted shadow-md fixed" : "bg-transparent"
           }`}
       >
         <Continer className="flex justify-between md:flex-row md:justify-between md:items-center flex-wrap py-5 gap-4">

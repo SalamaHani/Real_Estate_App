@@ -2,23 +2,31 @@
 import React, { useState } from "react";
 import { MotionDiv, Motionh1, MotionP } from "../motindev";
 import { Search } from "lucide-react";
-import { Listing } from "@prisma/client";
+import { listing } from "@prisma/client";
 import { useDebouncedCallback } from "use-debounce";
 import { SershQuerlisting } from "@/utils/actions";
+import { useRouter } from "next/navigation";
+
 type QueryResult = {
-  listing: Listing[];
+  listing: listing[];
   citys: string[];
 };
+
 function HeroSection() {
+  const router = useRouter();
   const [isOpen, setIsopen] = useState(false);
   const [Parmes, setParmes] = useState("");
   const [activeIndex, setActiveIndex] = useState<number>(-1);
   const [query, setQuery] = useState<QueryResult>({ listing: [], citys: [] });
+
   //handel fetsh servar action
-  const retunequer = async (val: string) => {
-    const liset = await SershQuerlisting(val);
-    return liset;
+  //handel navigate to listing page with city filter
+  const handleNavigateToListing = (city: string) => {
+    setIsopen(false);
+    setParmes("");
+    router.push(`/listing?city=${encodeURIComponent(city)}`);
   };
+
   //handel keypordss
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (query.listing.length && query.citys.length === 0) return;
@@ -32,12 +40,15 @@ function HeroSection() {
       setActiveIndex((prev) => (prev <= 0 ? lethquery - 1 : prev - 1));
     }
     if (e.key === "Enter" && activeIndex >= 0) {
-      alert(`Selected: ${query.citys[activeIndex]}`);
+      if (activeIndex < query.citys.length) {
+        handleNavigateToListing(query.citys[activeIndex]);
+      }
     }
   };
+
   //handel sersh query
   const handleSearch = useDebouncedCallback(async (value: string) => {
-    const querey = await retunequer(value);
+    const querey = await SershQuerlisting(value);
     setQuery(querey);
   }, 500);
 
@@ -81,7 +92,7 @@ function HeroSection() {
         >
           Enter the property address to see the home valuation report
         </MotionP>
-        <div className="relative w-[100%] ">
+        <div className="relative w-full">
           <div className=" flex flex-1 w-full ">
             <input
               type="text"
@@ -101,7 +112,7 @@ function HeroSection() {
               value={Parmes}
               className={`pl-3 py-3 bg-gray-50 dark:bg-popover dark:text-white  h-15  flex-1 px-3  border-none  outline-none transition-all duration-300  focus:border-none  rounded-md ${isOpen ? "rounded-b-none" : ""}    text-black dark:placeholder:text-white placeholder:text-gray-800 `}
             />
-            <button className="px-4 absolute right-0 top-[16px]  text-gray-400  hover:text-gray-700">
+            <button className="px-4 absolute right-0 top-4 text-primary\10 hover:text-primary">
               <Search />
             </button>
           </div>
@@ -136,11 +147,9 @@ function HeroSection() {
                         <button
                           key={index}
                           tabIndex={globalIndex}
-                          //   onMouseDown={() =>
-                          //     handleSuggestedSearch(city ?? "", "city")
-                          //   }
+                          onMouseDown={() => handleNavigateToListing(city)}
                           onFocus={() => setActiveIndex(globalIndex)}
-                          className={`focus:bg-accent focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-primary/10 dark:data-[variant=destructive]:focus:bg-primary/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-muted :hoverborder-l-2 hover:border-primary border-primary  w-full ${activeIndex == globalIndex ? "bg-muted  border-l-2  border-primary" : ""} data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4`}
+                          className={`focus:bg-accent text-primary  focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-primary/10 dark:data-[variant=destructive]:focus:bg-primary/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:text-destructive! [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-disabled:pointer-events-none data-disabled:opacity-50 hover:bg-muted :hoverborder-l-2 hover:border-primary border-primary w-full ${activeIndex == globalIndex ? "bg-muted border-l-2 border-primary" : ""} data-inset:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4`}
                           style={{
                             animationDelay: `${index * 50}ms`,
                           }}
@@ -170,14 +179,19 @@ function HeroSection() {
                     <button
                       tabIndex={globalIndex}
                       key={index}
-                      //   onMouseDown={() =>
-                      //     handleSuggestedSearch(
-                      //       search?.location?.street_address ?? "",
-                      //       "address"
-                      //     )
-                      //   }
+                      onMouseDown={() => {
+                        const city =
+                          search.location?.city ||
+                          search.location?.street_address
+                            ?.split(",")[1]
+                            ?.trim() ||
+                          "";
+                        if (city) {
+                          handleNavigateToListing(city);
+                        }
+                      }}
                       onFocus={() => setActiveIndex(globalIndex)}
-                      className={`focus:bg-accent focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-muted :hoverborder-l-2 hover:border-primary border-primary  w-full ${activeIndex == globalIndex ? "bg-muted  border-l-2  border-primary" : ""} data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4`}
+                      className={`focus:bg-accent text-primary focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:text-destructive! [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-disabled:pointer-events-none data-disabled:opacity-50 hover:bg-muted :hoverborder-l-2 hover:border-primary border-primary  w-full ${activeIndex == globalIndex ? "bg-muted  border-l-2  border-primary" : ""} data-inset:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4`}
                       style={{
                         animationDelay: `${index * 50}ms`,
                       }}

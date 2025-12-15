@@ -52,7 +52,7 @@ export default function NotificationBell({
       />
       {displayCount > 0 && (
         <span
-          className={`absolute -top-2 -right-1 min-w-[20px] h-5 flex items-center justify-center px-1.5 text-xs font-bold text-white bg-accent rounded-full shadow-lg ${
+          className={`absolute -top-2 -right-1 min-w-5 h-5 flex items-center justify-center px-1.5 text-xs font-bold text-white bg-accent rounded-full shadow-lg ${
             displayCount > 99 ? "text-[10px]" : ""
           } ${newNotificationPulse ? "animate-bounce" : "animate-pulse"}`}
         >

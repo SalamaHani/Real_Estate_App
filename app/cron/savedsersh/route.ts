@@ -1,4 +1,4 @@
-import { NextResponse, NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import prisma from "@/utils/db";
 import { sendNotificationEvent } from "@/lib/pusher-server";
 
@@ -9,7 +9,7 @@ import { sendNotificationEvent } from "@/lib/pusher-server";
  * Usage: GET /api/cron/savedsersh
  * Or setup with cron service like Vercel Cron, GitHub Actions, etc.
  */
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     console.log("🔍 Starting saved search notification cron job...");
 
@@ -43,16 +43,17 @@ export async function GET(request: NextRequest) {
     for (const savedSearch of savedSearches) {
       try {
         // Parse query parameters
-        const query = savedSearch.qury as Record<string, any>;
+        const query = savedSearch.qury as Record<string, string>;
 
         // Build MongoDB filter from saved search query
-        const filter: any = {};
+        const filter: Record<string, unknown> = {};
 
         // Price range
         if (query.Minimam !== undefined || query.Maximam !== undefined) {
           filter.price = {};
-          if (query.Minimam !== undefined) filter.price.$gte = Number(query.Minimam);
-          if (query.Maximam !== undefined) filter.price.$lte = Number(query.Maximam);
+          const priceFilter = filter.price as Record<string, unknown>;
+          if (query.Minimam !== undefined) (priceFilter as Record<string, number>).$gte = Number(query.Minimam);
+          if (query.Maximam !== undefined) (priceFilter as Record<string, number>).$lte = Number(query.Maximam);
         }
 
         // Bedrooms
@@ -93,16 +94,16 @@ export async function GET(request: NextRequest) {
         // Find new listings matching the criteria that haven't been seen
         const matchingListings = await prisma.$runCommandRaw({
           find: "listing",
-          filter,
+          filter: filter as Record<string, unknown>,
           limit: 10, // Limit to prevent overwhelming users
           sort: { createdAt: -1 }, // Get newest first
-        }) as any;
+        }) as { cursor: { firstBatch: Array<Record<string, unknown>> } };
 
         const listings = matchingListings?.cursor?.firstBatch || [];
 
         // Filter out listings that have already been seen
-        const newListings = listings.filter((listing: any) => {
-          const listingId = listing._id.$oid;
+        const newListings = listings.filter((listing: Record<string, unknown>) => {
+          const listingId = (listing._id as { $oid: string }).$oid;
           return !seenListingIds.includes(listingId);
         });
 
@@ -125,13 +126,13 @@ export async function GET(request: NextRequest) {
               type: "NEW_LISTING",
               title: `🏡 ${newListings.length} New ${newListings.length === 1 ? 'Property' : 'Properties'} Found!`,
               message: `Great news ${userName}! We found ${newListings.length} new ${newListings.length === 1 ? 'property' : 'properties'} matching your saved search "${savedSearch.nameSearch}". Check them out now!`,
-              link: `/sersh?${new URLSearchParams(query as any).toString()}`,
+              link: `/sersh?${new URLSearchParams(query).toString()}`,
               isRead: false,
               metadata: JSON.stringify({
                 savedSearchId: savedSearch.id,
                 savedSearchName: savedSearch.nameSearch,
                 listingCount: newListings.length,
-                listingIds: newListings.map((l: any) => l._id.$oid),
+                listingIds: newListings.map((l: Record<string, unknown>) => (l._id as { $oid: string }).$oid),
               }),
             },
           });
@@ -148,7 +149,7 @@ export async function GET(request: NextRequest) {
           await sendNotificationEvent(savedSearch.userId, notification, unreadCount);
 
           // Update listingseent array with new listing IDs
-          const newListingIds = newListings.map((listing: any) => listing._id.$oid);
+          const newListingIds = newListings.map((listing: Record<string, unknown>) => (listing._id as { $oid: string }).$oid);
           const updatedSeenListings = [...seenListingIds, ...newListingIds];
 
           await prisma.seavdsearchuser.update({

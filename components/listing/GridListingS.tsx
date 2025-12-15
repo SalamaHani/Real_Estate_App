@@ -1,5 +1,5 @@
 import React from "react";
-import { Listing } from "@prisma/client";
+import { listing } from "@prisma/client";
 import { CheckCircle, Clock, House, HousePlus, MapPin } from "lucide-react";
 import { Badge } from "../ui/badge";
 import FavoriteToggleButton from "./FavaretToggel";
@@ -28,7 +28,7 @@ function GridListingS({
   listing,
   hiden_map,
 }: {
-  listing: Listing[];
+  listing: listing[];
   hiden_map?: string;
 }) {
   const getStatusConfig = (statusName: string) => {
@@ -102,10 +102,10 @@ function GridListingS({
                   <Card className="overflow-hidden pt-0 h-full flex flex-col">
                     <Carousel className="w-full">
                       <CarouselContent>
-                        {photos.map((src, i) => (
+                        {photos.map((src: string, i: number) => (
                           <CarouselItem
                             key={i}
-                            className="relative aspect-[16/10]"
+                            className="relative aspect-16/10"
                           >
                             {photos.length == 1 ? null : (
                               <CarouselPrevious className="left-4 sm:left-8" />
@@ -120,16 +120,16 @@ function GridListingS({
                         ))}
                       </CarouselContent>
                     </Carousel>
-                    <CardHeader className="space-y-2 flex-shrink-0">
+                    <CardHeader className="space-y-2 shrink-0">
                       <Cardprice price={price ?? 0} />
                       <CardDescription className="flex items-center gap-1">
-                        <MapPin className="h-3 w-3 flex-shrink-0" />
+                        <MapPin className="h-3 w-3 shrink-0" />
                         <span className="truncate">
                           {location?.county} , {location?.city}
                         </span>
                       </CardDescription>
                     </CardHeader>
-                    <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 flex-grow">
+                    <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 grow">
                       <div className="flex flex-col justify-between">
                         <CardDescription>
                           <ul className="flex gap-2 sm:gap-3 md:gap-4 mb-0">

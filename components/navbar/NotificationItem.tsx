@@ -68,7 +68,7 @@ export default function NotificationItem({
             )}
 
             {/* Icon */}
-            <div className="flex-shrink-0 ml-2">
+            <div className="shrink-0 ml-2">
                 {getNotificationIcon(notification.type)}
             </div>
 

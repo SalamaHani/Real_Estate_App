@@ -28,7 +28,7 @@ export function useNotificationPusher(userId: string | undefined) {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [channel, setChannel] = useState<Channel | null>(null);
+  // const [channel, setChannel] = useState<Channel | null>(null);
 
   // Fetch initial notifications
   const fetchNotifications = useCallback(async () => {
@@ -123,7 +123,7 @@ export function useNotificationPusher(userId: string | undefined) {
       setUnreadCount(0);
     });
 
-    setChannel(userChannel);
+    // Channel is stored internally by Pusher subscription
 
     // Fetch initial data
     fetchNotifications();
@@ -133,7 +133,7 @@ export function useNotificationPusher(userId: string | undefined) {
       userChannel.unbind_all();
       pusherClient.unsubscribe(channelName);
     };
-  }, [userId, pusherClient, isConnected, fetchNotifications]);
+  }, [userId, pusherClient, isConnected, fetchNotifications, unreadCount]);
 
   return {
     notifications,

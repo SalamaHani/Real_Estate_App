@@ -107,7 +107,7 @@ export default function NotificationDropdown({
   return (
     <div
       ref={dropdownRef}
-      className="absolute right-0 top-full mt-2 w-96 max-w-[calc(100vw-2rem)] rounded-xl z-99999 overflow-hidden animate-in fade-in duration-200 dark:bg-gradient-to-br dark:from-card dark:via-card dark:to-muted"
+      className="absolute right-0 top-full mt-2 w-96 max-w-[calc(100vw-2rem)] rounded-xl z-99999 overflow-hidden animate-in fade-in duration-200 dark:bg-linear-to-br dark:from-card dark:via-card dark:to-muted"
       style={{
         zIndex: 999999,
         backdropFilter: "blur(16px) saturate(180%)",
@@ -118,7 +118,7 @@ export default function NotificationDropdown({
       }}
     >
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-border bg-gradient-to-r from-primary/5 to-primary/10">
+      <div className="flex items-center justify-between p-4 border-b border-border bg-linear-to-r from-primary/5 to-primary/10">
         <div className="flex items-center gap-2">
           <h3 className="text-lg font-bold text-foreground">Notifications</h3>
           {unreadCount > 0 && (
@@ -158,7 +158,7 @@ export default function NotificationDropdown({
 
       {/* Notification List */}
       <div
-        className="max-h-[500px] overflow-y-auto scroll-smooth"
+        className="max-h-125 overflow-y-auto scroll-smooth"
         style={{
           scrollbarWidth: "thin",
           scrollbarColor: "var(--color-primary) transparent",

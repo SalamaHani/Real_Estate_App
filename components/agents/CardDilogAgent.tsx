@@ -11,7 +11,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Agent } from "@prisma/client";
+import { listing } from "@prisma/client";
 import TextAreaInput from "../form/TextAreaInput";
 import { SubmitButton } from "../form/Buttons";
 import { Input } from "../ui/input";
@@ -24,13 +24,24 @@ import { toast } from "sonner";
 import AgentInfo from "../listing/AgentInfo";
 import { Send } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+
+interface AgentData {
+  full_name?: string;
+  email?: string;
+  phone?: string;
+  photo?: string;
+  brokerage_name?: string;
+}
+
 const initialState: ActionAgent = {
   success: false,
   message: "",
 };
-function CardDilogAgent({ Agent }: { Agent?: Agent | null }) {
+
+function CardDilogAgent({ Agent }: { Agent?: AgentData | null }) {
   const [open, setOpen] = React.useState(false);
-  const [state, action] = useActionState(SendAgent, initialState);
+  const [state, action, isPending] = useActionState(SendAgent, initialState);
+
   React.useEffect(() => {
     if (state?.success) {
       setOpen(false);
@@ -88,33 +99,37 @@ function CardDilogAgent({ Agent }: { Agent?: Agent | null }) {
                       name="FirstName"
                       id="FirstName"
                       type="text"
-                      defaultValue={state.Data?.FirstName}
+                      defaultValue={state.Data?.FirstName || ""}
+                      placeholder="Enter your first name"
+                      disabled={isPending}
                       className={
                         state?.errors?.FirstName ? "border-red-500" : ""
                       }
                     />
                     {state.errors?.FirstName && (
-                      <p className="text-red-500 text-xs">
-                        {state.errors.FirstName}
+                      <p className="text-red-500 text-xs mt-1">
+                        {state.errors.FirstName[0]}
                       </p>
                     )}
                   </div>
                   <div className="w-[50%]">
-                    <Label className="mb-2" htmlFor="FirstName">
+                    <Label className="mb-2" htmlFor="LastName">
                       Last Name <span className="text-red-500">*</span>
                     </Label>
                     <Input
                       name="LastName"
                       id="LastName"
                       type="text"
-                      defaultValue={state.Data?.LastName}
+                      defaultValue={state.Data?.LastName || ""}
+                      placeholder="Enter your last name"
+                      disabled={isPending}
                       className={
                         state?.errors?.LastName ? "border-red-500" : ""
                       }
                     />
                     {state.errors?.LastName && (
-                      <p className="text-red-500 text-xs">
-                        {state.errors.LastName}
+                      <p className="text-red-500 text-xs mt-1">
+                        {state.errors.LastName[0]}
                       </p>
                     )}
                   </div>
@@ -128,12 +143,14 @@ function CardDilogAgent({ Agent }: { Agent?: Agent | null }) {
                       name="email"
                       id="email"
                       type="email"
-                      defaultValue={state.Data?.email}
+                      defaultValue={state.Data?.email || ""}
+                      placeholder="your@email.com"
+                      disabled={isPending}
                       className={state?.errors?.email ? "border-red-500" : ""}
                     />
                     {state.errors?.email && (
-                      <p className="text-red-500 text-xs">
-                        {state.errors.email}
+                      <p className="text-red-500 text-xs mt-1">
+                        {state.errors.email[0]}
                       </p>
                     )}
                   </div>
@@ -143,37 +160,45 @@ function CardDilogAgent({ Agent }: { Agent?: Agent | null }) {
                     </Label>
                     <Input
                       name="Phone"
-                      type="number"
-                      defaultValue={state.Data?.Phone}
+                      id="Phone"
+                      type="tel"
+                      defaultValue={state.Data?.Phone || ""}
+                      placeholder="+1 (555) 123-4567"
+                      disabled={isPending}
                       className={state?.errors?.Phone ? "border-red-500" : ""}
                     />
                     {state.errors?.Phone && (
-                      <p className="text-red-500 text-xs">
-                        {state.errors.Phone}
+                      <p className="text-red-500 text-xs mt-1">
+                        {state.errors.Phone[0]}
                       </p>
                     )}
                   </div>
                 </div>
                 <TextAreaInput
-                  name="Listing Notes"
-                  labelText="Order Notes"
-                  defaultValue="Add any additional instructions or comments here..."
+                  name="message"
+                  labelText="Message"
+                  defaultValue=""
+                  placeholder="Add any questions or additional information here..."
                 />
                 <input
                   type="hidden"
                   name="agentemail"
-                  value={Agent?.email}
+                  value={Agent?.email || ""}
                   readOnly
                 />
               </div>
             </div>
             <DialogFooter className="mt-7">
               <DialogClose asChild>
-                <Button size="lg" variant="destructive">
+                <Button size="lg" variant="destructive" disabled={isPending}>
                   Cancel
                 </Button>
               </DialogClose>
-              <SubmitButton text="Contact Agent" />
+              <SubmitButton 
+                text="Contact Agent"
+                disabled={isPending}
+                loading={isPending}
+              />
             </DialogFooter>
           </form>
         </div>

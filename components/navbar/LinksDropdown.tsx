@@ -24,7 +24,7 @@ function LinksDropdown({ session }: { session: Session | null }) {
       <DropdownMenuTrigger asChild>
         <Button
           variant="outline"
-          className="flex gap-4 max-w-[100px] dark:hover:bg-muted   hover:bg-muted "
+          className="flex gap-4 max-w-25 dark:hover:bg-muted   hover:bg-muted "
         >
           <LuAlignLeft className="w-6 h-6 text-primary" />
           {session ? (
