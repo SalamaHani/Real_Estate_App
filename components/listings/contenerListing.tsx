@@ -10,7 +10,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-function ContenerListing({ cuntryar }: { cuntryar: Areacuntry }) {
+function Contenerlisting({ cuntryar }: { cuntryar: Areacuntry }) {
   const { name, photos } = cuntryar;
   return (
     <>
@@ -45,4 +45,4 @@ function ContenerListing({ cuntryar }: { cuntryar: Areacuntry }) {
   );
 }
 
-export default ContenerListing;
+export default Contenerlisting;

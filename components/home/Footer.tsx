@@ -14,7 +14,7 @@ function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Column 1: Company Info */}
           <div className="space-y-4 text-center sm:text-left">
-            <Logo scrolled={false} />
+            <Logo  />
             <p className="text-muted-foreground text-sm leading-relaxed max-w-xs mx-auto sm:mx-0">
               Premier real estate services delivering exceptional results for buyers and sellers across the region.
             </p>

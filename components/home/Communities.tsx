@@ -1,7 +1,7 @@
 import React from "react";
 import TitelSection from "../global/TitelSection";
 // import imgese from "../../public/imges/pexels-pixabay-280229.jpg";
-import ContenerListing from "../listings/ContenerListing";
+import Contenerlisting from "../listings/Contenerlisting";
 import { fetshAraeacuntry } from "@/utils/actions";
 async function Communities() {
   const cuntty = await fetshAraeacuntry();
@@ -16,7 +16,7 @@ async function Communities() {
                 key={item.id}
                 className="col-span-12 sm:col-span-6 md:col-span-4"
               >
-                <ContenerListing cuntryar={item} />
+                <Contenerlisting cuntryar={item} />
               </div>
             );
           })}
