@@ -1,7 +1,7 @@
 import React from "react";
 import TitelSection from "../global/TitelSection";
 import { fetshAraeacuntry } from "@/utils/actions";
-import Contenerlisting from "../listings/ContenerListing";
+import Contenerlisting from "../listings/Contenerlisting";
 //fvdecfrvd
 async function Communities() {
   const cuntty = await fetshAraeacuntry();
