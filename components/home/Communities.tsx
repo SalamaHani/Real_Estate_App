@@ -1,8 +1,7 @@
 import React from "react";
 import TitelSection from "../global/TitelSection";
-// import imgese from "../../public/imges/pexels-pixabay-280229.jpg";
-import Contenerlisting from "../listings/Contenerlisting";
 import { fetshAraeacuntry } from "@/utils/actions";
+import Contenerlisting from "../listings/Contenerlisting";
 async function Communities() {
   const cuntty = await fetshAraeacuntry();
   return (
