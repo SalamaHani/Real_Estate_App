@@ -9,6 +9,7 @@ import { revalidatePath } from "next/cache";
 /**
  * Server action to create a new listing
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function createListingAction(data: any) {
     try {
         const session = await getSession();
@@ -37,6 +38,7 @@ export async function createListingAction(data: any) {
         const validatedData = validation.data;
 
         // Prepare listing data with proper types for Prisma
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const listingData: any = {
             price: validatedData.price,
             bedrooms: BigInt(validatedData.bedrooms),
@@ -113,6 +115,7 @@ export async function createListingAction(data: any) {
 /**
  * Server action to update a listing
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function updateListingAction(listingId: string, data: any) {
     "use server";
     try {
@@ -133,6 +136,7 @@ export async function updateListingAction(listingId: string, data: any) {
         const validatedData = validation.data;
 
         // Prepare update data
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const updateData: any = {};
 
         if (validatedData.price !== undefined) updateData.price = validatedData.price;

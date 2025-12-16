@@ -2,7 +2,6 @@
 
 import prisma from "@/utils/db";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import { getSession } from "@/utils/users";
 import { CreateListingSchema } from "@/utils/schema";
 
@@ -86,6 +85,7 @@ export async function createListingAction(formData: FormData) {
         const validatedData = validation.data;
 
         // Prepare data for Prisma with proper type annotation to avoid TypeScript errors
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const listingData: any = {
             ...validatedData,
             bedrooms: BigInt(validatedData.bedrooms),
