@@ -26,10 +26,12 @@ const initialState = {
 
 export default function EditListingPage({ params }: { params: { id: string } }) {
     const router = useRouter();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [listing, setListing] = useState<any>(null);
     const [loading, setLoading] = useState(true);
 
     const [state, formAction, isPending] = useActionState(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         async (prevState: any, formData: FormData) => {
             const data = {
                 price: parseFloat(formData.get("price") as string),

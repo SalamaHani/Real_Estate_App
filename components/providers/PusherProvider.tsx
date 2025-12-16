@@ -35,6 +35,7 @@ export default function PusherProvider({ children }: PusherProviderProps) {
             setIsConnected(false);
         });
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         pusherClient.connection.bind("error", (error: any) => {
             console.error("Pusher connection error:", error);
         });
