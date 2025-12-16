@@ -16,11 +16,21 @@ function FavoriteToggleForm({
   favoriteId,
 }: FavoriteToggleFormProps) {
   const pathname = usePathname();
-  const toggleAction = toggleFavoriteAction.bind(null, {
-    listingId,
-    favoriteId,
-    pathname,
-  });
+  // const toggleAction = toggleFavoriteAction.bind(null, {
+  //   listingId,
+  //   favoriteId,
+  //   pathname,
+  // });
+  const toggleAction = async (): Promise<{ message: string }> => {
+    await toggleFavoriteAction.bind(null, {
+      listingId,
+      favoriteId,
+      pathname,
+    });
+    return {
+      message: "Favorite updated",
+    };
+  };
   return (
     <FormContainer
       className={cn(`${classname ? `relative` : ``}`)}

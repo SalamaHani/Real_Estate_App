@@ -36,7 +36,7 @@ function Navbar({ session }: { session: Session | null }) {
           }`}
       >
         <Continer className="flex justify-between md:flex-row md:justify-between md:items-center flex-wrap py-5 gap-4">
-          <Logo scrolled={scrolled} />
+          <Logo  />
           <div className="flex gap-4 items-center">
             <CurrencySelector />
             <DarkMode />

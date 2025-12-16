@@ -1,7 +1,7 @@
-import { Agent } from "@prisma/client";
+import { ListingAgents } from "@prisma/client";
 import React from "react";
 
-function AgentInfo({ Agent }: { Agent?: Agent | null }) {
+function AgentInfo({ Agent }: { Agent?: ListingAgents | null }) {
   return (
     <div className="flex justify-center items-center gap-x-2">
       <div className="flex flex-col justify-center">

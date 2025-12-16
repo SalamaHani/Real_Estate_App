@@ -1,28 +1,12 @@
 import React from "react";
 import CardAgent from "../home/CardAgent";
 import TitelSection from "../global/TitelSection";
+import { ListingAgents } from "@prisma/client";
 
 // Define Agent type based on database schema
-interface AgentType {
-  id?: string;
-  first_name?: string;
-  photo?: string;
-  full_name?: string;
-  brokerage_name?: string;
-  office_name?: string;
-  office_city?: string;
-  broker_email?: string;
-  office_line_number?: string;
-  email?: string;
-  social_media?: {
-    facebook?: string;
-    instagram?: string;
-    linkedin?: string;
-    twitter?: string;
-  };
-}
 
-function AgentsContenrr({ Agent }: { Agent: AgentType[] }) {
+
+function AgentsContenrr({ Agent }: { Agent: ListingAgents[] }) {
   return (
     <section className="mt-23">
       <TitelSection text="Here are a few agents that might fit your needs." />

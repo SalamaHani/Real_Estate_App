@@ -1,4 +1,4 @@
-import { Agent } from "@prisma/client";
+import { ListingAgents } from "@prisma/client";
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import React from "react";
 
@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Card, CardContent, CardDescription } from "../ui/card";
 import Imaglisting from "../listing/Imaglisting";
 
-function CardAgent({ Agent }: { Agent: Agent }) {
+function CardAgent({ Agent }: { Agent: ListingAgents }) {
   return (
     <Card className="flex-row overflow-hidden gap-1  pt-0 pb-0 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
       <Link

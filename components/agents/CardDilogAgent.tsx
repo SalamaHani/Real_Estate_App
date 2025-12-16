@@ -11,7 +11,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-
+import { ListingAgents } from "@prisma/client";
 import TextAreaInput from "../form/TextAreaInput";
 import { SubmitButton } from "../form/Buttons";
 import { Input } from "../ui/input";
@@ -25,20 +25,14 @@ import AgentInfo from "../listing/AgentInfo";
 import { Send } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
-interface AgentData {
-  full_name?: string;
-  email?: string;
-  phone?: string;
-  photo?: string;
-  brokerage_name?: string;
-}
+
 
 const initialState: ActionAgent = {
   success: false,
   message: "",
 };
 
-function CardDilogAgent({ Agent }: { Agent?: AgentData | null }) {
+function CardDilogAgent({ Agent }: { Agent?: ListingAgents | null }) {
   const [open, setOpen] = React.useState(false);
   const [state, action, isPending] = useActionState(SendAgent, initialState);
 

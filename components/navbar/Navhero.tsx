@@ -26,7 +26,7 @@ function Navhero({ session }: { session: Session | null }) {
       >
         <Continer className="flex justify-between items-center py-3 sm:py-4 md:py-5 gap-3 md:gap-4">
           {/* Logo */}
-          <Logo scrolled={isSearchPage} />
+          <Logo />
 
           {/* Right Side Actions */}
           <div className="flex gap-2 sm:gap-3 md:gap-4 items-center">

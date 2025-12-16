@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-import { Listing } from "@prisma/client";
+import { listing } from "@prisma/client";
 import {
   Card,
   CardContent,
@@ -21,7 +21,7 @@ import FavoriteToggleButton from "./FavaretToggel";
 import Imaglisting from "./Imaglisting";
 import Cardprice from "./Cardprice";
 
-function ListingGrid({ listing }: { listing: Listing[] }) {
+function ListingGrid({ listing }: { listing: listing[] }) {
   const getStatusConfig = (statusName: string) => {
     return statuse.find((s) => s.states === statusName) || statuse[3];
   };

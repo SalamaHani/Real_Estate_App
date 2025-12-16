@@ -1,5 +1,5 @@
 "use client";
-import { Listing } from "@prisma/client";
+import { listing } from "@prisma/client";
 import {
   APIProvider,
   Map,
@@ -10,7 +10,7 @@ import {
 import React, { useState } from "react";
 
 
-function MapFiltring({ listing }: { listing: Listing[] }) {
+function MapFiltring({ listing }: { listing: listing[] }) {
   const location = {
     lat: Number(listing[0]?.location?.lat) || -47.0369,
     lng: Number(listing[0]?.location?.lng) || 28.9072,

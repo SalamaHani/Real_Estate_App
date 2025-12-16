@@ -11,7 +11,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Agent } from "@prisma/client";
+import { ListingAgents } from "@prisma/client";
 import TextAreaInput from "../form/TextAreaInput";
 import { SubmitButton } from "../form/Buttons";
 import { UserRound } from "lucide-react";
@@ -32,7 +32,7 @@ function ContactAgentForm({
   Agent,
   listingId,
 }: {
-  Agent: Agent | null;
+  Agent: ListingAgents | null;
   listingId: string | undefined;
 }) {
   const [open, setOpen] = React.useState(false);

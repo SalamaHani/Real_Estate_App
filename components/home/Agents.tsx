@@ -2,32 +2,14 @@ import React from "react";
 import TitelSection from "../global/TitelSection";
 import CardAgent from "./CardAgent";
 import { fetshAgenys } from "@/utils/actions";
-interface AgentType {
-  id?: string;
-  first_name?: string;
-  photo?: string;
-  full_name?: string;
-  brokerage_name?: string;
-  office_name?: string;
-  office_city?: string;
-  broker_email?: string;
-  office_line_number?: string;
-  email?: string;
-  social_media?: {
-    facebook?: string;
-    instagram?: string;
-    linkedin?: string;
-    twitter?: string;
-  };
-}
-
+import { ListingAgents } from "@prisma/client";
 async function Agents() {
   const listingsWithAgents = await fetshAgenys();
-  const agents: AgentType[] = [];
+  const agents: ListingAgents[] = [];
   listingsWithAgents.map((listing) => {
     listing.agents.map((agent) => {
       if (
-        !agents.find((a: AgentType) => a.email === agent.email) &&
+        !agents.find((a: ListingAgents) => a.email === agent.email) &&
         agents.length < 4
       ) {
         agents.push(agent);
@@ -41,7 +23,7 @@ async function Agents() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
           {agents.map((item) => {
             return (
-              <div key={item.id}>
+              <div key={item.first_name}>
                 <CardAgent Agent={item} />
               </div>
             );

@@ -3,11 +3,9 @@ import React from "react";
 import Link from "next/link";
 import { Building2 } from "lucide-react";
 
-type NavbarProps = {
-  scrolled?: boolean;
-};
 
-function Logo({ scrolled }: NavbarProps) {
+
+function Logo() {
   return (
     <Link
       href="/"
@@ -21,7 +19,7 @@ function Logo({ scrolled }: NavbarProps) {
       {/* Text Logo */}
       <div className="flex flex-col leading-tight">
         <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-primary tracking-tight">
-          Barrington Group
+          AQuery Group
         </span>
         <span className="text-[10px] sm:text-xs text-muted-foreground uppercase tracking-wider font-medium -mt-1">
           Fine Properties

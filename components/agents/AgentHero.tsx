@@ -3,27 +3,11 @@ import Imaglisting from "../listing/Imaglisting";
 import CardDilogAgent from "./CardDilogAgent";
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import Link from "next/link";
+import { ListingAgents } from "@prisma/client";
 
 // Define Agent type based on database schema
-interface AgentType {
-  id?: string;
-  photo?: string;
-  full_name?: string;
-  brokerage_name?: string;
-  office_name?: string;
-  office_city?: string;
-  broker_email?: string;
-  office_line_number?: string;
-  email?: string;
-  social_media?: {
-    facebook?: string;
-    instagram?: string;
-    linkedin?: string;
-    twitter?: string;
-  };
-}
 
-function AgentHero({ Agent }: { Agent?: AgentType | null }) {
+function AgentHero({ Agent }: { Agent?: ListingAgents | null }) {
   return (
     <div className="w-full flex flex-wrap md:flex-nowrap  justify-between gap-6 mt-20 mb-20 ">
       <div className="w-full md:w-[40%] cursor-pointer">
