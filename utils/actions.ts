@@ -52,7 +52,7 @@ export const toggleFavoriteAction = async (prevState: {
   listingId: string;
   favoriteId: string | null;
   pathname: string;
-}) => {
+}): Promise<{ message: string }> => {
   const session = await getSession();
   const user = session?.user;
   if (user === null) redirect("/login");
@@ -78,7 +78,11 @@ export const toggleFavoriteAction = async (prevState: {
     revalidatePath(pathname);
     return { message: favoriteId ? "Removed from faves" : "Added to faves" };
   } catch (error) {
-    return error;
+    return {
+      message: error
+        ? "Error removing from favorites"
+        : "Error adding to favorites",
+    };
   }
 };
 export const fetchFavoriteId = async ({ listingId }: { listingId: string }) => {
@@ -570,7 +574,7 @@ export const deleteReview = async (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   prevState: any,
   formData: FormData
-) => {
+): Promise<{ message: string }> => {
   const reviewId = formData.get("reviewId") as string;
   const session = await getSession();
   const user = session?.user;
@@ -585,7 +589,9 @@ export const deleteReview = async (
     revalidatePath("/account/reviews");
     return { message: "review deleted " };
   } catch (error) {
-    return error;
+    return {
+      message: error ? "Error deleting review." : "Error deleting review.",
+    };
   }
 };
 // export const SaveSearchUserAction = async (
@@ -738,7 +744,7 @@ export const deleteSeaved = async (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   prevState: any,
   formData: FormData
-) => {
+): Promise<{ message: string }> => {
   const reviewId = formData.get("savedId") as string;
   const session = await getSession();
   const user = session?.user;
@@ -753,6 +759,10 @@ export const deleteSeaved = async (
     revalidatePath("/account/s");
     return { message: "Saved Searsh Deleted !" };
   } catch (error) {
-    return error;
+    return {
+      message: error
+        ? "Error deleting saved search."
+        : "Error deleting saved search.",
+    };
   }
 };

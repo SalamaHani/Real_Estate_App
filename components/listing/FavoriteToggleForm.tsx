@@ -12,7 +12,7 @@ type FavoriteToggleFormProps = {
 
 function FavoriteToggleForm({
   classname,
-  listingId,
+  listingId ,
   favoriteId,
 }: FavoriteToggleFormProps) {
   const pathname = usePathname();
