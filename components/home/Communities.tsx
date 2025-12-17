@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import TitelSection from "../global/TitelSection";
 import { fetshAraeacuntry } from "@/utils/actions";
@@ -10,7 +11,7 @@ async function Communities() {
       <TitelSection text={"Featured Communities"} />
       <div className="mt-12 mx-auto">
         <div className="grid sm:grid-cols-12 gap-4">
-          {cuntty.map((item) => {
+          {cuntty.map((item: any) => {
             return (
               <div
                 key={item.id}

@@ -22,7 +22,7 @@ async function Agents() {
       <TitelSection text={"Agents Specializing in Your Search Areas"} />
       <div className="max-w-340 px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
-          {agents.map((item) => {
+          {agents.map((item: ListingAgents) => {
             return (
               <div key={item.first_name}>
                 <CardAgent Agent={item} />

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import TitelSection from "../global/TitelSection";
 import { Feauterdlistings } from "@/utils/actions";
@@ -9,7 +10,7 @@ async function Featured() {
     <section className="mt-23">
       <TitelSection text={"Featured Listings Homes"} />
       <div>
-        <ListingGrid listing={Featurdlisting} />
+        <ListingGrid listing={Featurdlisting as any} />
       </div>
     </section>
   );
