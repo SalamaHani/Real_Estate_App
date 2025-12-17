@@ -19,8 +19,9 @@ import Link from "next/link";
 import Imaglisting from "../listing/Imaglisting";
 import Cardprice from "../listing/Cardprice";
 import FavoriteToggleButton from "../listing/FavaretToggel";
+import { Listing } from "@/utils/Tayp";
 
-function ListingOfagent({ listing }: { listing: listing }) {
+function ListingOfagent({ listing }: { listing: Listing }) {
   const getStatusConfig = (statusName: string) => {
     return statuse.find((s) => s.states === statusName) || statuse[3];
   };

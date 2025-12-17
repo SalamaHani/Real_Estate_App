@@ -4,11 +4,12 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { Search, X } from "lucide-react";
 import { useDebouncedCallback } from "use-debounce";
 import { useEffect, useState } from "react";
-import { listing } from "@prisma/client";
+
 import { Badge } from "../ui/badge";
 import { formatPrice } from "@/utils/format";
+import { Listing } from "@/utils/Tayp";
 type QueryResult = {
-  listing: listing[];
+  listing: Listing[];
   citys: string[];
 };
 type KeyValue = {

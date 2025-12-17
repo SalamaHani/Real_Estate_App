@@ -1,5 +1,5 @@
 import React from "react";
-import { listing } from "@prisma/client";
+
 import { CheckCircle, Clock, House, HousePlus, MapPin } from "lucide-react";
 import { Badge } from "../ui/badge";
 import FavoriteToggleButton from "./FavaretToggel";
@@ -23,12 +23,13 @@ import NoreseltListing from "./NoreseltListing";
 import { ScrollArea } from "../ui/scroll-area";
 import Continer from "../global/Continer";
 import Cardprice from "./Cardprice";
+import { Listing } from "@/utils/Tayp";
 
 function GridListingS({
   listing,
   hiden_map,
 }: {
-  listing: listing[];
+  listing: Listing[];
   hiden_map?: string;
 }) {
   const getStatusConfig = (statusName: string) => {

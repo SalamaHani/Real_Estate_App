@@ -2,13 +2,14 @@
 import React, { useState } from "react";
 import { MotionDiv, Motionh1, MotionP } from "../motindev";
 import { Search } from "lucide-react";
-import { listing } from "@prisma/client";
+
 import { useDebouncedCallback } from "use-debounce";
 import { SershQuerlisting } from "@/utils/actions";
 import { useRouter } from "next/navigation";
+import { Listing } from "@/utils/Tayp";
 
 type QueryResult = {
-  listing: listing[];
+  listing: Listing [];
   citys: string[];
 };
 

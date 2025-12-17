@@ -25,7 +25,6 @@ import {
   deleteListingAction,
 } from "@/utils/admin-listing-actions";
 
-import { listing } from "@prisma/client";
 
 export default function ListingsPage() {
   const router = useRouter();

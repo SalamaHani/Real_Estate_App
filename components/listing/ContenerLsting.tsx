@@ -1,11 +1,12 @@
-import { listing } from "@prisma/client";
+
 import ShowMap from "../sersh/ShowMap";
 import GridListingS from "./GridListingS";
 import PaginationListing from "../global/Pgenation";
 import MapFiltring from "./MapFiltring";
+import { Listing } from "@/utils/Tayp";
 
 type DataListing = {
-  listings: listing[];
+  listings: Listing[];
   metadata: {
     total: number;
     totalPage: number;
