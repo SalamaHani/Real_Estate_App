@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { IconButton } from "@/components/form/Buttons";
 import FormContainer from "@/components/form/FormContener";
 import Continer from "@/components/global/Continer";
@@ -15,7 +16,7 @@ async function page() {
     <Continer className="mt-20">
       <TitelSection text="Your Reviews" />
       <section className="grid md:grid-cols-2 gap-8 pt-12">
-        {reviews.map((review) => {
+        {reviews.map((review: any) => {
           const { comment, rating, authorName, createdAt } = review;
           const reviewInfo = { comment, rating, authorName, createdAt };
           return (
@@ -38,14 +39,8 @@ async function page() {
   );
 }
 const DeleteReview = ({ reviewId }: { reviewId: string }) => {
-  const deletreveiw = async (): Promise<{ message: string }> => {
-    await deleteReview.bind(null, { reviewId });
-    return {
-      message: "Reviw deleted",
-    };
-  };
   return (
-    <FormContainer className="" action={deletreveiw}>
+    <FormContainer className="" action={deleteReview}>
       <input type="text" readOnly hidden name="reviewId" value={reviewId} />
       <IconButton actionType="delete" />
     </FormContainer>

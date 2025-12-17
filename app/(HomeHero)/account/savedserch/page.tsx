@@ -94,14 +94,8 @@ async function page() {
   );
 }
 const DeleteSeaved = ({ seavedId }: { seavedId: string }) => {
-  const deleteSeavede = async (): Promise<{ message: string }> => {
-    await deleteSeaved.bind(null, { seavedId });
-    return {
-      message: "Saved Searsh deleted",  
-    };
-  };
   return (
-    <FormContainer className="" action={deleteSeavede}>
+    <FormContainer className="" action={deleteSeaved}>
       <input type="text" readOnly hidden name="savedId" value={seavedId} />
       <IconButton actionType="delete" />
     </FormContainer>
