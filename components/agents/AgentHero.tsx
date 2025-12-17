@@ -3,7 +3,8 @@ import Imaglisting from "../listing/Imaglisting";
 import CardDilogAgent from "./CardDilogAgent";
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import Link from "next/link";
-import { ListingAgents } from "@/utils/Tayp";
+import { ListingAgents } from "@prisma/client";
+
 
 
 // Define Agent type based on database schema

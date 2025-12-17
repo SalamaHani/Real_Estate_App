@@ -1,7 +1,8 @@
 import React from "react";
 import CardAgent from "../home/CardAgent";
 import TitelSection from "../global/TitelSection";
-import { ListingAgents } from "@/utils/Tayp";
+import { ListingAgents } from "@prisma/client";
+
 
 
 // Define Agent type based on database schema

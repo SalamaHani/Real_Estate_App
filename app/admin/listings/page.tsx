@@ -24,11 +24,12 @@ import {
   fetchListingsAction,
   deleteListingAction,
 } from "@/utils/admin-listing-actions";
+import { Listing } from "@/utils/Tayp";
 
 
 export default function ListingsPage() {
   const router = useRouter();
-  const [listings, setListings] = useState<listing[]>([]);
+  const [listings, setListings] = useState<Listing[]>([]);
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState<string | null>(null);
   const [pagination, setPagination] = useState({
@@ -51,7 +52,6 @@ export default function ListingsPage() {
       );
 
       if (result.success) {
-        setListings(result.listings);
         setPagination((prev) => ({ ...prev, ...result.pagination }));
       } else {
         toast.error(result.error || "Failed to fetch listings");
