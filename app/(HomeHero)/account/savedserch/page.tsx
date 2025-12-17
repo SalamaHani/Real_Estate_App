@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Continer from "@/components/global/Continer";
 import TitelSection from "@/components/global/TitelSection";
 import { MotionDiv } from "@/components/motindev";
@@ -22,7 +23,7 @@ async function page() {
     <Continer className="mt-20">
       <TitelSection text="Your Saved Searsh" />
       <section className="grid md:grid-cols-2 gap-8 pt-12">
-        {savedsearsh.map((saved) => {
+        {savedsearsh.map((saved: any) => {
           const { nameSearch, email_frequency, url, createdAt } = saved;
           return (
             <MotionDiv

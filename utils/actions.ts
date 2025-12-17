@@ -587,7 +587,7 @@ export const deleteReview = async (
       },
     });
     revalidatePath("/account/reviews");
-    return { message: "review deleted " };
+    return { message: "review deleted" };
   } catch (error) {
     return {
       message: error ? "Error deleting review." : "Error deleting review.",
