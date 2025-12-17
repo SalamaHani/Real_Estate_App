@@ -1,5 +1,4 @@
 import React from "react";
-import { listing } from "@prisma/client";
 import { CheckCircle, Clock, House, HousePlus, MapPin } from "lucide-react";
 import { Badge } from "../ui/badge";
 import {
