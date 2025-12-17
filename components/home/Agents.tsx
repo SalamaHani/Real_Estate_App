@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import TitelSection from "../global/TitelSection";
 import CardAgent from "./CardAgent";
@@ -6,8 +7,8 @@ import { ListingAgents } from "@/utils/Tayp";
 async function Agents() {
   const listingsWithAgents = await fetshAgenys();
   const agents: ListingAgents[] = [];
-  listingsWithAgents.map((listing) => {
-    listing.agents.map((agent) => {
+  listingsWithAgents.map((listing: any) => {
+    listing.agents.map((agent: any) => {
       if (
         !agents.find((a: ListingAgents) => a.email === agent.email) &&
         agents.length < 4
