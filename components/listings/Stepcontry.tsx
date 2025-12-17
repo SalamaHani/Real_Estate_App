@@ -1,6 +1,6 @@
 import React from "react";
 import Avrgcntry from "./Avrgcntry";
-import { Areacuntry } from "@prisma/client";
+import { Areacuntry } from "@/utils/Tayp";
 import { Button } from "../ui/button";
 import { Phone } from "lucide-react";
 

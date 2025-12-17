@@ -11,8 +11,8 @@ import {
 import React from "react";
 import HTMLContent from "../global/HtmalCont";
 import { Card } from "../ui/card";
-import { Areacuntry } from "@prisma/client";
 import TitelSection from "../global/TitelSection";
+import { Areacuntry } from "@/utils/Tayp";
 function Contatrycont({ cuntryprparty }: { cuntryprparty: Areacuntry | null }) {
   return (
     <div className="pb-10 pt-10">

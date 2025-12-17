@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { MapPin } from "lucide-react";
-import { Areacuntry } from "@prisma/client";
+import { Areacuntry } from "@/utils/Tayp";
 import Imaglisting from "../listing/Imaglisting";
 import {
   Carousel,

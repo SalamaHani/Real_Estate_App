@@ -65,6 +65,28 @@ export interface CuantersT {
 }
 
 // types/prismaModels.ts
+export interface Areacuntry {
+  id: string;
+  AboutAllCountry: bigint;
+  AvgWorkCommute: bigint;
+  Catholic: bigint;
+  Maps: string;
+  MedianAge: bigint;
+  MedianAreaIncome: bigint;
+  MedianSalePrice: bigint;
+  Mosques: bigint;
+  Stores: bigint;
+  Universities: bigint;
+  areaKm2: number;
+  description: string;
+  hospitalsCount: bigint;
+  living_area: bigint;
+  name: string;
+  photos: string[];
+  population: bigint;
+  property_type: string;
+  schoolsCount: bigint;
+}
 
 export interface ListingAgentsSocialMedia {
   facebook?: string;
