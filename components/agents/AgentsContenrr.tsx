@@ -1,7 +1,7 @@
 import React from "react";
 import CardAgent from "../home/CardAgent";
 import TitelSection from "../global/TitelSection";
-import { ListingAgents } from "@prisma/client";
+import { ListingAgents } from "@/utils/Tayp";
 
 
 

@@ -11,14 +11,14 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { ListingAgents } from "@prisma/client";
+
 import TextAreaInput from "../form/TextAreaInput";
 import { SubmitButton } from "../form/Buttons";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Separator } from "../ui/separator";
-import { ActionAgent } from "@/utils/Tayp";
+import { ActionAgent, ListingAgents } from "@/utils/Tayp";
 import { SendAgent } from "@/utils/actions";
 import { toast } from "sonner";
 import AgentInfo from "../listing/AgentInfo";

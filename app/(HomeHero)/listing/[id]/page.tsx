@@ -10,6 +10,7 @@ import TitelListingt from "@/components/listings/TitelListingt";
 import { ReviewDiloge } from "@/components/reviews/ReviewDiloge";
 import { Button } from "@/components/ui/button";
 import { fetchlistingById } from "@/utils/actions";
+import { ListingAgents } from "@/utils/Tayp";
 import React from "react";
 type ProductEditPageProps = {
   params: Promise<{
@@ -42,7 +43,7 @@ async function page({ params }: ProductEditPageProps) {
               <ShareButton name={listung?.mls_name ?? ""} listingId={id} />
               <ContactAgentForm
                 listingId={listung?.id ?? ""}
-                Agent={listung?.agents[0] ?? null}
+                Agent={listung?.agents[0] as ListingAgents ?? null}
               />
               <ReviewDiloge listingId={listung?.id ?? ""} />
             </div>

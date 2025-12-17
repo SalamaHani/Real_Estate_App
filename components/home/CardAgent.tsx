@@ -1,10 +1,11 @@
-import { ListingAgents } from "@prisma/client";
+
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import React from "react";
 
 import Link from "next/link";
 import { Card, CardContent, CardDescription } from "../ui/card";
 import Imaglisting from "../listing/Imaglisting";
+import { ListingAgents } from "@/utils/Tayp";
 
 function CardAgent({ Agent }: { Agent: ListingAgents }) {
   return (

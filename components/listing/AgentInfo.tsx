@@ -1,4 +1,5 @@
-import { ListingAgents } from "@prisma/client";
+
+import { ListingAgents } from "@/utils/Tayp";
 import React from "react";
 
 function AgentInfo({ Agent }: { Agent?: ListingAgents | null }) {

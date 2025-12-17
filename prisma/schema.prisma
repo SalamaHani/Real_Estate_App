@@ -27,6 +27,7 @@ type ListingAgents {
   social_media             ListingAgentsSocialMedia
 }
 
+
 type ListingAgentsSocialMedia {
   facebook  String?
   instagram String?

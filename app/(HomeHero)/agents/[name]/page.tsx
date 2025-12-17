@@ -5,6 +5,7 @@ import Continer from "@/components/global/Continer";
 import TitelSection from "@/components/global/TitelSection";
 import Footer from "@/components/home/Footer";
 import { fetshAgentlisting, ListingOfAgents } from "@/utils/actions";
+import { ListingAgents } from "@/utils/Tayp";
 import React from "react";
 type ProductEditPageProps = {
   params: Promise<{
@@ -19,7 +20,7 @@ async function page({ params }: ProductEditPageProps) {
   const llistingofAgent = await ListingOfAgents({ email });
   return (
     <Continer>
-      <AgentHero Agent={agent} />
+      <AgentHero Agent={agent as ListingAgents} />
       <TitelSection text={`${agent?.first_name} Recent Active Listings`} />
       {llistingofAgent.map((item: any) => (
         <div key={item.id} className="mb-8">
