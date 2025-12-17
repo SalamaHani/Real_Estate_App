@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Continer from "@/components/global/Continer";
 import Footer from "@/components/home/Footer";
 import Contenerlisting from "@/components/listings/Contenerlisting";
@@ -22,7 +23,7 @@ async function page() {
 
         <div className="mt-12 mx-auto">
           <div className="grid sm:grid-cols-12 gap-8">
-            {cuntty.map((item) => {
+            {cuntty.map((item: any) => {
               return (
                 <div
                   key={item.id}
