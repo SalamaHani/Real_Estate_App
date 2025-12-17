@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import ListingOfagent from "@/components/agents/ListingOfagent";
 import Continer from "@/components/global/Continer";
 import TitelSection from "@/components/global/TitelSection";
