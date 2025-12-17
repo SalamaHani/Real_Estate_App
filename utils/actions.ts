@@ -107,14 +107,7 @@ export const faveretlisting = async () => {
   });
   return faveretlisting;
 };
-// export const getListingFav = async ({ id }: { id: string }) => {
-//   const listing = await db.listing.findFirst({
-//     where: {
-//       id,
-//     },
-//   });
-//   return listing
-// };
+
 export const fetshAraeacuntry = async () => {
   const cuntry = await db.areacuntry.findMany({
     take: 6,
