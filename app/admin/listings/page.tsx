@@ -25,11 +25,11 @@ import {
   deleteListingAction,
 } from "@/utils/admin-listing-actions";
 
-import { listing } from "@prisma/client";
+import { Listing } from "@prisma/client";
 
 export default function ListingsPage() {
   const router = useRouter();
-  const [listings, setListings] = useState<listing[]>([]);
+  const [listings, setListings] = useState<Listing[]>([]);
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState<string | null>(null);
   const [pagination, setPagination] = useState({
