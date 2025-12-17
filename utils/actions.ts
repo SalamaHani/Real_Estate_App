@@ -370,7 +370,8 @@ export const FetshAllAgents = async ({
     },
   });
   const agents: ListingAgents[] = [];
-  Agents.map((Agent) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Agents.map((Agent:any) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     Agent.agents.map((agent: any) => {
       if (
