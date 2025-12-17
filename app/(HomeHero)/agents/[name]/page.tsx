@@ -16,12 +16,15 @@ async function page({ params }: ProductEditPageProps) {
   const agent = await fetshAgentlisting({ name });
   const email = agent?.email ?? "";
   const llistingofAgent = await ListingOfAgents({ email });
-  console.log(llistingofAgent);
   return (
     <Continer>
       <AgentHero Agent={agent} />
       <TitelSection text={`${agent?.first_name} Recent Active Listings`} />
-      <ListingOfagent listing={llistingofAgent} />
+      {llistingofAgent.map((item) => (
+        <div key={item.id} className="mb-8">
+          <ListingOfagent listing={item} />
+        </div>
+      ))}
       <Footer />
     </Continer>
   );

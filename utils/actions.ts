@@ -101,11 +101,11 @@ export const faveretlisting = async () => {
   const session = await getSession();
   const user = session?.user;
   const userId = user?.id;
-  const faveretlisting = await db.favorite.findMany({
+  const listing = await db.favorite.findMany({
     where: { userId },
     include: { listing: true },
   });
-  return faveretlisting;
+  return listing;
 };
 
 export const fetshAraeacuntry = async () => {

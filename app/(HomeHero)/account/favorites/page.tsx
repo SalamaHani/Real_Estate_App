@@ -17,7 +17,7 @@ async function page() {
       <TitelSection text="Your Favorites Listing?" />
       {fivaretlistinng.map((item) => (
         <div key={item.id} className="mb-8">
-          <ListingOfagent listing={item} />
+          <ListingOfagent listing={item.listing} />
         </div>
       ))}
     </Continer>
