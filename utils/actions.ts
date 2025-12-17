@@ -397,7 +397,8 @@ export const fetshAgentlisting = async ({ name }: { name: string }) => {
   let foundAgent = null;
   const authername = decodeURIComponent(name);
   for (const listing of listings) {
-    foundAgent = listing.agents.find((agent) => agent.first_name == authername);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    foundAgent = listing.agents.find((agent:any) => agent.first_name == authername);
     if (foundAgent) break;
   }
   return foundAgent;
@@ -565,56 +566,7 @@ export const deleteReview = async (
     };
   }
 };
-// export const SaveSearchUserAction = async (
-//   prevState: ActionUserSeavd,
-//   formData: FormData
-// ): Promise<ActionUserSeavd> => {
-//   const session = await getSession();
-//   const user = session?.user;
-//   const userId = user?.id;
-//   if (!user) redirect("/login");
-//   const UserData: UserFormDataSaved = {
-//     url: formData.get("url") as string,
-//     nameSearch: formData.get("nameSearch") as string,
-//     email_frequency: formData.get("email_frequency") as string,
-//   };
-//   const params = new URLSearchParams(UserData.url);
-//   const parmesAll = Object.fromEntries(params.entries());
-//   const validatedData = SavedcontactSchema.safeParse(UserData);
-//   if (!validatedData.success) {
-//     return {
-//       success: false,
-//       Data: {
-//         nameSearch: UserData.nameSearch,
-//         email_frequency: UserData.email_frequency,
-//         url: UserData.url,
-//       },
-//       message: "Please fix the errors in the form",
-//       errors: validatedData.error.flatten().fieldErrors,
-//     };
-//   }
-//   try {
-//     await db.seavdsearchuser.create({
-//       data: {
-//         userId: userId as string,
-//         url: validatedData.data.url as string,
-//         qury: parmesAll,
-//         nameSearch: validatedData.data.nameSearch as string,
-//         email_frequency: validatedData.data.email_frequency as string,
-//       },
-//     });
-//     return {
-//       success: true,
-//       message: "Successfully Saved Search!",
-//     };
-//   } catch (error) {
-//     console.error("Error creating Interest:", error);
-//     return {
-//       success: false,
-//       message: "Something went wrong while contacting the agent.",
-//     };
-//   }
-// };
+
 export const SaveSearchUserAction = async (
   prevState: ActionUserSeavd,
   formData: FormData
