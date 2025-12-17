@@ -2,10 +2,10 @@ import ListingOfagent from "@/components/agents/ListingOfagent";
 import Continer from "@/components/global/Continer";
 import TitelSection from "@/components/global/TitelSection";
 import { faveretlisting } from "@/utils/actions";
-import { listing } from "@prisma/client";
+import { Listing } from "@prisma/client";
 import React from "react";
 interface FavoriteItem {
-  listing: listing;
+  listing: Listing;
 }
 async function page() {
   const fivaretlistinng: FavoriteItem[] = await faveretlisting();
