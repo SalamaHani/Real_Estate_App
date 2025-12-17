@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import AgentHero from "@/components/agents/AgentHero";
 import ListingOfagent from "@/components/agents/ListingOfagent";
 import Continer from "@/components/global/Continer";
@@ -20,7 +21,7 @@ async function page({ params }: ProductEditPageProps) {
     <Continer>
       <AgentHero Agent={agent} />
       <TitelSection text={`${agent?.first_name} Recent Active Listings`} />
-      {llistingofAgent.map((item) => (
+      {llistingofAgent.map((item: any) => (
         <div key={item.id} className="mb-8">
           <ListingOfagent listing={item} />
         </div>
