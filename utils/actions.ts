@@ -7,6 +7,7 @@ import {
   ActionAgent,
   ActionUserReview,
   ActionUserSeavd,
+  ListingAgents,
   RevierFormData,
   UserFormData,
   UserFormDataSaved,
@@ -14,7 +15,7 @@ import {
 import { AgentcontactSchema, SavedcontactSchema } from "./schema";
 import prisma from "./db";
 import { cookies } from "next/headers";
-import { ListingAgents } from "@prisma/client";
+
 import { console } from "inspector";
 import { checkSavedSearchForUser } from "@/lib/saved-search-helper";
 
@@ -402,12 +403,12 @@ export const FetshAllAgents = async ({
   });
   const agents: ListingAgents[] = [];
   Agents.map((Agent) => {
-    Agent.agents.map((agent: ListingAgents) => {
+    Agent.agents.map((agent) => {
       if (
         !agents.find((a: ListingAgents) => a.email === agent.email) &&
         agents.length < limit
       ) {
-        agents.push(agent);
+        agents.push(agent as ListingAgents);
       }
     });
   });

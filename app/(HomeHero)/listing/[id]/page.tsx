@@ -10,7 +10,7 @@ import TitelListingt from "@/components/listings/TitelListingt";
 import { ReviewDiloge } from "@/components/reviews/ReviewDiloge";
 import { Button } from "@/components/ui/button";
 import { fetchlistingById } from "@/utils/actions";
-import { ListingAgents } from "@/utils/Tayp";
+import { Listing, ListingAgents } from "@/utils/Tayp";
 import React from "react";
 type ProductEditPageProps = {
   params: Promise<{
@@ -49,7 +49,7 @@ async function page({ params }: ProductEditPageProps) {
             </div>
           </div>
         </div>
-        <DatielsListing listungs={listung} />
+        <DatielsListing listungs={listung as Listing} />
         <div className=" flex flex-wrap justify-between items-center gap-10 mb-20">
           <MapListing
             city={listung?.location?.city ?? ""}
