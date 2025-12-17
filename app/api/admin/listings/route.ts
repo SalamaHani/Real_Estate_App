@@ -3,7 +3,7 @@ import prisma from "@/utils/db";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { CreateListingSchema } from "@/utils/schema";
-import { z } from "zod";
+
 
 // GET - Fetch all listings with pagination
 export async function GET(request: NextRequest) {
