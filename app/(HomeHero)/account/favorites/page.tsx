@@ -15,7 +15,7 @@ async function page() {
   return (
     <Continer className="mt-20">
       <TitelSection text="Your Favorites Listing?" />
-      {fivaretlistinng.map((item) => (
+      {fivaretlistinng.map((item: any) => (
         <div key={item.id} className="mb-8">
           <ListingOfagent listing={item.listing} />
         </div>
