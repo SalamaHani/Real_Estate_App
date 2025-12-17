@@ -4,11 +4,11 @@ import FormContainer from "../form/FormContener";
 import { createReviewAction } from "@/utils/actions";
 import RatingInput from "./RatingInput";
 import TextAreaInput from "../form/TextAreaInput";
-import { getUserFromSession } from "@/lib/auth";
-import { cookies } from "next/headers";
+import { authClient } from "@/lib/auth-client";
 
 async function SubmitReview({ productId }: { productId: string }) {
-  const user = await getUserFromSession(await cookies());
+  const session = await authClient.getSession();
+  const user = session?.data?.user;
   return (
     <div>
       <Card className="p-8 mt-8">

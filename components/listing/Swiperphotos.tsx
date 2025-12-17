@@ -2,10 +2,7 @@ import React from "react";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Image from "next/image";
-// import "swiper/css";
-// import "swiper/css/navigation";
-// import "swiper/css/pagination";
-// import "swiper/css/scrollbar";
+
 
 function Swiperphotos({ photos }: { photos: string[] | null }) {
   return (

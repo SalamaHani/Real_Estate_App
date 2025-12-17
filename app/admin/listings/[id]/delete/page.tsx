@@ -13,6 +13,7 @@ export default function DeleteListingPage() {
     const params = useParams();
     const listingId = params?.id as string;
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [listing, setListing] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [deleting, setDeleting] = useState(false);

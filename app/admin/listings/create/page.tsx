@@ -28,6 +28,7 @@ const initialState = {
 export default function CreateListingPage() {
     const router = useRouter();
     const [state, formAction, isPending] = useActionState(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         async (prevState: any, formData: FormData) => {
             // Extract form data and convert to object
             const data = {

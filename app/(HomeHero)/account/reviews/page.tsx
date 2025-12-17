@@ -38,8 +38,14 @@ async function page() {
   );
 }
 const DeleteReview = ({ reviewId }: { reviewId: string }) => {
+  const deletreveiw = async (): Promise<{ message: string }> => {
+    await deleteReview.bind(null, { reviewId });
+    return {
+      message: "Reviw deleted",
+    };
+  };
   return (
-    <FormContainer className="" action={deleteReview}>
+    <FormContainer className="" action={deletreveiw}>
       <input type="text" readOnly hidden name="reviewId" value={reviewId} />
       <IconButton actionType="delete" />
     </FormContainer>

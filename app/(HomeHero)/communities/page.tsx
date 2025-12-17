@@ -1,9 +1,8 @@
 import Continer from "@/components/global/Continer";
 import Footer from "@/components/home/Footer";
-import ContenerListing from "@/components/listings/ContenerListing";
+import Contenerlisting from "@/components/listings/Contenerlisting";
 import { fetshAraeacuntry } from "@/utils/actions";
 import React from "react";
-
 async function page() {
   const cuntty = await fetshAraeacuntry();
   return (
@@ -29,7 +28,7 @@ async function page() {
                   key={item.id}
                   className="col-span-12 sm:col-span-8 md:col-span-6"
                 >
-                  <ContenerListing cuntryar={item} />
+                  <Contenerlisting cuntryar={item} />
                 </div>
               );
             })}

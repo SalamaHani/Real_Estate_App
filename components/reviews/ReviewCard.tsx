@@ -30,7 +30,7 @@ function ReviewCard({ reviewInfo, children }: ReviewCardProps) {
             <h3 className="text-sm font-bold capitalize mb-1">
               {reviewInfo?.authorName ?? ""}
             </h3>
-            <Rating rating={reviewInfo?.rating ?? 7} />
+            <Rating rating={BigInt(reviewInfo?.rating ?? 7)} />
             <div className="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
               <span className=" flex  mt-1 items-center gap-1">
                 <Calendar className="h-3 w-3" />

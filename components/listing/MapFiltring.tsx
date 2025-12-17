@@ -51,29 +51,7 @@ function MapFiltring({ listing }: { listing: listing[] }) {
                 position={location}
                 onCloseClick={() => setOpen(false)}
               >
-                {/* <h1>joolgtr</h1>
-                <div className="block border w- border-gray-200 rounded-lg hover:shadow-2xs focus:outline-hidden dark:border-neutral-700">
-                  <div className="relative flex items-center overflow-hidden">
-                    <Image
-                      src={item.photos[0]}
-                      alt={"cfv"}
-                      fill
-                      className=" w-8 h-full absolute inset-0 bg-black object-cover rounded-s-lg"
-                      sizes=""
-                    />
-                    <div className="grow p-4 ms-32 sm:ms-48">
-                      <div className="min-h-24 flex flex-col justify-center">
-                        <h3 className="font-semibold text-sm text-gray-800 dark:text-neutral-300">
-                          Studio by Mailchimp
-                        </h3>
-                        <p className="mt-1 text-sm text-gray-500 bg-white dark:text-neutral-500">
-                          Produce professional, reliable streams easily
-                          leveraging Mailchimps innovative broadcast studio.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div> */}
+      
               </InfoWindow>
             )}
           </Map>

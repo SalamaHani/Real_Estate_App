@@ -1,10 +1,10 @@
 
-import { Listing } from "@prisma/client";
+import { listing } from "@prisma/client";
 import React from "react";
 import { CheckCircle, Clock, House, HousePlus } from "lucide-react";
 import { Badge } from "../ui/badge";
 import Cardprice from "../listing/Cardprice";
-function DatielsListing({ listungs }: { listungs: Listing | null }) {
+function DatielsListing({ listungs }: { listungs: listing | null }) {
   const getStatusConfig = (statusName: string) => {
     return statuse.find((s) => s.states === statusName) || statuse[3];
   };

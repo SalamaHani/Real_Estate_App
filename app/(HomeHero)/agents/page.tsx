@@ -4,14 +4,19 @@ import PaginationListing from "@/components/global/Pgenation";
 import Footer from "@/components/home/Footer";
 import { FetshAllAgents } from "@/utils/actions";
 import React from "react";
-type ListingsPageProps = {
-  searchParams: {
-    Page?: string;
-    limit?: string;
-  };
-};
-async function page({ searchParams }: ListingsPageProps) {
-  const Page = parseInt(searchParams.Page ?? "1");
+interface PageProps {
+  // Use a specific type instead of 'any' for better type safety
+  searchParams:
+    | Promise<{ [key: string]: string | string[] | undefined }>
+    | undefined;
+  // If you also use 'params', it needs to be a Promise too
+  params?: Promise<{ [key: string]: string | string[] }>;
+}
+async function page({ searchParams }: PageProps) {
+  const resolvedSearchParams = await searchParams;
+  const Page = resolvedSearchParams?.page
+    ? parseInt(resolvedSearchParams.page as string, 10)
+    : 1;
   const AgentData = await FetshAllAgents({ Page });
   return (
     <Continer>

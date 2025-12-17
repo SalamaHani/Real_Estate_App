@@ -1,5 +1,5 @@
 import React from "react";
-import { Favorite, Listing } from "@prisma/client";
+import { listing } from "@prisma/client";
 import { CheckCircle, Clock, House, HousePlus, MapPin } from "lucide-react";
 import { Badge } from "../ui/badge";
 import {
@@ -21,7 +21,7 @@ import Imaglisting from "../listing/Imaglisting";
 import Cardprice from "../listing/Cardprice";
 import FavoriteToggleButton from "../listing/FavaretToggel";
 
-function ListingOfagent({ listing }: { listing: Listing[] }) {
+function ListingOfagent({ listing }: { listing: listing[] }) {
   const getStatusConfig = (statusName: string) => {
     return statuse.find((s) => s.states === statusName) || statuse[3];
   };
