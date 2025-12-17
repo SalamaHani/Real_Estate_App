@@ -70,7 +70,7 @@ function ListingOfagent({ listing }: { listing: Listing }) {
   const listingId = listing.id;
 
   return (
-    <div className={`grid sm:grid-cols-4 grid-cols-1  gap-2 mt-10 mb-10 `}>
+    <div className={`grid sm:grid-cols-4 grid-cols-4  gap-2 mt-10 mb-10 `}>
       <div>
         <article className="group relative ">
           <Card className=" overflow-hidden pt-0">

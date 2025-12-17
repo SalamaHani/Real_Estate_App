@@ -219,38 +219,6 @@ export const SendAgentListinge = async (
     message: "Successfully Contact Agent !",
   };
 };
-///sersh query
-// export const SershQuerlisting = async (value: string) => {
-//   type RawCursorResult = {
-//     cursor: {
-//       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-//       firstBatch: any[];
-//     };
-//   };
-
-//   if (value === "") return { listing: [], citys: [] };
-//   const city = (await prisma.$runCommandRaw({
-//     distinct: "listing",
-//     key: "location.city",
-//     query: {
-//       $or: [{ "location.city": { $regex: value, $options: "i" } }],
-//     },
-//   })) as RawCursorResult;
-//   const liset = (await prisma.$runCommandRaw({
-//     find: "listing",
-//     filter: {
-//       $or: [
-//         { "location.street_address": { $regex: value, $options: "i" } },
-//         { "location.county": { $regex: value, $options: "i" } },
-//       ],
-//     },
-
-//     limit: 5,
-//   })) as RawCursorResult;
-//   const citys = city.values ;
-//   const listing = liset.cursor.firstBatch;
-//   return { listing, citys };
-// };
 
 export const SershQuerlisting = async (value: string) => {
   type RawFindResult = {
@@ -403,7 +371,8 @@ export const FetshAllAgents = async ({
   });
   const agents: ListingAgents[] = [];
   Agents.map((Agent) => {
-    Agent.agents.map((agent) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    Agent.agents.map((agent: any) => {
       if (
         !agents.find((a: ListingAgents) => a.email === agent.email) &&
         agents.length < limit
