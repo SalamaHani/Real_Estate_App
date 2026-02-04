@@ -19,7 +19,6 @@ export async function GET(
     const listing = await prisma.listing.findUnique({
       where: { id: (await params).id },
     });
-
     if (!listing) {
       return NextResponse.json({ error: "Listing not found" }, { status: 404 });
     }

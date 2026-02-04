@@ -35,7 +35,8 @@ export const AgentcontactSchema = z.object({
 });
 export const SavedcontactSchema = z.object({
   nameSearch: z.string().min(1, { message: "Name Search  is required" }),
-  email_frequency: z.string().min(1, { message: "Email frequency is required" }),
+  email_frequency: z.string()
+.min(1, { message: "Email frequency is required" }),
   url: z.string().min(1, { message: "URL is required" }),
 });
 
