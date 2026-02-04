@@ -1,9 +1,7 @@
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/utils/db";
 import { nextCookies } from "better-auth/next-js";
-
-const prisma = new PrismaClient();
 
 export const auth = betterAuth({
   trustedOrigins: ["http://localhost:3001", "http://10.30.0.85:3001"],

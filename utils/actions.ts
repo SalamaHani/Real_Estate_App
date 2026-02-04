@@ -371,7 +371,7 @@ export const FetshAllAgents = async ({
   });
   const agents: ListingAgents[] = [];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  Agents.map((Agent:any) => {
+  Agents.map((Agent: any) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     Agent.agents.map((agent: any) => {
       if (
@@ -398,7 +398,7 @@ export const fetshAgentlisting = async ({ name }: { name: string }) => {
   const authername = decodeURIComponent(name);
   for (const listing of listings) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    foundAgent = listing.agents.find((agent:any) => agent.first_name == authername);
+    foundAgent = listing.agents.find((agent: any) => agent.first_name == authername);
     if (foundAgent) break;
   }
   return foundAgent;
